@@ -42,7 +42,7 @@
                         <option value='P'>Perempuan</option>
                         </select>
                     </div>
-                    <span class="text-danger">@error('jk') {{$message}} @enderror</span></br>
+                    <span class="text-danger">@error('jk') {{$message}} @enderror</span>
 
                   <label for="alamat" class="form-label">Address</label>
                   <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" placeholder="Enter your address" name="alamat" value="{{old('alamat')}}">

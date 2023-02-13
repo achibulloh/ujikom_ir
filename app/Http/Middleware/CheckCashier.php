@@ -5,7 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-class CheckRole
+
+class CheckCashier
 {
     /**
      * Handle an incoming request.
@@ -16,14 +17,15 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check('')) {
-            if (Auth()->user()->role == '') {
-                return redirect('/')->with('fail','Mohon Hunungi Admin');
-                // return $next($request);
+        if (Auth::check('kasir')) {
+            if (Auth()->user()->role == 'kasir') {
+                return $next($request);
+            } else if (Auth()->user()->role == 'admin') {
+                return redirect('admin');
             } else {
-                return redirect('/')->with('fail','You have no access');
+                return redirect('/')->with('fail','You have no admin access');
             }
         }
-        return redirect('/')->with('fail','You have no access');
+        return redirect('/')->with('fail','You have no cashier access');
     }
 }

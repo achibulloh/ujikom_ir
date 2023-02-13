@@ -70,8 +70,10 @@ class CustomAuthController extends Controller
                     return redirect()->intended('admin');
                     // return view("admin.dasboard");
                 } else if (Auth()->user()->role == 'kasir') {
-                    // return redirect()->intended('kasir');
-                    return view("kasir.dasboard");
+                    return redirect()->intended('kasir');
+                    // return view("kasir.dasboard");
+                } else if  (Auth()->user()->role == ''){
+                    return redirect('/')->with('fail','Your account has not been leveled by admin.');
                 } else {
                     return redirect('/')->with('fail','Input proper email or password.');
                 }
