@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\User;
+use App\Models\Users;
 
 class AdminController extends Controller
 {
@@ -13,7 +13,8 @@ class AdminController extends Controller
         return view("admin.profile");   
     } 
     public function users() {
-        return view("admin.users");   
+        $data = Users::all();
+        return view("admin.users")->with('data', $data); 
     } 
     public function laporan() {
         return view("admin.laporan");   

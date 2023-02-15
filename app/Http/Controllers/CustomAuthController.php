@@ -77,8 +77,10 @@ class CustomAuthController extends Controller
                 } else {
                     return redirect('/')->with('fail','Input proper email or password.');
                 }
-            } else {
+            } else if (Auth()->user()->status_akun == 'pending') {
                 return redirect('/')->with('fail','Your account has not been activated by admin.');
+            } else {
+                return redirect('/')->with('fail','Your account is blocked immediately contact admin.');
             }
         } else {
             return redirect('/')->with('fail','Input proper email or password.');
