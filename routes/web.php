@@ -32,6 +32,10 @@ Route::get('/admin', [CustomAuthController::class,'adminn'])->name('admin')->mid
 Route::get('/kasir', [CustomAuthController::class,'kasirr'])->name('kasir')->middleware('checkcashier');
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
-// Dasboard
-Route::get('/profile', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkrole');
+// Dasboard Admin
+Route::get('/profile', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
+Route::get('/laporan', 'App\Http\Controllers\AdminController@laporan')->name('laporan')->middleware('checkadmin');
+Route::get('/users', 'App\Http\Controllers\AdminController@users')->name('users')->middleware('checkadmin');
+Route::get('/menu', 'App\Http\Controllers\AdminController@menu')->name('menu')->middleware('checkadmin');
+Route::get('/kategori', 'App\Http\Controllers\AdminController@kategori')->name('kategori')->middleware('checkadmin');
 // End Dasboard
