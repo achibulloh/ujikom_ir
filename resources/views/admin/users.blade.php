@@ -106,6 +106,224 @@
 						<li class="breadcrumb-item"><a href="/users">Management Users</a></li>
 					</ol>
                 </div>
+				                <!-- row -->
+				<div class="row">
+                    <div class="col-lg-12">
+                        <div class="profile card card-body px-3 pt-3 pb-0">
+                            <div class="profile-head">
+                                <div class="profile-info">
+									<div class="profile-details">
+                                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Fees Collection</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example4" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Username</th>
+                                                <th>Nama Lengkap</th>
+                                                <th>Nomor Telepon</th>
+												<th>Email</th>
+												<th>Jenis Kelamin</th>
+                                                <th>Alamat</th>
+                                                <th>Status Akun</th>
+                                                <th>Role</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td>Tiger Nixon</td>
+                                                <td>#54605</td>
+                                                <td>Library</td>
+                                                <td>Cash</td>
+                                                <td><span class="badge light badge-success">Paid</span></td>
+                                                <td>2011/04/25</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>02</td>
+                                                <td>Garrett Winters</td>
+                                                <td>#54687</td>
+                                                <td>Library</td>
+                                                <td>Credit Card</td>
+                                                <td><span class="badge light badge-warning">Panding</span></td>
+												<td>2011/07/25</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>03</td>
+                                                <td>Ashton Cox</td>
+                                                <td>#35672</td>
+                                                <td>Tuition</td>
+                                                <td>Cash</td>
+                                                <td><span class="badge light badge-success">Paid</span></td>
+                                                <td>2009/01/12</td>
+												<td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>04</td>
+                                                <td>Cedric Kelly</td>
+                                                <td>#57984</td>
+                                                <td>Annual</td>
+												<td>Credit Card</td>
+                                                <td><span class="badge light badge-warning">Panding</span></td>
+                                                <td>2012/03/29</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>05</td>
+                                                <td>Airi Satou</td>
+                                                <td>#12453</td>
+                                                <td>Library</td>
+												<td>Cheque</td>
+                                                <td><span class="badge light badge-warning">Panding</span></td>
+                                                <td>2008/11/28</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>06</td>
+                                                <td>Brielle Williamson</td>
+                                                <td>#59723</td>
+                                                <td>Tuition</td>
+												<td>Cash</td>
+                                                <td><span class="badge light badge-success">Paid</span></td>
+                                                <td>2012/12/02</td>
+												<td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>07</td>
+                                                <td>Herrod Chandler</td>
+                                                <td>#98726</td>
+                                                <td>Tuition</td>
+												<td>Credit Card</td>
+                                                <td><span class="badge light badge-danger">Udpaid</span></td>
+                                                <td>2012/08/06</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>08</td>
+                                                <td>Rhona Davidson</td>
+                                                <td>#98721</td>
+                                                <td>Library</td>
+												<td>Cheque</td>
+                                                <td><span class="badge light badge-danger">Udpaid</span></td>
+                                                <td>2010/10/14</td>
+												<td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>09</td>
+                                                <td>Colleen Hurst</td>
+                                                <td>#54605</td>
+                                                <td>Annual</td>
+												<td>Cheque</td>
+                                                <td><span class="badge light badge-success">Paid</span></td>
+                                                <td>2009/09/15</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>10</td>
+                                                <td>Cleen Hurst</td>
+                                                <td>#54885</td>
+                                                <td>Annudl</td>
+												<td>Chedue</td>
+                                                <td><span class="badge light badge-success">Paid</span></td>
+                                                <td>2009/09/15</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>11</td>
+                                                <td>Coslleen Hurst</td>
+                                                <td>#54d605</td>
+                                                <td>Annu4al</td>
+												<td>Chequ5e</td>
+                                                <td><span class="badge light badge-success">Paid</span></td>
+                                                <td>2009/09/15</td>
+                                                <td><strong>120$</strong></td>
+                                                <td>
+													<div class="d-flex">
+														<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+														<a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+													</div>												
+												</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 		@endsection

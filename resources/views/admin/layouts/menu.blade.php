@@ -22,8 +22,10 @@
 	
 	<link href="{{ asset('assets/dsadmin/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/nouislider/nouislider.min.css') }}">
+	<link href="{{ asset('assets/dsadmin/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 	<!-- Style css -->
     <link href="{{ asset('assets/dsadmin/css/style.css') }}" rel="stylesheet">
+
 	
 </head>
 <body>
@@ -189,6 +191,8 @@
 	
 	<!-- Apex Chart -->
 	<script src="{{ asset('assets/dsadmin/vendor/apexchart/apexchart.js') }}"></script>
+	<script src="{{ asset('assets/dsadmin/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('assets/dsadmin/js/plugins-init/datatables.init.js') }}"></script>
 	<script src="{{ asset('assets/dsadmin/vendor/nouislider/nouislider.min.js') }}"></script>
 	<script src="{{ asset('assets/dsadmin/vendor/wnumb/wNumb.js') }}"></script>
 	
