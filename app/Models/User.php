@@ -24,6 +24,7 @@ class User extends Authenticatable
         'alamat',
         'nomor_tlp',
         'email',
+        'role',
         'password',
     ];
 

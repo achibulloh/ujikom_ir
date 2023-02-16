@@ -36,6 +36,8 @@ Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name(
 Route::get('/profile', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
 Route::get('/laporan', 'App\Http\Controllers\AdminController@laporan')->name('laporan')->middleware('checkadmin');
 Route::get('/users', 'App\Http\Controllers\AdminController@users')->name('users')->middleware('checkadmin');
+Route::post('/tambahuser', [AdminController::class,'tambahusers'])->name('tambahuser');
+Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('hapususer');
 Route::get('/menu', 'App\Http\Controllers\AdminController@menu')->name('menu')->middleware('checkadmin');
 Route::get('/kategori', 'App\Http\Controllers\AdminController@kategori')->name('kategori')->middleware('checkadmin');
 // End Dasboard

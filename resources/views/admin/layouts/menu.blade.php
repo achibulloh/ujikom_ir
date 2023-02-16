@@ -201,8 +201,32 @@
 
     <script src="{{ asset('assets/dsadmin/js/custom.min.js') }}"></script>
 	<script src="{{ asset('assets/dsadmin/js/dlabnav-init.js') }}"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
 	
-    
+    @if(Session::has("fail"))
+        <script>
+            Swal.fire({
+                  position: 'top-center',
+                  icon: 'error',
+                  title: '{{Session::get('fail')}}',
+                  showConfirmButton: false,
+                  timer: 1500 
+            })
+         </script>
+    @endif
+    @if(Session::has("success"))
+        <script>
+            Swal.fire({
+                  position: 'top-center',
+                  icon: 'success',
+                  title: '{{Session::get('success')}}',
+                  showConfirmButton: false,
+                  timer: 1500 
+            })
+         </script>
+    @endif
 	
 </body>
 </html>
