@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ asset('assets/image/logo_bpi.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/image/png/LogoOnly.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <title>Forgot Password Kantin</title>
 </head>
