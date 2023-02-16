@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Users;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -15,7 +14,7 @@ class AdminController extends Controller
         return view("admin.profile");   
     } 
     public function users() {
-        $data = Users::all();
+        $data = User::all();
         return view("admin.users")->with('data', $data); 
     } 
     public function laporan() {
@@ -61,7 +60,14 @@ class AdminController extends Controller
 
         return redirect('/users')->with('success','You have successfully deleted users.');
     }
-    public function update(Request $request, User $user){
+
+    public function edit(Request $request, $id){
+        $user = users::where('id', $id)->first();
+        return view('users', compact('data'));
+    }
+
+    public function update(Request $request, $id){
+        $user = User::find($id);
         $request->validate([
             'username'=>'required|unique:users',
             'nama_lengkap'=>'required',
@@ -70,8 +76,23 @@ class AdminController extends Controller
             'nomor_tlp'=>'required|min:12|max:13',
             'email'=>'required|email|unique:users',
             'role'=>'required',
+            'status_akun'=>'required',
             'password'=>'required|min:6|max:30'
         ]);
-        User::where('id', $user->id)->update($validate);
+
+        $user = new User();
+        $user->username = $request->username;
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->alamat = $request->alamat;
+        $user->nomor_tlp = $request->nomor_tlp;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->status_akun = $request->status_akun;
+        $user->password = Hash::make($request->password);
+        $res = $user->save();
+        if($res){
+            return redirect('/users')->with('success','You have successfully registered users.');
+        }
     }
 }
