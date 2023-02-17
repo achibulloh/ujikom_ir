@@ -17,7 +17,6 @@ class CustomAuthController extends Controller
         return view("auth.register");
     }
     public function registerkasir(Request $request){
-        Users::find(1);
         $request->validate([
             'username'=>'required|unique:users',
             'nama_lengkap'=>'required',

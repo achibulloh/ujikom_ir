@@ -223,8 +223,8 @@
                                                                                             <label for="jk" class="col-sm-3 col-form-label">Jenis Kelamin</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <select class="default-select form-control wide mb-3 @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jk" >
-                                                                                                    <option value="{{ $items->jenis_kelamin == 'L' }}">Laki-Laki</option>
-                                                                                                    <option value="{{ $items->jenis_kelamin == 'P' }}">Perempuan</option>
+                                                                                                    <option value="L" {{$items->jenis_kelamin == 'L' ? 'selected' : ''}}>Laki-Laki</option>
+                                                                                                    <option value="P" {{$items->jenis_kelamin == 'P' ? 'selected' : ''}}>Perempuan</option>
                                                                                                 </select>
                                                                                                 <span class="text-danger">@error('jenis_kelamin') {{$message}} @enderror</span>
                                                                                             </div>
@@ -262,8 +262,8 @@
                                                                                             <label for="role" class="col-sm-3 col-form-label">Role</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <select class="default-select form-control wide mb-3 @error('role') is-invalid @enderror" id="role"  name="role">
-                                                                                                    <option value="{{ $items->role == 'admin' }}">Admin</option>
-                                                                                                    <option value="{{ $items->role == 'kasir' }}">Kasir</option>
+                                                                                                    <option value="admin" {{$items->role == 'admin' ? 'selected' : ''}}>Admin</option>
+                                                                                                    <option value="kasir" {{$items->role == 'kasir' ? 'selected' : ''}}>Kasir</option>
                                                                                                 </select>
                                                                                                 <span class="text-danger">@error('role') {{$message}} @enderror</span>
                                                                                             </div>
@@ -274,9 +274,9 @@
                                                                                             <label for="status_akun" class="col-sm-3 col-form-label">Status Akun</label>
                                                                                             <div class="col-sm-9">
                                                                                                 <select class="default-select form-control wide mb-3 @error('status_akun') is-invalid @enderror" id="status_akun"  name="status_akun">
-                                                                                                    <option value="{{ $items->status_akun == 'active' }}">Active</option>
-                                                                                                    <option value="{{ $items->status_akun == 'pending' }}">Pending</option>
-                                                                                                    <option value="{{ $items->status_akun == 'blokir' }}">Blokir</option>
+                                                                                                    <option value="active" {{$items->status_akun == 'active' ? 'selected' : ''}}>Active</option>
+                                                                                                    <option value="pending" {{$items->status_akun == 'pending' ? 'selected' : ''}}>Pending</option>
+                                                                                                    <option value="blokir" {{$items->status_akun == 'blokir' ? 'selected' : ''}}>Blokir</option>
                                                                                                 </select>
                                                                                                 <span class="text-danger">@error('status_akun') {{$message}} @enderror</span>
                                                                                             </div>

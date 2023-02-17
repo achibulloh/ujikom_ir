@@ -63,21 +63,20 @@ class AdminController extends Controller
 
     public function edit(Request $request, $id){
         $user = users::where('id', $id)->first();
-        return view('users', compact('data'));
+        return view('users', compact('user'));
     }
 
-    public function update(Request $request, $id){
-        $user = User::find($id);
+    public function update(Request $request){
         $request->validate([
-            'username'=>'required|unique:users',
+            'username'=>'required',
             'nama_lengkap'=>'required',
             'jenis_kelamin'=>'required',
             'alamat'=>'required',
             'nomor_tlp'=>'required|min:12|max:13',
-            'email'=>'required|email|unique:users',
+            'email'=>'required|email',
             'role'=>'required',
             'status_akun'=>'required',
-            'password'=>'required|min:6|max:30'
+            'password'=>'required|min:6|max:225'
         ]);
 
         $user = new User();
