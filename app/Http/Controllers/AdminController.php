@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Session;
+
 
 class AdminController extends Controller
 {
@@ -62,12 +64,13 @@ class AdminController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $user = users::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
         return view('users', compact('user'));
     }
 
-    public function update(Request $request){
-        $request->validate([
+    public function update(Request $request, $id){
+        $user = User::where('id', $id);
+        $this->validate($request, [
             'username'=>'required',
             'nama_lengkap'=>'required',
             'jenis_kelamin'=>'required',
@@ -75,10 +78,8 @@ class AdminController extends Controller
             'nomor_tlp'=>'required|min:12|max:13',
             'email'=>'required|email',
             'role'=>'required',
-            'status_akun'=>'required',
             'password'=>'required|min:6|max:225'
         ]);
-
         $user = new User();
         $user->username = $request->username;
         $user->nama_lengkap = $request->nama_lengkap;
@@ -88,10 +89,9 @@ class AdminController extends Controller
         $user->email = $request->email;
         $user->role = $request->role;
         $user->status_akun = $request->status_akun;
-        $user->password = Hash::make($request->password);
-        $res = $user->save();
-        if($res){
-            return redirect('/users')->with('success','You have successfully registered users.');
-        }
+        $user->password = PASSWORD_DEFAULT($request->password);
+        $user->save();
+        Session::flash('success','Data Anda Berhasil Update');
+        return redirect('users');
     }
 }
