@@ -27,6 +27,9 @@
     <link href="{{ asset('assets/dsadmin/css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/dsadmin/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
 
+	    <!-- Toastr -->
+		<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/toastr/css/toastr.min.css') }}">
+
 	{{-- Waktu --}}
 		<link href="{{ asset('assets/dsadmin/vendor/jquery-asColorPicker/css/asColorPicker.min.css') }}" rel="stylesheet">
 	    <!-- Clockpicker -->
@@ -245,18 +248,34 @@
 		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
 	{{-- Endd Waktu --}}
+	    <!-- Toastr -->
+		<script src="{{ asset('assets/dsadmin/vendor/toastr/js/toastr.min.js') }}"></script>
+
+		<!-- All init script -->
+		<script src="{{ asset('assets/dsadmin/js/plugins-init/toastr-init.js') }}"></script>
 	@if(Session::has("fail"))
 		<script>
-			Swal.fire({
-				position: 'top-center',
-				icon: 'error',
-				title: '{{Session::get('fail')}}',
-				showConfirmButton: false,
-				timer: 1500 
-			})
+				toastr.error("{{Session::get('Fail')}}", "Error", {
+                    positionClass: "toast-top-right",
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
 		</script>
 	@endif
-	@if(Session::has("success"))
+	{{-- @if(Session::has("success"))
 		<script>
 			Swal.fire({
 				position: 'top-center',
@@ -266,6 +285,28 @@
 				timer: 1500 
 			})
 		</script>
+	@endif --}}
+	@if(Session::has("success"))
+	<script>
+                toastr.success("{{Session::get('success')}}", "Success", {
+                    positionClass: "toast-top-right",
+                    timeOut: 5e3,
+                    closeButton: !0,
+                    debug: !1,
+                    newestOnTop: !0,
+                    progressBar: !0,
+                    preventDuplicates: !0,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: !1
+                })
+	</script>
 	@endif
 	
 </body>
