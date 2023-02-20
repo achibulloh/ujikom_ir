@@ -36,7 +36,7 @@
 						<li class="breadcrumb-item"><a href="/users">Management Users</a></li>
 					</ol>
                 </div>
-				                <!-- row -->
+				<!-- row -->
 				<div class="row">
                     <div class="col-lg-12">
                         <div class="profile card card-body px-3 pt-3 pb-0">
@@ -198,7 +198,7 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <form action="{{ url('users/'.$items->id.'update') }}" method="POST">
+                                                                                <form action="{{ url('users/'.$items->id.'/update') }}" method="POST">
                                                                                     @csrf
                                                                                         <!-- Username -->
                                                                                             <div class="mb-3 row">

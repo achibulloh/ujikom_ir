@@ -38,7 +38,7 @@ Route::get('/laporan', 'App\Http\Controllers\AdminController@laporan')->name('la
 Route::get('/users', 'App\Http\Controllers\AdminController@users')->name('users')->middleware('checkadmin');
 Route::post('/tambahuser', [AdminController::class,'tambahusers'])->name('tambahuser');
 Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('hapususer');
-Route::post('/users/{id}update', 'App\Http\Controllers\AdminController@update');
+Route::post('/users/{id}/update', 'App\Http\Controllers\AdminController@update');
 Route::get('/users/{id}/edit', 'App\Http\Controllers\AdminController@edit');
 Route::get('/menu', 'App\Http\Controllers\AdminController@menu')->name('menu')->middleware('checkadmin');
 Route::get('/kategori', 'App\Http\Controllers\AdminController@kategori')->name('kategori')->middleware('checkadmin');

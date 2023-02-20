@@ -23,7 +23,8 @@ class AdminController extends Controller
         return view("admin.laporan");   
     } 
     public function kategori() {
-        return view("admin.kategori");   
+        $data = Kategori::all();
+        return view("admin.kategori")->with('data', $data);   
     } 
     public function menu() {
         return view("admin.menu");   
@@ -69,28 +70,31 @@ class AdminController extends Controller
     }
 
     public function update(Request $request, $id){
-        $user = User::where('id', $id);
-        $this->validate($request, [
-            'username'=>'required',
-            'nama_lengkap'=>'required',
-            'jenis_kelamin'=>'required',
-            'alamat'=>'required',
-            'nomor_tlp'=>'required|min:12|max:13',
-            'email'=>'required|email',
-            'role'=>'required',
-            'password'=>'required|min:6|max:225'
-        ]);
-        $user = new User();
-        $user->username = $request->username;
-        $user->nama_lengkap = $request->nama_lengkap;
-        $user->jenis_kelamin = $request->jenis_kelamin;
-        $user->alamat = $request->alamat;
-        $user->nomor_tlp = $request->nomor_tlp;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->status_akun = $request->status_akun;
-        $user->password = PASSWORD_DEFAULT($request->password);
-        $user->save();
+        $user = User::find($id);
+        $user->update($request->all());
+        // $user = User::where('id', $id);
+            // $this->validate($request, [
+            //     'username'=>'required',
+            //     'nama_lengkap'=>'required',
+            //     'jenis_kelamin'=>'required',
+            //     'alamat'=>'required',
+            //     'nomor_tlp'=>'required|min:12|max:13',
+            //     'email'=>'required|email',
+            //     'role'=>'required',
+            //     'status_akun'=>'required',
+            //     'password'=>'required|min:6|max:225'
+            // ]);
+        // $user = new User();
+        // $user->username = $request->username;
+        // $user->nama_lengkap = $request->nama_lengkap;
+        // $user->jenis_kelamin = $request->jenis_kelamin;
+        // $user->alamat = $request->alamat;
+        // $user->nomor_tlp = $request->nomor_tlp;
+        // $user->email = $request->email;
+        // $user->role = $request->role;
+        // $user->status_akun = $request->status_akun;
+        // $user->password = Hash::make($request->password);
+        // $user->save();
         Session::flash('success','Data Anda Berhasil Update');
         return redirect('users');
     }

@@ -206,7 +206,28 @@
 	<script src="{{ asset('assets/dsadmin/js/plugins-init/sweetalert.init.js') }}"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
-    
+	@if(Session::has("fail"))
+		<script>
+			Swal.fire({
+				position: 'top-center',
+				icon: 'error',
+				title: '{{Session::get('fail')}}',
+				showConfirmButton: false,
+				timer: 1500 
+			})
+		</script>
+	@endif
+	@if(Session::has("success"))
+		<script>
+			Swal.fire({
+				position: 'top-center',
+				icon: 'success',
+				title: '{{Session::get('success')}}',
+				showConfirmButton: false,
+				timer: 1500 
+			})
+		</script>
+	@endif
 	
 </body>
 </html>
