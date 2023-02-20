@@ -29,7 +29,8 @@ class AdminController extends Controller
         return view("admin.kategori")->with('data', $data);   
     } 
     public function menu() {
-        return view("admin.menu");   
+        $data = Kategori::all();
+        return view("admin.menu")->with('data', $data);   
     } 
     public function tambahusers (Request $request) {
         $request->validate([
