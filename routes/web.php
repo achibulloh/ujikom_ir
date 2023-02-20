@@ -42,6 +42,8 @@ Route::post('/users/{id}/update', 'App\Http\Controllers\AdminController@update')
 Route::get('/users/{id}/edit', 'App\Http\Controllers\AdminController@edit');
 Route::get('/menu', 'App\Http\Controllers\AdminController@menu')->name('menu')->middleware('checkadmin');
 Route::get('/kategori', 'App\Http\Controllers\AdminController@kategori')->name('kategori')->middleware('checkadmin');
-Route::post('/tambahkategori', 'App\Http\Controllers\AdminController@tambahkategori');
-Route::delete('/kategori/{id}', [AdminController::class, 'hapuskategori'])->name('hapuskategori');
-// End Dasboard
+Route::post('/tambahkategori', 'App\Http\Controllers\AdminController@tambahkategori')->name('tambahkategori');
+Route::delete('/hapuskategori/{id}', [AdminController::class, 'hapuskategori'])->name('hapuskategori');
+Route::post('/kategori/{id}/updatekategori', 'App\Http\Controllers\AdminController@updatekategori');
+Route::get('/kategori/{id}/editkategori', 'App\Http\Controllers\AdminController@editkategori');
+// End Dasboard Admin

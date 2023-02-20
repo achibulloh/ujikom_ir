@@ -99,16 +99,16 @@
 														@foreach ($data as $items)
 															<tr>
 																<td>{{ $loop->iteration }}</td>
-																<td>{{ $items->id_kategori }}</td>
+																<td>KT-{{ $items->id_kategori }}</td>
 																<td>{{ $items->nama_kategori }}</td>
 																<!-- <td><strong>120$</strong></td> -->
 																<td>
 																	<div class="d-flex">
 																			<!-- Update -->
-																				<button data-bs-toggle="modal" data-bs-target=".edit{{$items->id}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>
+																				<button data-bs-toggle="modal" data-bs-target=".edit{{$items->id_kategori}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>
 																			<!-- End Update -->
 																			<!-- Modal Alert Update -->
-																				<div class="modal fade edit{{$items->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+																				<div class="modal fade edit{{$items->id_kategori}}" tabindex="-1" role="dialog" aria-hidden="true">
 																					<div class="modal-dialog modal-lg">
 																						<div class="modal-content">
 																							<div class="modal-header">
@@ -117,17 +117,8 @@
 																								</button>
 																							</div>
 																							<div class="modal-body">
-																								<form action="" method="POST">
+																								<form action="{{ url('kategori/'.$items->id_kategori.'/updatekategori') }}" method="POST">
 																									@csrf
-																										<!-- Username -->
-																											<div class="mb-3 row">
-																												<label for="id_kategori" class="col-sm-3 col-form-label">Id Kategori</label>
-																												<div class="col-sm-9">
-																													<input type="Text" class="form-control @error('id_kategori') is-invalid @enderror"        placeholder="Id Kategori" name="id_kategori" value="{{ $items->id_kategori }}" id="id_kategori">
-																													<span class="text-danger">@error('id_kategori') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Username -->
 																										<!-- Nama Lengkap -->
 																											<div class="mb-3 row">
 																												<label for="nama_kategori" class="col-sm-3 col-form-label">Nama Kategori</label>
@@ -148,10 +139,10 @@
 																				</div>
 																			<!-- End Modal Alert Update -->
 																			<!-- Delete -->
-																				<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delete{{$items->id}}"><i class="fa fa-trash"></i></a>
+																				<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delete{{$items->id_kategori}}"><i class="fa fa-trash"></i></a>
 																			<!-- End Delete -->
 																			<!-- Modal Alert Delete -->
-																				<div class="modal fade" id="Delete{{$items->id}}">
+																				<div class="modal fade" id="Delete{{$items->id_kategori}}">
 																					<div class="modal-dialog" role="document">
 																						<div class="modal-content">
 																							<div class="modal-header">
@@ -163,7 +154,7 @@
 																							<div class="modal-footer">
 																								<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
 																								<!-- @method('delete') -->
-																								<form action="{{route('hapuskategori', $items->id)}}" method="post">
+																								<form action="{{ route('hapuskategori', $items->id_kategori) }}" method="post">
 																									@method('delete')
 																									@csrf
 																									<button type="submit" class="btn btn-primary">Yes, Delete</button>

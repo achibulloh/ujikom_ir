@@ -27,6 +27,20 @@
     <link href="{{ asset('assets/dsadmin/css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/dsadmin/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
 
+	{{-- Waktu --}}
+		<link href="{{ asset('assets/dsadmin/vendor/jquery-asColorPicker/css/asColorPicker.min.css') }}" rel="stylesheet">
+	    <!-- Clockpicker -->
+		<link href="{{ asset('assets/dsadmin/vendor/clockpicker/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet">
+	    <!-- Daterange picker -->
+		<link href="{{ asset('assets/dsadmin/vendor/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+		<!-- Material color picker -->
+		<link href="{{ asset('assets/dsadmin/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
+	    <!-- Pick date -->
+		<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/pickadate/themes/default.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/pickadate/themes/default.date.css') }}">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	{{-- End Waktu --}}
+
 	
 </head>
 <body>
@@ -205,7 +219,32 @@
 	<script src="{{ asset('assets/dsadmin/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 	<script src="{{ asset('assets/dsadmin/js/plugins-init/sweetalert.init.js') }}"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	{{-- Waktu --}}
+	    <!-- momment js is must -->
+		<script src="{{ asset('assets/dsadmin/vendor/moment/moment.min.js') }}"></script>
+		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+	    <!-- pickdate -->
+		<script src="{{ asset('assets/dsadmin/vendor/pickadate/picker.js') }}"></script>
+		<script src="{{ asset('assets/dsadmin/vendor/pickadate/picker.time.js') }}"></script>
+		<script src="{{ asset('assets/dsadmin/vendor/pickadate/picker.date.js') }}"></script>
 	
+	
+	
+		<!-- Daterangepicker -->
+		<script src="{{ asset('assets/dsadmin/js/plugins-init/bs-daterange-picker-init.js') }}"></script>
+		<!-- Clockpicker init -->
+		<script src="{{ asset('assets/dsadmin/js/plugins-init/clock-picker-init.js') }}"></script>
+		<!-- asColorPicker init -->
+		<script src="{{ asset('assets/dsadmin/js/plugins-init/jquery-asColorPicker.init.js') }}"></script>
+		<!-- Material color picker init -->
+		<script src="{{ asset('assets/dsadmin/js/plugins-init/material-date-picker-init.js') }}"></script>
+		<!-- Pickdate -->
+		<script src="{{ asset('assets/dsadmin/js/plugins-init/pickadate-init.js') }}"></script>
+	
+		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+	{{-- Endd Waktu --}}
 	@if(Session::has("fail"))
 		<script>
 			Swal.fire({

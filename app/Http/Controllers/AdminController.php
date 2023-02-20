@@ -21,7 +21,8 @@ class AdminController extends Controller
         return view("admin.users")->with('data', $data); 
     } 
     public function laporan() {
-        return view("admin.laporan");   
+        $data = User::all();
+        return view("admin.laporan")->with('data', $data);   
     } 
     public function kategori() {
         $data = Kategori::all();
@@ -73,29 +74,6 @@ class AdminController extends Controller
     public function update(Request $request, $id){
         $user = User::find($id);
         $user->update($request->all());
-        // $user = User::where('id', $id);
-            // $this->validate($request, [
-            //     'username'=>'required',
-            //     'nama_lengkap'=>'required',
-            //     'jenis_kelamin'=>'required',
-            //     'alamat'=>'required',
-            //     'nomor_tlp'=>'required|min:12|max:13',
-            //     'email'=>'required|email',
-            //     'role'=>'required',
-            //     'status_akun'=>'required',
-            //     'password'=>'required|min:6|max:225'
-            // ]);
-        // $user = new User();
-        // $user->username = $request->username;
-        // $user->nama_lengkap = $request->nama_lengkap;
-        // $user->jenis_kelamin = $request->jenis_kelamin;
-        // $user->alamat = $request->alamat;
-        // $user->nomor_tlp = $request->nomor_tlp;
-        // $user->email = $request->email;
-        // $user->role = $request->role;
-        // $user->status_akun = $request->status_akun;
-        // $user->password = Hash::make($request->password);
-        // $user->save();
         Session::flash('success','Data Anda Berhasil Update');
         return redirect('users');
     }
@@ -112,10 +90,20 @@ class AdminController extends Controller
         Session::flash('success','You have successfully add kategori.');
         return redirect('kategori');
     }
-    public function hapuskategori($id) {
-        $user = User::find($id);
+    public function hapuskategori($id_kategori) {
+        $user = Kategori::where('id_kategori', '=', $id_kategori);
         $user->delete();
 
-        return redirect('/users')->with('success','You have successfully deleted users.');
+        return redirect('/kategori')->with('success','You have successfully deleted users.');
+    }
+    public function editkategori($id_kategori){
+        $data = Kategori::where('id_kategori', $id_kategori)->first();
+        return view('kategori', compact('data'));
+    }
+    public function updatekategori(Request $request, $id_kategori) {
+        $data = Kategori::where('id_kategori', '=', $id_kategori);
+        $data->update($request->except(['_token', 'submit']));
+        Session::flash('success','Data Anda Berhasil Update');
+        return redirect('kategori');
     }
 }
