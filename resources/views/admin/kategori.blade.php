@@ -62,89 +62,20 @@
 																	</button>
 																</div>
 																<div class="modal-body">
-																	<form action="{{ route('tambahuser') }}" method="POST">
+																	<form action="{{ route('tambahkategori') }}" method="POST">
 																		@csrf
-																			<!-- Username -->
+																			<!-- Nama Kategori -->
 																				<div class="mb-3 row">
-																					<label for="username" class="col-sm-3 col-form-label">Username</label>
+																					<label for="nama_kategori" class="col-sm-3 col-form-label">Nama Kategori</label>
 																					<div class="col-sm-9">
-																						<input type="Text" class="form-control @error('username') is-invalid @enderror"        placeholder="Username" name="username" value="{{old('username')}}" required>
-																						<span class="text-danger">@error('username') {{$message}} @enderror</span>
+																						<input type="Text" class="form-control @error('nama_kategori') is-invalid @enderror"        placeholder="Nama Kategori" name="nama_kategori" value="{{old('nama_kategori')}}" id="nama_kategori">
+																						<span class="text-danger">@error('nama_kategori') {{$message}} @enderror</span>
 																					</div>
 																				</div>
-																			<!-- End Username -->
-																			<!-- Nama Lengkap -->
-																				<div class="mb-3 row">
-																					<label for="nama_lengkap" class="col-sm-3 col-form-label">Nama Lengkap</label>
-																					<div class="col-sm-9">
-																						<input type="Text" class="form-control @error('nama_lengkap') is-invalid @enderror"        placeholder="Nama Lengkap" name="nama_lengkap" value="{{old('nama_lengkap')}}" id="nama_lengkap">
-																						<span class="text-danger">@error('nama_lengkap') {{$message}} @enderror</span>
-																					</div>
-																				</div>
-																			<!-- End Nama Lengkap -->
-																			<!-- Jenis Kelamin -->
-																				<div class="mb-3 row">
-																					<label for="jk" class="col-sm-3 col-form-label">Jenis Kelamin</label>
-																					<div class="col-sm-9">
-																						<select class="default-select form-control wide mb-3 @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jk" >
-																							<option value="L">Laki-Laki</option>
-																							<option value="P">Perempuan</option>
-																						</select>
-																						<span class="text-danger">@error('jenis_kelamin') {{$message}} @enderror</span>
-																					</div>
-																				</div>
-																			<!-- End Jenis Kelamin -->
-																			<!-- Alamat -->
-																				<div class="mb-3 row">
-																					<label for="alamat" class="col-sm-3 col-form-label" >Alamat</label>
-																					<div class="col-sm-9">
-																						<input type="Text" class="form-control @error('alamat') is-invalid @enderror"        placeholder="Alamat" name="alamat" value="{{old('alamat')}}" id="alamat">
-																						<span class="text-danger">@error('alamat') {{$message}} @enderror</span>
-																					</div>
-																				</div>
-																			<!-- End Alamat -->
-																			<!-- Nomor TLP -->
-																				<div class="mb-3 row">
-																					<label for="nomortlp" class="col-sm-3 col-form-label">Nomor Telepon</label>
-																					<div class="col-sm-9">
-																						<input type="number" class="form-control @error('nomor_tlp') is-invalid @enderror"        placeholder="Nomor Telepon" name="nomor_tlp" value="{{old('nomor_tlp')}}" id="nomor_tlp">
-																						<span class="text-danger">@error('nomor_tlp') {{$message}} @enderror</span>
-																					</div>
-																				</div>
-																			<!-- End Nomor TLP -->
-																			<!-- Email -->
-																				<div class="mb-3 row">
-																					<label for="email" class="col-sm-3 col-form-label">Email</label>
-																					<div class="col-sm-9">
-																						<input type="email" class="form-control @error('email') is-invalid @enderror"        placeholder="Email" name="email" value="{{old('email')}}" id="email">
-																						<span class="text-danger">@error('email') {{$message}} @enderror</span>
-																					</div>
-																				</div>
-																			<!-- End Email -->
-																			<!-- Jenis Kelamin -->
-																				<div class="mb-3 row">
-																					<label for="role" class="col-sm-3 col-form-label">Role</label>
-																					<div class="col-sm-9">
-																						<select class="default-select form-control wide mb-3 @error('role') is-invalid @enderror" id="role"  name="role">
-																							<option value="admin">Admin</option>
-																							<option value="kasir">Kasir</option>
-																						</select>
-																						<span class="text-danger">@error('role') {{$message}} @enderror</span>
-																					</div>
-																				</div>
-																			<!-- End Jenis Kelamin -->
-																			<!-- Password -->
-																				<div class="mb-3 row">
-																					<label for="password" class="col-sm-3 col-form-label">Password</label>
-																					<div class="col-sm-9">
-																						<input type="Password" class="form-control @error('password') is-invalid @enderror" value="{{old('password')}}"        placeholder="Password" id="password" name="password">
-																						<span class="text-danger">@error('password') {{$message}} @enderror</span>
-																					</div>
-																				</div>
-																			<!-- End Password -->
+																			<!-- End Nama kategori -->
 																			<div class="modal-footer">
 																				<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-																				<button type="submit" class="btn btn-primary" name="submit">Tambah Users</button>
+																				<button type="submit" class="btn btn-primary" name="submit">Tambah Kategori</button>
 																			</div>
 																	</form>
 																</div>
@@ -181,104 +112,31 @@
 																					<div class="modal-dialog modal-lg">
 																						<div class="modal-content">
 																							<div class="modal-header">
-																								<h3 class="modal-title">Edit Users</h3>
+																								<h3 class="modal-title">Edit Kategori</h3>
 																								<button type="button" class="btn-close" data-bs-dismiss="modal">
 																								</button>
 																							</div>
 																							<div class="modal-body">
-																								<form action="{{ url('users/'.$items->id.'/update') }}" method="POST">
+																								<form action="" method="POST">
 																									@csrf
 																										<!-- Username -->
 																											<div class="mb-3 row">
-																												<label for="username" class="col-sm-3 col-form-label">Username</label>
+																												<label for="id_kategori" class="col-sm-3 col-form-label">Id Kategori</label>
 																												<div class="col-sm-9">
-																													<input type="Text" class="form-control @error('username') is-invalid @enderror"        placeholder="Username" name="username" value="{{ $items->username }}" required>
-																													<span class="text-danger">@error('username') {{$message}} @enderror</span>
+																													<input type="Text" class="form-control @error('id_kategori') is-invalid @enderror"        placeholder="Id Kategori" name="id_kategori" value="{{ $items->id_kategori }}" id="id_kategori">
+																													<span class="text-danger">@error('id_kategori') {{$message}} @enderror</span>
 																												</div>
 																											</div>
 																										<!-- End Username -->
 																										<!-- Nama Lengkap -->
 																											<div class="mb-3 row">
-																												<label for="nama_lengkap" class="col-sm-3 col-form-label">Nama Lengkap</label>
+																												<label for="nama_kategori" class="col-sm-3 col-form-label">Nama Kategori</label>
 																												<div class="col-sm-9">
-																													<input type="Text" class="form-control @error('nama_lengkap') is-invalid @enderror"        placeholder="Nama Lengkap" name="nama_lengkap" value="{{ $items->nama_lengkap }}" id="nama_lengkap">
-																													<span class="text-danger">@error('nama_lengkap') {{$message}} @enderror</span>
+																													<input type="Text" class="form-control @error('nama_kategori') is-invalid @enderror"        placeholder="Nama Kategori" name="nama_kategori" value="{{ $items->nama_kategori }}" id="nama_kategori">
+																													<span class="text-danger">@error('nama_kategori') {{$message}} @enderror</span>
 																												</div>
 																											</div>
 																										<!-- End Nama Lengkap -->
-																										<!-- Jenis Kelamin -->
-																											<div class="mb-3 row">
-																												<label for="jk" class="col-sm-3 col-form-label">Jenis Kelamin</label>
-																												<div class="col-sm-9">
-																													<select class="default-select form-control wide mb-3 @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jk" >
-																														<option value="L" {{$items->jenis_kelamin == 'L' ? 'selected' : ''}}>Laki-Laki</option>
-																														<option value="P" {{$items->jenis_kelamin == 'P' ? 'selected' : ''}}>Perempuan</option>
-																													</select>
-																													<span class="text-danger">@error('jenis_kelamin') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Jenis Kelamin -->
-																										<!-- Alamat -->
-																											<div class="mb-3 row">
-																												<label for="alamat" class="col-sm-3 col-form-label" >Alamat</label>
-																												<div class="col-sm-9">
-																													<input type="Text" class="form-control @error('alamat') is-invalid @enderror"        placeholder="Alamat" name="alamat" value="{{ $items->alamat }}" id="alamat">
-																													<span class="text-danger">@error('alamat') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Alamat -->
-																										<!-- Nomor TLP -->
-																											<div class="mb-3 row">
-																												<label for="nomortlp" class="col-sm-3 col-form-label">Nomor Telepon</label>
-																												<div class="col-sm-9">
-																													<input type="number" class="form-control @error('nomor_tlp') is-invalid @enderror"        placeholder="Nomor Telepon" name="nomor_tlp" value="{{ $items->nomor_tlp }}" id="nomor_tlp">
-																													<span class="text-danger">@error('nomor_tlp') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Nomor TLP -->
-																										<!-- Email -->
-																											<div class="mb-3 row">
-																												<label for="email" class="col-sm-3 col-form-label">Email</label>
-																												<div class="col-sm-9">
-																													<input type="email" class="form-control @error('email') is-invalid @enderror"        placeholder="Email" name="email" value="{{ $items->email }}" id="email">
-																													<span class="text-danger">@error('email') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Email -->
-																										<!-- Role -->
-																											<div class="mb-3 row">
-																												<label for="role" class="col-sm-3 col-form-label">Role</label>
-																												<div class="col-sm-9">
-																													<select class="default-select form-control wide mb-3 @error('role') is-invalid @enderror" id="role"  name="role">
-																														<option value="admin" {{$items->role == 'admin' ? 'selected' : ''}}>Admin</option>
-																														<option value="kasir" {{$items->role == 'kasir' ? 'selected' : ''}}>Kasir</option>
-																													</select>
-																													<span class="text-danger">@error('role') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Role -->
-																										<!-- Status Akun -->
-																											<div class="mb-3 row">
-																												<label for="status_akun" class="col-sm-3 col-form-label">Status Akun</label>
-																												<div class="col-sm-9">
-																													<select class="default-select form-control wide mb-3 @error('status_akun') is-invalid @enderror" id="status_akun"  name="status_akun">
-																														<option value="active" {{$items->status_akun == 'active' ? 'selected' : ''}}>Active</option>
-																														<option value="pending" {{$items->status_akun == 'pending' ? 'selected' : ''}}>Pending</option>
-																														<option value="blokir" {{$items->status_akun == 'blokir' ? 'selected' : ''}}>Blokir</option>
-																													</select>
-																													<span class="text-danger">@error('status_akun') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Status Akun -->
-																										<!-- Password -->
-																											<div class="mb-3 row">
-																												<label for="password" class="col-sm-3 col-form-label">Password</label>
-																												<div class="col-sm-9">
-																													<input type="Password" class="form-control @error('password') is-invalid @enderror"        placeholder="Password" id="password" name="password" value="{{ $items->password }}" >
-																													<span class="text-danger">@error('password') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Password -->
 																										<div class="modal-footer">
 																											<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
 																											<button type="submit" class="btn btn-primary" name="submit">Update Users</button>
@@ -290,10 +148,10 @@
 																				</div>
 																			<!-- End Modal Alert Update -->
 																			<!-- Delete -->
-																				<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delet{{$items->id}}"><i class="fa fa-trash"></i></a>
+																				<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delete{{$items->id}}"><i class="fa fa-trash"></i></a>
 																			<!-- End Delete -->
 																			<!-- Modal Alert Delete -->
-																				<div class="modal fade" id="Delet{{$items->id}}">
+																				<div class="modal fade" id="Delete{{$items->id}}">
 																					<div class="modal-dialog" role="document">
 																						<div class="modal-content">
 																							<div class="modal-header">
@@ -305,7 +163,7 @@
 																							<div class="modal-footer">
 																								<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
 																								<!-- @method('delete') -->
-																								<form action="{{route('hapususer', $items->id)}}" method="post">
+																								<form action="{{route('hapuskategori', $items->id)}}" method="post">
 																									@method('delete')
 																									@csrf
 																									<button type="submit" class="btn btn-primary">Yes, Delete</button>
