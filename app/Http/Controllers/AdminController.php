@@ -14,7 +14,8 @@ use Session;
 class AdminController extends Controller
 {
     public function profile() {
-        return view("admin.profile");   
+        $data = User::all();
+        return view("admin.profile")->with('data', $data);   
     } 
     public function users() {
         $data = User::all();

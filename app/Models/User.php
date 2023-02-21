@@ -21,6 +21,7 @@ class User extends Authenticatable
         'username',
         'nama_lengkap',
         'jenis_kelamin',
+        'status',
         'status_akun',
         'alamat',
         'nomor_tlp',

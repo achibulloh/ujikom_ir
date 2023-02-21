@@ -30,7 +30,7 @@
 	    <!-- Toastr -->
 		<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/toastr/css/toastr.min.css') }}">
 
-	{{-- Waktu --}}
+	<!-- {{-- Waktu --}} -->
 		<link href="{{ asset('assets/dsadmin/vendor/jquery-asColorPicker/css/asColorPicker.min.css') }}" rel="stylesheet">
 	    <!-- Clockpicker -->
 		<link href="{{ asset('assets/dsadmin/vendor/clockpicker/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet">
@@ -42,7 +42,7 @@
 		<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/pickadate/themes/default.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/pickadate/themes/default.date.css') }}">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	{{-- End Waktu --}}
+	<!-- {{-- End Waktu --}} -->
 
 	
 </head>
@@ -113,6 +113,7 @@
 							<div class="header-info ms-3">
 								<span class="font-w600 ">Hi, <b>{{ auth()->user()->username }}</b></span>
 								<small class="text-end font-w400">{{ auth()->user()->email }}</small>
+								<!-- <small class="font-w600"><b>@if (auth()->user()->status == 'Online')<span class="badge light badge-success"><i class="fa fa-circle text-success me-1"></i>Online</span>@else (auth()->user()->status == 'Offline')<span class="badge light badge-success"><i class="fa fa-circle text-success me-1"></i>Offline</span>@endif</b></small> -->
 							</div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-end">
