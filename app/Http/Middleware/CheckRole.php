@@ -18,7 +18,7 @@ class CheckRole
     {
         if (Auth::check('')) {
             if (Auth()->user()->role == '') {
-                return redirect('/')->with('fail','Mohon Hunungi Admin');
+                return redirect('/')->with('fail','Mohon Hubungi Admin');
                 // return $next($request);
             } else {
                 return redirect('/')->with('fail','You have no access');
