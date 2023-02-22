@@ -15,9 +15,17 @@ use App\Http\Controllers\KasirController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     // if(!Session::get('/')){
+//     //     // return redirect('/');
+//     // }
+//     // else{
+//         //     return redirect('admin');
+//         // }
+        
+//             return view('auth.login');
+// });
+Route::get('/', [CustomAuthController::class,'index'])->name('/');
 Route::get('/forgotpassword', function () {
     return view('auth.forgotpassword');
 });
@@ -33,7 +41,7 @@ Route::get('/kasir', [CustomAuthController::class,'kasirr'])->name('kasir')->mid
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
 // Dasboard Admin
-Route::get('/profile', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
+Route::get('/profile/{id}', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
 Route::get('/laporan', 'App\Http\Controllers\AdminController@laporan')->name('laporan')->middleware('checkadmin');
 Route::get('/users', 'App\Http\Controllers\AdminController@users')->name('users')->middleware('checkadmin');
 Route::post('/tambahuser', [AdminController::class,'tambahusers'])->name('tambahuser');

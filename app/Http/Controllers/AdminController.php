@@ -35,6 +35,7 @@ class AdminController extends Controller
     } 
     public function tambahusers (Request $request) {
         $request->validate([
+            'photo'=>'required',
             'username'=>'required|unique:users',
             'nama_lengkap'=>'required',
             'jenis_kelamin'=>'required',
@@ -46,6 +47,7 @@ class AdminController extends Controller
         ]);
 
         $user = new User();
+        $user->photo = $request->photo;
         $user->username = $request->username;
         $user->nama_lengkap = $request->nama_lengkap;
         $user->jenis_kelamin = $request->jenis_kelamin;
@@ -76,6 +78,12 @@ class AdminController extends Controller
     public function update(Request $request, $id){
         $user = User::find($id);
         $user->update($request->all());
+        if ($request->hasFile('photo')) {
+            $request->file('photo')->move('assets/photo-profile/',$request->file('photo')->getClientOriginalName());
+            $user->photo - $request->file('photo')->getClientOriginalName();
+            $user->save();
+        }
+
         Session::flash('success','Data Anda Berhasil Update');
         return redirect('users');
     }

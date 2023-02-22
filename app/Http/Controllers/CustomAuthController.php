@@ -7,9 +7,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class CustomAuthController extends Controller
 {
+    public function index(){
+        return view('auth.login');
+        // if($request->session()->has('id')){
+        //     if(Auth()->user()->role == 'admin') {
+        //         $user = Auth::user();
+        //         // Menampilkan id user yang telah login
+        //         $id = Auth::id();
+        //         return redirect()->intended('admin');
+        //     } else if (Auth()->user()->role == 'kasir') {
+        //         return redirect()->intended('kasir');
+        //     }
+        // }
+        // else{
+        //     return redirect('/');
+        // }
+        // return redirect('/');
+    }
+
     public function forgotpassword(){
         
     }
@@ -62,15 +81,12 @@ class CustomAuthController extends Controller
         if(Auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))) {
             if (Auth()->user()->status_akun == 'active') {
                 if(Auth()->user()->role == 'admin') {
-                    // return redirect()->intended('admin'); 
                     $user = Auth::user();
                     // Menampilkan id user yang telah login
                     $id = Auth::id();
                     return redirect()->intended('admin');
-                    // return view("admin.dasboard");
                 } else if (Auth()->user()->role == 'kasir') {
                     return redirect()->intended('kasir');
-                    // return view("kasir.dasboard");
                 } else if  (Auth()->user()->role == ''){
                     return redirect('/')->with('fail','Your account has not been leveled by admin.');
                 } else {
@@ -90,6 +106,8 @@ class CustomAuthController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         Auth::logout();
         return redirect('/')->with('success','Logged out successfully.');
         // return redirect('/');

@@ -27,6 +27,7 @@ class User extends Authenticatable
         'nomor_tlp',
         'email',
         'role',
+        'photo',
         'password'
     ];
 

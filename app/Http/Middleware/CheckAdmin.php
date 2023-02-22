@@ -23,7 +23,7 @@ class CheckAdmin
         } else if (Auth()->user()->role == 'kasir') {
             return redirect('kasir');
         } else {
-            // return redirect('/')->with('fail','You have no admin access');
+            return redirect('/')->with('fail','You have no admin access');
         }
     }
         return redirect('/')->with('fail','You have no admin access');
