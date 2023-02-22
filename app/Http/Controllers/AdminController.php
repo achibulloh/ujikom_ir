@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Kategori;
 use Session;
@@ -77,12 +78,33 @@ class AdminController extends Controller
 
     public function update(Request $request, $id){
         $user = User::find($id);
-        $user->update($request->all());
-        if ($request->hasFile('photo')) {
-            $request->file('photo')->move('assets/photo-profile/',$request->file('photo')->getClientOriginalName());
-            $user->photo - $request->file('photo')->getClientOriginalName();
-            $user->save();
+        // $user = new User();
+        $user->photo = $request->photo;
+        $user->username = $request->username;
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->alamat = $request->alamat;
+        $user->nomor_tlp = $request->nomor_tlp;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->password = Hash::make($request->password);
+        $user->update();
+        // $user->update($request->all());
+        if (request()->hasFile('photo')) {
+            if($user->photo && file_exists(storage_path('app/public/photo/' . $user->photo))){
+                Storage::delete('app/public/assets/photo/'.$user->photo);
+            }
+    
+            $file = $request->file('photo');
+            $fileName = $file->hashName() . '.' . $file->getClientOriginalExtension();
+            $request->photo->move(storage_path('app/public/assets/photo'), $fileName);
+            $user->photo = $fileName;
         }
+        // if ($request->hasFile('photo')) {
+        //     $request->file('photo')->move('assets/photo-profile/',$request->file('photo')->getClientOriginalName());
+        //     $user->photo - $request->file('photo')->getClientOriginalName();
+        //     $user->save();
+        // }
 
         Session::flash('success','Data Anda Berhasil Update');
         return redirect('users');

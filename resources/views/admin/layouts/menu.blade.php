@@ -109,7 +109,7 @@
 				<ul class="metismenu" id="menu">
 					<li class="dropdown header-profile">
 						<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-							<img src="{{ asset('assets/photo-profile/'.auth()->user()->photo) }}" width="20" alt=""/>
+							<img src="{{ asset('storage/photos/'.auth()->user()->photo) }}" width="20" alt=""/>
 							<div class="header-info ms-3">
 								<span class="font-w600 ">Hi, <b>{{ auth()->user()->username }}</b></span>
 								<small class="text-end font-w400">{{ auth()->user()->email }}</small>
@@ -224,7 +224,7 @@
 	<script src="{{ asset('assets/dsadmin/js/plugins-init/sweetalert.init.js') }}"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-	{{-- Waktu --}}
+	<!-- {{-- Waktu --}} -->
 	    <!-- momment js is must -->
 		<script src="{{ asset('assets/dsadmin/vendor/moment/moment.min.js') }}"></script>
 		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
@@ -248,7 +248,7 @@
 	
 		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 		<script src="{{ asset('assets/dsadmin/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-	{{-- Endd Waktu --}}
+	<!-- {{-- Endd Waktu --}} -->
 	    <!-- Toastr -->
 		<script src="{{ asset('assets/dsadmin/vendor/toastr/js/toastr.min.js') }}"></script>
 
