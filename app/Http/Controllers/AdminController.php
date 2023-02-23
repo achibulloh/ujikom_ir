@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Cache\Store;
 use App\Models\User;
 use App\Models\Kategori;
 use Session;
@@ -16,8 +17,22 @@ class AdminController extends Controller
 {
     public function profile() {
         $data = User::all();
-        return view("admin.profile")->with('data', $data);   
+        return view("admin.profile",compact('data'));   
     } 
+    public function profileupdate(Request $request, $id) {
+        $user = User::find($id);
+        $user->photo = $request->file('photo')->store('photo');
+        $user->username = $request->username;
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->alamat = $request->alamat;
+        $user->nomor_tlp = $request->nomor_tlp;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->update();
+        Session::flash('success','Data Anda Berhasil Update');
+        return redirect('profile');
+    }
     public function users() {
         $data = User::all();
         return view("admin.users")->with('data', $data); 
@@ -36,7 +51,7 @@ class AdminController extends Controller
     } 
     public function tambahusers (Request $request) {
         $request->validate([
-            'photo'=>'required',
+            'photo'=>'image',
             'username'=>'required|unique:users',
             'nama_lengkap'=>'required',
             'jenis_kelamin'=>'required',
@@ -46,23 +61,21 @@ class AdminController extends Controller
             'role'=>'required',
             'password'=>'required|min:6|max:30'
         ]);
+        $newPost = [
+            'photo' => $request->file('photo')->store('photo'),
+            'username' => $request->username,
+            'nama_lengkap' => $request->nama_lengkap,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'nomor_tlp' => $request->nomor_tlp,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
+        ];
+        User::create($newPost);
+        Storage::disk('local')->put('file.txt', 'Contents');
 
-        $user = new User();
-        $user->photo = $request->photo;
-        $user->username = $request->username;
-        $user->nama_lengkap = $request->nama_lengkap;
-        $user->jenis_kelamin = $request->jenis_kelamin;
-        $user->alamat = $request->alamat;
-        $user->nomor_tlp = $request->nomor_tlp;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->password = Hash::make($request->password);
-        $res = $user->save();
-        if($res){
-            return redirect('/users')->with('success','You have successfully registered users.');
-        } else {
-            return back()->with('fail','Smothing wrong');
-        }
+        return redirect('/tambahuser')->with('success', "You have successfully registered users.");
     }
     public function destroy($id) {
         $user = User::find($id);
@@ -78,8 +91,7 @@ class AdminController extends Controller
 
     public function update(Request $request, $id){
         $user = User::find($id);
-        // $user = new User();
-        $user->photo = $request->photo;
+        $user->photo = $request->file('photo')->store('photo');
         $user->username = $request->username;
         $user->nama_lengkap = $request->nama_lengkap;
         $user->jenis_kelamin = $request->jenis_kelamin;
@@ -89,23 +101,6 @@ class AdminController extends Controller
         $user->role = $request->role;
         $user->password = Hash::make($request->password);
         $user->update();
-        // $user->update($request->all());
-        if (request()->hasFile('photo')) {
-            if($user->photo && file_exists(storage_path('app/public/photo/' . $user->photo))){
-                Storage::delete('app/public/assets/photo/'.$user->photo);
-            }
-    
-            $file = $request->file('photo');
-            $fileName = $file->hashName() . '.' . $file->getClientOriginalExtension();
-            $request->photo->move(storage_path('app/public/assets/photo'), $fileName);
-            $user->photo = $fileName;
-        }
-        // if ($request->hasFile('photo')) {
-        //     $request->file('photo')->move('assets/photo-profile/',$request->file('photo')->getClientOriginalName());
-        //     $user->photo - $request->file('photo')->getClientOriginalName();
-        //     $user->save();
-        // }
-
         Session::flash('success','Data Anda Berhasil Update');
         return redirect('users');
     }

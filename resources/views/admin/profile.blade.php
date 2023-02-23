@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="profile-info">
 									<div class="profile-photo">
-										<img src="{{ asset('assets/image/logo_bpi.png') }}" class="img-fluid rounded-circle" alt="">
+										<img src="{{Auth::user()->photo == null ? asset('assets/image/logo_bpi.png') : asset('storage/'.Auth::user()->photo)}}" class="img-fluid rounded-circle" alt="">
 									</div>
 									<div class="profile-details">
 										<div class="profile-name px-3 pt-2">
@@ -60,7 +60,7 @@
 											<h4 class="text-primary mb-0">Email :</h4>
 											<p>{{ auth()->user()->email }}</p>
 										</div>
-										<div class="dropdown ms-auto">
+										<!-- <div class="dropdown ms-auto">
 											<a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
 											<ul class="dropdown-menu dropdown-menu-end">
 												<li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i> View profile</li>
@@ -68,7 +68,7 @@
 												<li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add to group</li>
 												<li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block</li>
 											</ul>
-										</div>
+										</div> -->
 									</div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                         <ul class="nav nav-tabs">
                                             <li class="nav-item"><a href="#about-me" data-bs-toggle="tab" class="nav-link active show">About Me</a>
                                             </li>
-                                            <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab" class="nav-link">Setting</a>
+                                            <li class="nav-item"><a href="#profile-settings{{auth()->user()->id}}" data-bs-toggle="tab" class="nav-link">Setting</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content"></br>
@@ -138,81 +138,61 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="profile-settings" class="tab-pane fade">
+                                            <div id="profile-settings{{auth()->user()->id}}" class="tab-pane fade">
                                                 <div class="pt-3">
                                                     <div class="settings-form">
-                                                        <h4 class="text-primary">Account Setting</h4>
-                                                        <form>
-                                                            <div class="row">
+                                                        <h4 class="text-primary">Account Setting</h4><br>
+                                                        <form action="{{ url('profile/'.auth()->user()->id.'/update') }}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="mb-3 row">
+                                                                <label for="username" class="col-sm-3 col-form-label">Foto Profile</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"        placeholder="Foto Profile" name="photo" value="{{ auth()->user()->photo }}" required>
+                                                                    <span class="text-danger">@error('photo') {{$message}} @enderror</span>
+                                                                </div>
+                                                            </div>                            
                                                                 <div class="mb-3 col-md-6">
-                                                                    <label class="form-label">Email</label>
-                                                                    <input type="email" placeholder="Email" class="form-control">
+                                                                    <label class="form-label" id="username" >Username</label>
+                                                                    <input type="text" placeholder="Your Username" name="username" id="username" value="{{ auth()->user()->username }}" class="form-control @error('username') is-invalid @enderror">
                                                                 </div>
                                                                 <div class="mb-3 col-md-6">
-                                                                    <label class="form-label">Password</label>
-                                                                    <input type="password" placeholder="Password" class="form-control">
+                                                                    <label class="form-label" id="nama_lengkap" >Nama Lengkap</label>
+                                                                    <input type="text" placeholder="Nama Lengkap" name="nama_lengkap" id="nama_lengkap" value="{{ auth()->user()->nama_lengkap }}" class="form-control @error('nama_lengkap') is-invalid @enderror">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="mb-3 col-md-6">
+                                                                    <label class="form-label" id="email" >Email</label>
+                                                                    <input type="email" placeholder="Email" name="email" id="email" value="{{ auth()->user()->email }}" class="form-control @error('email') is-invalid @enderror">
+                                                                </div>
+                                                                <div class="mb-3 col-md-6">
+                                                                    <label class="form-label" id="nomor_tlp" >Password</label>
+                                                                    <input type="number" placeholder="Nomor Telepone" name="nomor_tlp" id="password" value="{{ auth()->user()->nomor_tlp }}" class="form-control @error('nomor_tlp') is-invalid @enderror">
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Address</label>
-                                                                <input type="text" placeholder="1234 Main St" class="form-control">
+                                                                    <label class="form-label" id="password" >Password</label>
+                                                                    <input type="password" placeholder="Password" name="password" id="password" value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Address 2</label>
-                                                                <input type="text" placeholder="Apartment, studio, or floor" class="form-control">
+                                                                <label class="form-label" id="alamat">Address</label>
+                                                                <input type="text" placeholder="Yours Address" name="alamat" id="alamat" value="{{ auth()->user()->alamat }}" class="form-control @error('alamat') is-invalid @enderror">
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="mb-3 col-md-6">
-                                                                    <label class="form-label">City</label>
-                                                                    <input type="text" class="form-control">
-                                                                </div>
-                                                                <div class="mb-3 col-md-4">
-                                                                    <label class="form-label">State</label>
-                                                                    <select class="form-control default-select wide" id="inputState">
-                                                                        <option selected="">Choose...</option>
-                                                                        <option>Option 1</option>
-                                                                        <option>Option 2</option>
-                                                                        <option>Option 3</option>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label" id="jenis_kelamin" >Jenis Kelamin</label>
+                                                                    <select class="form-control default-select wide @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin" id="jenis_kelamin">
+                                                                        <option value="L" {{auth()->user()->jenis_kelamin == 'L' ? 'selected' : ''}}>Laki-Laki</option>
+                                                                        <option value="P" {{auth()->user()->jenis_kelamin == 'P' ? 'selected' : ''}}>Perempuan</option>
                                                                     </select>
                                                                 </div>
-                                                                <div class="mb-3 col-md-2">
-                                                                    <label class="form-label">Zip</label>
-                                                                    <input type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <div class="form-check custom-checkbox">
-																	<input type="checkbox" class="form-check-input" id="gridCheck">
-																	<label class="form-check-label form-label" for="gridCheck"> Check me out</label>
-																</div>
-                                                            </div>
-                                                            <button class="btn btn-primary" type="submit">Update </button>
+                                                            <button class="btn btn-primary mb-3" type="submit">Update </button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-									<!-- Modal -->
-									<div class="modal fade" id="replyModal">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title">Post Reply</h5>
-													<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-												</div>
-												<div class="modal-body">
-													<form>
-														<textarea class="form-control" rows="4">Message</textarea>
-													</form>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">btn-close</button>
-													<button type="button" class="btn btn-primary">Reply</button>
-												</div>
-											</div>
-										</div>
-									</div>
                                 </div>
                             </div>
                         </div>

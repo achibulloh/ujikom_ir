@@ -184,7 +184,7 @@
 										@foreach ($data as $items)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><img class="rounded-circle" width="35" src="{{ asset('assets/dsadmin/images/profile/small/pic1.jpg 	') }}" alt=""></td>
+                                                <td><img class="rounded-circle" width="35" src="{{ asset('storage/'.$items->photo) }}" alt=""></td>
                                                 <td>{{ $items->username }}</td>
                                                 <td>{{ $items->nama_lengkap }}</td>
                                                 <td>{{ $items->nomor_tlp }}</td>
@@ -209,13 +209,13 @@
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <form action="{{ url('users/'.$items->id.'/update') }}" method="POST">
+                                                                            <form action="{{ url('profile/'.$items->id.'/update') }}" method="POST" enctype="multipart/form-data">
                                                                                     @csrf
                                                                                         <!-- Photo -->
                                                                                             <div class="mb-3 row">
                                                                                                 <label for="username" class="col-sm-3 col-form-label">Foto Profile</label>
                                                                                                 <div class="col-sm-9">
-                                                                                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"        placeholder="Foto Profile" name="photo" value="{{old('photo')}}" required>
+                                                                                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"        placeholder="Foto Profile" name="photo" value="{{$items->photo}}" required>
                                                                                                     <span class="text-danger">@error('photo') {{$message}} @enderror</span>
                                                                                                 </div>
                                                                                             </div>

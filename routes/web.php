@@ -41,9 +41,11 @@ Route::get('/kasir', [CustomAuthController::class,'kasirr'])->name('kasir')->mid
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
 // Dasboard Admin
-Route::get('/profile/{id}', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
+Route::post('/profile/{id}/update', 'App\Http\Controllers\AdminController@profileupdate')->name('profileupdate');
+Route::get('/profile', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
 Route::get('/laporan', 'App\Http\Controllers\AdminController@laporan')->name('laporan')->middleware('checkadmin');
 Route::get('/users', 'App\Http\Controllers\AdminController@users')->name('users')->middleware('checkadmin');
+Route::get('/tambahuser', [AdminController::class,'users']);
 Route::post('/tambahuser', [AdminController::class,'tambahusers'])->name('tambahuser');
 Route::delete('/users/{id}', [AdminController::class, 'destroy'])->name('hapususer');
 Route::post('/users/{id}/update', 'App\Http\Controllers\AdminController@update');

@@ -92,9 +92,10 @@
 																<th> # </th>
 																<th> Foto Menu </th>
 																<th> Id Category </th>
-																<th> Nama Category </th>
 																<th> Id Kategori </th>
 																<th> Id Vendor </th>
+																<th> Nama Category </th>
+																<th> Harga </th>
 																<th> Stok Barang </th>
 																<th> Action </th>
 															</tr>
@@ -103,8 +104,12 @@
 														@foreach ($data as $items)
 															<tr>
 																<td>{{ $loop->iteration }}</td>
-																<td><td><img class="rounded-circle" width="35" src="{{ asset('assets/dsadmin/images/profile/small/pic1.jpg 	') }}" alt=""></td></td>
+																<td><img class="rounded-circle" width="35" src="{{ asset('assets/dsadmin/images/profile/small/pic1.jpg 	') }}" alt=""></td>
 																<td>KT-{{ $items->id_kategori }}</td>
+																<td>{{ $items->nama_kategori }}</td>
+																<td>{{ $items->nama_kategori }}</td>
+																<td>{{ $items->nama_kategori }}</td>
+																<td>{{ $items->nama_kategori }}</td>
 																<td>{{ $items->nama_kategori }}</td>
 																<!-- <td><strong>120$</strong></td> -->
 																<td>
