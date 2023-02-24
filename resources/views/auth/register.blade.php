@@ -25,8 +25,12 @@
                   </div>
 
               <div class="login-form">
-                <form action="{{route('register-kasir')}}" method="POST">
+                <form action="{{route('register-kasir')}}" method="POST" enctype="multipart/form-data">
                   @csrf
+                  <label for="photo" class="form-label">Photo Profile</label>
+                  <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" placeholder="Enter your photo" name="photo" value="{{old('photo')}}">
+                  <span class="text-danger">@error('photo') {{$message}} @enderror</span>
+
                   <label for="username" class="form-label">Username</label>
                   <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Enter your Username" name="username" value="{{old('username')}}">
                   <span class="text-danger">@error('username') {{$message}} @enderror</span>

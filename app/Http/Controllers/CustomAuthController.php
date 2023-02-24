@@ -37,6 +37,7 @@ class CustomAuthController extends Controller
     }
     public function registerkasir(Request $request){
         $request->validate([
+            'photo'=>'required',
             'username'=>'required|unique:users',
             'nama_lengkap'=>'required',
             'jenis_kelamin'=>'required',
@@ -47,6 +48,7 @@ class CustomAuthController extends Controller
         ]);
 
         $user = new User();
+        $user->photo = $request->file('photo')->store('photo');
         $user->username = $request->username;
         $user->nama_lengkap = $request->nama_lengkap;
         $user->jenis_kelamin = $request->jenis_kelamin;
@@ -80,6 +82,7 @@ class CustomAuthController extends Controller
 
         if(Auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))) {
             if (Auth()->user()->status_akun == 'active') {
+                // $request->session()->regenerate();
                 if(Auth()->user()->role == 'admin') {
                     $user = Auth::user();
                     // Menampilkan id user yang telah login
