@@ -184,7 +184,7 @@
 										@foreach ($data as $items)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td><img class="rounded-circle" width="35" src="{{ asset('storage/'.$items->photo) }}" alt=""></td>
+                                                <td><img class="rounded-circle" width="35" src="{{$items->photo == null ? asset('assets/image/logo_bpi.png') : asset($items->photo)}}" alt=""></td>
                                                 <td>{{ $items->username }}</td>
                                                 <td>{{ $items->nama_lengkap }}</td>
                                                 <td>{{ $items->nomor_tlp }}</td>

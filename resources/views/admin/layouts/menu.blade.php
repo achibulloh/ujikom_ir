@@ -111,7 +111,7 @@
 							<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
 							<!-- photo/FXiKSVKJFf7QbggsnoueF7CY9sgTWHU0zhq3o7ml.jpg -->
 								<!-- <img src="{{ Auth::user()->photo == null }} ? {{ asset('assets/image/png/LogoOnly.png') }} : {{ asset('storage/'.Auth::user()->photo) }}" width="20" alt=""/> -->
-								<img src="{{Auth::user()->photo == null ? asset('assets/image/logo_bpi.png') : asset('storage/'.Auth::user()->photo)}}" width="20" alt="">
+								<img src="{{Auth::user()->photo == null ? asset('assets/image/logo_bpi.png') : asset(Auth::user()->photo)}}" width="20" alt="">
 								<div class="header-info ms-3">
 									<span class="font-w600 ">Hi, <b>{{ auth()->user()->username }}</b></span>
 									<small class="text-end font-w400">{{ auth()->user()->email }}</small>

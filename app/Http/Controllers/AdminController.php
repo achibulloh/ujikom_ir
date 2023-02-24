@@ -73,7 +73,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ];
         User::create($newPost);
-        Storage::disk('local')->put('file.txt', 'Contents');
+        Storage::disk('public')->put('file.txt', 'Contents');
 
         return redirect('/tambahuser')->with('success', "You have successfully registered users.");
     }
