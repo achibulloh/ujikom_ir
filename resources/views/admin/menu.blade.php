@@ -57,18 +57,18 @@
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title">Tambah Category</h5>
+																	<h5 class="modal-title">Tambah Menu</h5>
 																	<button type="button" class="btn-close" data-bs-dismiss="modal">
 																	</button>
 																</div>
 																<div class="modal-body">
-																	<form action="{{ route('tambahkategori') }}" method="POST">
+																	<form action="" method="POST">
 																		@csrf
 																			<!-- Nama Kategori -->
 																				<div class="mb-3 row">
 																					<label for="nama_kategori" class="col-sm-3 col-form-label">Nama Menu</label>
 																					<div class="col-sm-9">
-																						<input type="Text" class="form-control @error('nama_kategori') is-invalid @enderror"        placeholder="Nama Kategori" name="nama_kategori" value="{{old('nama_kategori')}}" id="nama_kategori">
+																						<input type="Text" class="form-control @error('nama_kategori') is-invalid @enderror" placeholder="Nama Kategori" name="nama_kategori" value="{{old('nama_kategori')}}" id="nama_kategori">
 																						<span class="text-danger">@error('nama_kategori') {{$message}} @enderror</span>
 																					</div>
 																				</div>
@@ -91,9 +91,7 @@
 															<tr>
 																<th> # </th>
 																<th> Foto Menu </th>
-																<th> Id Category </th>
-																<th> Id Kategori </th>
-																<th> Id Vendor </th>
+																<th> Nama Menu </th>
 																<th> Nama Category </th>
 																<th> Harga </th>
 																<th> Stok Barang </th>
@@ -106,7 +104,6 @@
 																<td>{{ $loop->iteration }}</td>
 																<td><img class="rounded-circle" width="35" src="{{ asset('assets/dsadmin/images/profile/small/pic1.jpg 	') }}" alt=""></td>
 																<td>KT-{{ $items->id_kategori }}</td>
-																<td>{{ $items->nama_kategori }}</td>
 																<td>{{ $items->nama_kategori }}</td>
 																<td>{{ $items->nama_kategori }}</td>
 																<td>{{ $items->nama_kategori }}</td>

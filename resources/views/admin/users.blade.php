@@ -215,7 +215,7 @@
                                                                                             <div class="mb-3 row">
                                                                                                 <label for="username" class="col-sm-3 col-form-label">Foto Profile</label>
                                                                                                 <div class="col-sm-9">
-                                                                                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"        placeholder="Foto Profile" name="photo" value="{{$items->photo}}" required>
+                                                                                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"        placeholder="Foto Profile" name="photo" value="{{$items->photo}}">
                                                                                                     <span class="text-danger">@error('photo') {{$message}} @enderror</span>
                                                                                                 </div>
                                                                                             </div>

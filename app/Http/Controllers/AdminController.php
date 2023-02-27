@@ -106,12 +106,10 @@ class AdminController extends Controller
     }
     public function tambahkategori (Request $request) {
         $request->validate([
-            // 'id_kategori'=>'required|unique:kategori',
             'nama_kategori'=>'required|unique:kategori',
         ]);
 
         $kategori = new Kategori();
-        // $kategori->id_kategori = $request->id_kategori;
         $kategori->nama_kategori = $request->nama_kategori;
         $kategori->save();
         Session::flash('success','You have successfully add kategori.');
