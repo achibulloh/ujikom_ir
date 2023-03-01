@@ -37,7 +37,7 @@ Route::post('/register-kasir', [CustomAuthController::class,'registerkasir'])->n
 // To Dasboard
 Route::post('/proses_login', 'App\Http\Controllers\CustomAuthController@proses_login')->name('proses_login');
 Route::get('/admin', [CustomAuthController::class,'adminn'])->name('admin')->middleware('checkadmin');
-Route::get('/kasir', [CustomAuthController::class,'kasirr'])->name('kasir')->middleware('checkcashier');
+Route::get('/kasir', [KasirController::class,'kasirr'])->name('kasir')->middleware('checkcashier');
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
 // Dasboard Admin

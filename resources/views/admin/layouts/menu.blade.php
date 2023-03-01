@@ -11,8 +11,6 @@
 		<meta name="description" content="Smart Casier" />
 		<meta property="og:title" content="Smart Casier" />
 		<meta property="og:description" content="Effisiensikan Bisnismu Dengan Smart Cashier, Solusi Kasir Moderenmu." />
-		<meta property="og:image" content="https://dompet.dexignlab.com/xhtml/social-image.png" />
-		<meta name="format-detection" content="telephone=no">
 		
 		<!-- PAGE TITLE HERE -->
 		<title>Smart Cashier - @yield('title')</title>
@@ -149,7 +147,7 @@
 								<span class="nav-text">Category</span>
 							</a>
 						</li>
-						<!-- <li><a class="ai-icon" href="#" aria-expanded="false">
+						<!-- <li><a class="ai-icon" href="/transaksi" aria-expanded="false">
 								<i class="flaticon-045-heart"></i>
 								<span class="nav-text">Transaction</span>
 							</a>

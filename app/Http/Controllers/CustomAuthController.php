@@ -68,10 +68,6 @@ class CustomAuthController extends Controller
         return view("admin.dasboard");   
     }
 
-    public function kasirr() {
-        return view("kasir.dasboard");   
-    }
-
     public function proses_login(Request $request) {
         $input = $request->all();
         $this->validate($request, [

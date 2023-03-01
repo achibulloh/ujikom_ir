@@ -37,7 +37,7 @@ class AdminController extends Controller
     public function users() {
         $data = User::all();
         return view("admin.users")->with('data', $data); 
-    } 
+    }
     public function laporan() {
         $data = User::all();
         return view("admin.laporan")->with('data', $data);   
