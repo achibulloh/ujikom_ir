@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/image/png/LogoOnly.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <title>Login Smart Chasier</title>
+    <title>Login Smart Cashier</title>
 </head>
 <body>
     <section class="login d-flex">

@@ -19,7 +19,7 @@
 		
 		<!-- FAVICONS ICON -->
 		<link rel="shortcut icon" type="image/png" href="{{ asset('assets/image/png/LogoOnly.png') }}" />
-		
+		<link href="{{ asset('assets/dsadmin/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('assets/dsadmin/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('assets/dsadmin/vendor/nouislider/nouislider.min.css') }}">
 		<link href="{{ asset('assets/dsadmin/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
@@ -256,6 +256,8 @@
 
 			<!-- All init script -->
 			<script src="{{ asset('assets/dsadmin/js/plugins-init/toastr-init.js') }}"></script>
+			<script src="{{ asset('assets/dsadmin/vendor/select2/js/select2.full.min.js') }}"></script>
+			<script src="{{ asset('assets/dsadmin/js/plugins-init/select2-init.js') }}"></script>
 		@if(Session::has("fail"))
 			<script>
 					toastr.error("{{Session::get('Fail')}}", "Error", {

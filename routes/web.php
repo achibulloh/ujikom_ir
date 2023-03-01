@@ -25,7 +25,7 @@ use App\Http\Controllers\KasirController;
         
 //             return view('auth.login');
 // });
-Route::get('/', [CustomAuthController::class,'index'])->name('/');
+Route::get('/', [CustomAuthController::class,'index'])->name('index')->middleware('guest');
 Route::get('/forgotpassword', function () {
     return view('auth.forgotpassword');
 });
@@ -56,4 +56,5 @@ Route::post('/tambahkategori', 'App\Http\Controllers\AdminController@tambahkateg
 Route::delete('/hapuskategori/{id}', [AdminController::class, 'hapuskategori'])->name('hapuskategori');
 Route::post('/kategori/{id}/updatekategori', 'App\Http\Controllers\AdminController@updatekategori');
 Route::get('/kategori/{id}/editkategori', 'App\Http\Controllers\AdminController@editkategori');
+Route::post('/tambahmenu', 'App\Http\Controllers\AdminController@tambahmenu')->name('tambahmenu');
 // End Dasboard Admin

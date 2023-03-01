@@ -22,8 +22,10 @@ return new class extends Migration
             $table->string('nomor_tlp');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('status', ['Online','Offline','Pending'])->default('Pending');
+            $table->enum('status', ['Online','Offline'])->default('Offline');
+            $table->enum('status_akun', ['pending','active','blokir'])->default('pending');
             $table->enum('role',['admin','kasir'])->default('kasir');
+            $table->string('photo')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

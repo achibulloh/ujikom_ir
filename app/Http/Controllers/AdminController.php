@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Cache\Store;
 use App\Models\User;
+use App\Models\Menu;
 use App\Models\Kategori;
 use Session;
 
@@ -46,9 +47,32 @@ class AdminController extends Controller
         return view("admin.kategori")->with('data', $data);   
     } 
     public function menu() {
-        $data = Kategori::all();
-        return view("admin.menu")->with('data', $data);   
+        $data = Menu::all();
+        $kategori = Kategori::all();
+        return view("admin.menu", compact(['data', 'kategori']));   
     } 
+    public function tambahmenu (Request $request) {
+        $request->validate([
+            'nama_menu'=>'required|unique:menu',
+            'id_kategori'=>'required',
+            'harga'=>'required',
+            'stok'=>'required'
+        ]);
+        $newPost = [
+            'nama_menu' => $request->nama_menu,
+            'id_kategori' => $request->id_kategori,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'nomor_tlp' => $request->nomor_tlp,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
+        ];
+        Menu::create($newPost);
+
+        return redirect('/menu')->with('success', "You have successfully create menu.");
+    }
+
     public function tambahusers (Request $request) {
         $request->validate([
             'photo'=>'image',
