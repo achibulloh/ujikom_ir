@@ -86,7 +86,6 @@ function initApp() {
     addCash(amount) {      
       this.cash = (this.cash || 0) + amount;
       this.updateChange();
-      this.beep();
     },
     getItemsCount() {
       return this.cart.reduce((count, item) => count + item.qty, 0);

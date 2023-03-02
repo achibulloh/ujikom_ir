@@ -88,7 +88,7 @@
         <div class="bg-white rounded-3xl flex flex-col h-full shadow">
 
           <!-- cart items -->
-          <div x-show="cart.length > 0" class="flex-1 flex flex-col overflow-auto">
+          <div class="flex-1 flex flex-col overflow-auto">
             <div class="h-16 text-center flex justify-center">
               <div class="pl-8 text-left text-lg py-4 relative">
                 <!-- cart icon -->
