@@ -130,7 +130,7 @@
 																										<!-- End Nama Lengkap -->
 																										<div class="modal-footer">
 																											<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-																											<button type="submit" class="btn btn-primary" name="submit">Update Users</button>
+																											<button type="submit" class="btn btn-primary" name="submit">Update Kategori</button>
 																										</div>
 																								</form>
 																							</div>

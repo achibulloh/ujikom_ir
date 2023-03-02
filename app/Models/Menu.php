@@ -18,5 +18,12 @@ class Menu extends Model
         'harga',
         'stok'
     ];
+
+    protected $primaryKey = 'id_menu';
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
     // https://github.com/mesinkasir/axcoracashierapp
 }

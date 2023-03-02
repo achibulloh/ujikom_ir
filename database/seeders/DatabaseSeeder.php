@@ -53,5 +53,65 @@ class DatabaseSeeder extends Seeder
         [
             'nama_kategori' => 'Cemilan'
         ],]);
+        DB::table('menu')->insert([[
+            'nama_menu' => 'Nasi Goreng',
+            'id_kategori' => '1',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Nasi Ayam',
+            'id_kategori' => '1',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Ayam Geprek',
+            'id_kategori' => '1',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Ayam Penyet',
+            'id_kategori' => '1',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Coffe',
+            'id_kategori' => '2',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Teh Manis',
+            'id_kategori' => '2',
+            'harga' => '5000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Aqua Botol',
+            'id_kategori' => '2',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Cireng',
+            'id_kategori' => '3',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Tahu Krispi',
+            'id_kategori' => '3',
+            'harga' => '15000',
+            'stok' => '23'
+        ],
+        [
+            'nama_menu' => 'Tempe Mendoan',
+            'id_kategori' => '3',
+            'harga' => '15000',
+            'stok' => '23'
+        ],]);
     }
 }

@@ -144,7 +144,7 @@
 																<td>{{ $loop->iteration }}</td>
 																<td><img class="rounded-circle" width="35" src="{{ asset('assets/dsadmin/images/profile/small/pic1.jpg 	') }}" alt=""></td>
 																<td>{{ $items->nama_menu }}</td>
-																<td>{{ $items->id_kategori }}</td>
+																<td>{{ $items->kategori->nama_kategori }}</td>
 																<td>{{ $items->formatRupiah('harga') }}</td>
 																<td>{{ $items->stok }}</td>
 																<!-- <td><strong>120$</strong></td> -->
@@ -158,25 +158,65 @@
 																					<div class="modal-dialog modal-lg">
 																						<div class="modal-content">
 																							<div class="modal-header">
-																								<h3 class="modal-title">Edit Kategori</h3>
+																								<h3 class="modal-title">Edit Menu</h3>
 																								<button type="button" class="btn-close" data-bs-dismiss="modal">
 																								</button>
 																							</div>
 																							<div class="modal-body">
 																								<form action="{{ url('menu/'.$items->id.'/update') }}" method="POST">
 																									@csrf
-																										<!-- Nama Lengkap -->
+																										<!-- Photo Menu -->
 																											<div class="mb-3 row">
-																												<label for="nama_kategori" class="col-sm-3 col-form-label">Nama Kategori</label>
+																												<label for="photo_menu" class="col-sm-3 col-form-label">Photo Menu</label>
 																												<div class="col-sm-9">
-																													<input type="Text" class="form-control @error('nama_kategori') is-invalid @enderror"        placeholder="Nama Kategori" name="nama_kategori" value="{{ $items->nama_kategori }}" id="nama_kategori">
-																													<span class="text-danger">@error('nama_kategori') {{$message}} @enderror</span>
+																													<input type="file" class="form-control @error('photo_menu') is-invalid @enderror" placeholder="Photo Menu" name="photo_menu" value="{{ $items->photo_menu }}" id="photo_menu">
+																													<span class="text-danger">@error('photo_menu') {{$message}} @enderror</span>
 																												</div>
 																											</div>
-																										<!-- End Nama Lengkap -->
+																										<!-- End Photo Menu -->
+																										<!-- Nama Menu -->
+																											<div class="mb-3 row">
+																												<label for="nama_menu" class="col-sm-3 col-form-label">Nama Menu</label>
+																												<div class="col-sm-9">
+																													<input type="Text" class="form-control @error('nama_menu') is-invalid @enderror" placeholder="Nama Menu" name="nama_menu" value="{{ $items->nama_menu }}" id="nama_menu">
+																													<span class="text-danger">@error('nama_menu') {{$message}} @enderror</span>
+																												</div>
+																											</div>
+																										<!-- End Nama Menu -->
+																										<!-- Nama Category -->
+																												<div class="mb-3 row">
+																													<label for="harga_menu" class="col-sm-3 col-form-label">Nama Category</label>
+																													<div class="col-sm-9">
+																														<select id="single-select" name="id_kategori">
+																															@foreach ($kategori as $items)
+																																<option value="{{ $items->id_kategori }}">{{ $items->nama_kategori }}</option>
+																															@endforeach
+																														</select>
+																															<span class="text-danger">@error('id_kategori') {{$message}} @enderror</span>
+																													</div>
+																												</div>
+																										<!-- End Nama Category -->
+																										<!-- Harga Menu -->
+																											<div class="mb-3 row">
+																												<label for="harga_menu" class="col-sm-3 col-form-label">Harga Menu</label>
+																												<div class="col-sm-9">
+																													<input type="number" class="form-control @error('harga') is-invalid @enderror" placeholder="Harga Menu" name="harga" value="{{ $items->harga }}" id="harga_menu">
+																													<span class="text-danger">@error('harga') {{$message}} @enderror</span>
+																												</div>
+																											</div>
+																										<!-- End Harga Menu -->
+																										<!-- Stok Menu -->
+																											<div class="mb-3 row">
+																												<label for="stok_menu" class="col-sm-3 col-form-label">Stok Menu</label>
+																												<div class="col-sm-9">
+																													<input type="number" class="form-control @error('stok') is-invalid @enderror" placeholder="Stok Menu" name="stok" value="{{ $items->stok }}" id="stok_menu">
+																													<span class="text-danger">@error('stok') {{$message}} @enderror</span>
+																												</div>
+																											</div>
+																										<!-- End Stok Menu -->
 																										<div class="modal-footer">
 																											<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-																											<button type="submit" class="btn btn-primary" name="submit">Update Users</button>
+																											<button type="submit" class="btn btn-primary" name="submit">Edit Menu</button>
 																										</div>
 																								</form>
 																							</div>
@@ -185,10 +225,10 @@
 																				</div>
 																			<!-- End Modal Alert Update -->
 																			<!-- Delete -->
-																				<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delete{{$items->id_menu}}"><i class="fa fa-trash"></i></a>
+																				<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target=".Delete{{$items->id_menu}}"><i class="fa fa-trash"></i></a>
 																			<!-- End Delete -->
 																			<!-- Modal Alert Delete -->
-																				<div class="modal fade" id="Delete{{$items->id_menu}}">
+																				<div class="modal fade Delete{{$items->id_menu}}">
 																					<div class="modal-dialog" role="document">
 																						<div class="modal-content">
 																							<div class="modal-header">

@@ -65,53 +65,20 @@
         </div>
         <div class="h-full overflow-hidden mt-4">
           <div class="h-full overflow-y-auto px-2">
-            <div
-              class="select-none bg-blue-gray-100 rounded-3xl flex flex-wrap content-center justify-center h-full opacity-25"
-              x-show="products.length === 0"
-            >
-              <div class="w-full text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                </svg>
-                <p class="text-xl">
-                  YOU DON'T HAVE
-                  <br/>
-                  ANY PRODUCTS TO SHOW
-                </p>
-              </div>
-            </div>
-            <div
-              class="select-none bg-blue-gray-100 rounded-3xl flex flex-wrap content-center justify-center h-full opacity-25"
-              x-show="filteredProducts().length === 0 && keyword.length > 0"
-            >
-              <div class="w-full text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <p class="text-xl">
-                  EMPTY SEARCH RESULT
-                  <br/>
-                  "<span x-text="keyword" class="font-semibold"></span>"
-                </p>
-              </div>
-            </div>
-            <div x-show="filteredProducts().length" class="grid grid-cols-4 gap-4 pb-3">
-            @foreach ($data as $items)
-              <template x-for="product in filteredProducts()" :key="product.id">
-                <div
-                  role="button"
-                  class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg"
-                >
+            <div class="grid grid-cols-4 gap-4 pb-3">
+              @foreach ($data as $items)
+              <form action="" method="POST">
+                <div type="submit"  class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg">
                   <img src="{{ asset('assets/image/png/LogoOnly.png') }}" alt="SMART CHASIER">
                   <div class="flex pb-3 px-3 text-sm -mt-3">
                     <p class="flex-grow truncate mr-1">{{$items->nama_menu}}</p>
                     <p class="nowrap font-semibold">{{$items->harga}}</p>
                   </div>
                 </div>
-              </template>
-              @endforeach
+              </form>
+                @endforeach
+              </div>
             </div>
-          </div>
         </div>
       </div>
       <!-- end of store menu -->
@@ -119,15 +86,6 @@
       <!-- right sidebar -->
       <div class="w-5/12 flex flex-col bg-blue-gray-50 h-full bg-white pr-4 pl-2 py-4">
         <div class="bg-white rounded-3xl flex flex-col h-full shadow">
-          <!-- empty cart -->
-          <div x-show="cart.length === 0" class="flex-1 w-full p-4 opacity-25 select-none flex flex-col flex-wrap content-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            <p>
-              CART EMPTY
-            </p>
-          </div>
 
           <!-- cart items -->
           <div x-show="cart.length > 0" class="flex-1 flex flex-col overflow-auto">
@@ -149,13 +107,14 @@
               </div>
             </div>
 
+            @foreach ($data as $items)
             <div class="flex-1 w-full px-4 overflow-auto">
-              <template x-for="item in cart" :key="item.productId">
+              <template x-for="item in cart">
                 <div class="select-none mb-3 bg-blue-gray-50 rounded-lg w-full text-blue-gray-700 py-2 px-2 flex justify-center">
-                  <img :src="item.image" alt="" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
+                  <img src="{{ asset('assets/image/png/LogoOnly.png') }}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
                   <div class="flex-grow">
-                    <h5 class="text-sm" x-text="item.name"></h5>
-                    <p class="text-xs block" x-text="priceFormat(item.price)"></p>
+                    <h5 class="text-sm">{{$items->nama_menu}}</h5>
+                    <p class="text-xs block">{{$items->harga}}</p>
                   </div>
                   <div class="py-1">
                     <div class="w-28 grid grid-cols-3 gap-2 ml-2">
@@ -175,6 +134,7 @@
                 </div>
               </template>
             </div>
+            @endforeach
           </div>
           <!-- end of cart items -->
 
@@ -189,7 +149,7 @@
                 <div class="flex-grow text-left">CASH</div>
                 <div class="flex text-right">
                   <div class="mr-2">Rp</div>
-                  <input x-bind:value="numberFormat(cash)" x-on:keyup="updateCash($event.target.value)" type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none">
+                  <input x-bind:value="numberFormat(cash)" x-on:keyup="updateCash($event.target.value)" type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none" readonly>
                 </div>
               </div>
               <hr class="my-2">

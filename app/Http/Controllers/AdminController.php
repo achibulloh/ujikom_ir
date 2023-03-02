@@ -47,9 +47,9 @@ class AdminController extends Controller
         return view("admin.kategori")->with('data', $data);   
     } 
     public function menu() {
-        $data = Menu::all();
+        $data = Menu::with('kategori')->get();
         $kategori = Kategori::all();
-        return view("admin.menu", compact(['data', 'kategori']));   
+        return view("admin.menu", compact('data', 'kategori'));   
     } 
     public function tambahmenu (Request $request) {
         $request->validate([
