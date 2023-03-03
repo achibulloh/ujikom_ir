@@ -27,7 +27,6 @@ function initApp() {
     db: null,
     time: null,
     firstTime: localStorage.getItem("first_time") === null,
-    activeMenu: 'pos',
     loadingSampleData: false,
     moneys: [2000, 5000, 10000, 20000, 50000, 100000],
     products: [],
@@ -114,7 +113,7 @@ function initApp() {
     submit() {
       const time = new Date();
       this.isShowModalReceipt = true;
-      this.receiptNo = `TWPOS-KS-${Math.round(time.getTime() / 1000)}`;
+      this.receiptNo = `SC-${Math.round(time.getTime() / 1000)}`;
       this.receiptDate = this.dateFormat(time);
     },
     closeModalReceipt() {
@@ -141,24 +140,6 @@ function initApp() {
       this.updateChange();
       this.clearSound();
     },
-    printAndProceed() {
-      const receiptContent = document.getElementById('receipt-content');
-      const titleBefore = document.title;
-      const printArea = document.getElementById('print-area');
-
-      printArea.innerHTML = receiptContent.innerHTML;
-      document.title = this.receiptNo;
-
-      window.print();
-      this.isShowModalReceipt = false;
-
-      printArea.innerHTML = '';
-      document.title = titleBefore;
-
-      // TODO save sale data to database
-
-      this.clear();
-    }
   };
 
   return app;
