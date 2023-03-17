@@ -60,15 +60,6 @@
 											<h4 class="text-primary mb-0">Email :</h4>
 											<p>{{ auth()->user()->email }}</p>
 										</div>
-										<!-- <div class="dropdown ms-auto">
-											<a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
-											<ul class="dropdown-menu dropdown-menu-end">
-												<li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i> View profile</li>
-												<li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add to btn-close friends</li>
-												<li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add to group</li>
-												<li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block</li>
-											</ul>
-										</div> -->
 									</div>
                                 </div>
                             </div>
@@ -148,7 +139,7 @@
                                                             <div class="mb-3 row">
                                                                 <label for="username" class="col-sm-3 col-form-label">Foto Profile</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"        placeholder="Foto Profile" name="photo" value="{{ auth()->user()->photo }}" required>
+                                                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"        placeholder="Foto Profile" name="photo" value="{{ auth()->user()->photo }}">
                                                                     <span class="text-danger">@error('photo') {{$message}} @enderror</span>
                                                                 </div>
                                                             </div>                            
@@ -167,13 +158,13 @@
                                                                     <input type="email" placeholder="Email" name="email" id="email" value="{{ auth()->user()->email }}" class="form-control @error('email') is-invalid @enderror">
                                                                 </div>
                                                                 <div class="mb-3 col-md-6">
-                                                                    <label class="form-label" id="nomor_tlp" >Password</label>
-                                                                    <input type="number" placeholder="Nomor Telepone" name="nomor_tlp" id="password" value="{{ auth()->user()->nomor_tlp }}" class="form-control @error('nomor_tlp') is-invalid @enderror">
+                                                                    <label class="form-label" id="nomor_tlp" >Nomor Telepone</label>
+                                                                    <input type="number" placeholder="Nomor Telepone" name="nomor_tlp" id="nomor_tlp" value="{{ auth()->user()->nomor_tlp }}" class="form-control @error('nomor_tlp') is-invalid @enderror">
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
                                                                     <label class="form-label" id="password" >Password</label>
-                                                                    <input type="password" placeholder="Password" name="password" id="password" value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror">
+                                                                    <input type="password" placeholder="Password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label" id="alamat">Address</label>

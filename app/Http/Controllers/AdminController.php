@@ -22,17 +22,24 @@ class AdminController extends Controller
     } 
     public function profileupdate(Request $request, $id) {
         $user = User::find($id);
-        $user->photo = $request->file('photo')->store('photo');
+        if ($request->file('photo')) {
+            $user->photo = $request->file('photo')->store('photo');
+        }
         $user->username = $request->username;
         $user->nama_lengkap = $request->nama_lengkap;
         $user->jenis_kelamin = $request->jenis_kelamin;
         $user->alamat = $request->alamat;
         $user->nomor_tlp = $request->nomor_tlp;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->update();
-        Session::flash('success','Data Anda Berhasil Update');
-        return redirect('profile');
+        $creds = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+        if (!$creds) {
+            Session::flash('fail','Password Salah');
+            return redirect('profile');
+        } else {
+            $user->update();
+            Session::flash('success','Data Anda Berhasil Update');
+            return redirect('profile');
+        }
     }
     public function users() {
         $data = User::all();

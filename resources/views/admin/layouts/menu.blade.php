@@ -258,7 +258,7 @@
 			<script src="{{ asset('assets/dsadmin/js/plugins-init/select2-init.js') }}"></script>
 		@if(Session::has("fail"))
 			<script>
-					toastr.error("{{Session::get('Fail')}}", "Error", {
+					toastr.error("{{Session::get('fail')}}", "Error", {
 						positionClass: "toast-top-right",
 						timeOut: 5e3,
 						closeButton: !0,
