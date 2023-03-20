@@ -31,15 +31,10 @@ class AdminController extends Controller
         $user->alamat = $request->alamat;
         $user->nomor_tlp = $request->nomor_tlp;
         $user->email = $request->email;
-        $creds = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-        if (!$creds) {
-            Session::flash('fail','Password Salah');
-            return redirect('profile');
-        } else {
-            $user->update();
-            Session::flash('success','Data Anda Berhasil Update');
-            return redirect('profile');
-        }
+        if ($request->updatepassword) $user->password = Hash::make($request->updatepassword);
+        $user->update();
+        Session::flash('success','Data Anda Berhasil Update');
+        return redirect('profile');
     }
     public function users() {
         $data = User::all();

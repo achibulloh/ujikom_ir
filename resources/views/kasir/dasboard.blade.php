@@ -83,7 +83,7 @@
               @foreach ($data as $items)
               <form action="" method="POST">
                 <div type="submit"  class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg">
-                  <img src="{{ asset('assets/image/png/LogoOnly.png') }}" alt="SMART CHASIER">
+                  <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
                   <div class="flex pb-3 px-3 text-sm -mt-3">
                     <p class="flex-grow truncate mr-1">{{$items->nama_menu}}</p>
                     <p class="nowrap font-semibold">{{$items->harga}}</p>

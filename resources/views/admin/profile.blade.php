@@ -163,8 +163,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
-                                                                    <label class="form-label" id="password" >Password</label>
-                                                                    <input type="password" placeholder="Password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required>
+                                                                    <label class="form-label" id="updatepassword" >New Password</label>
+                                                                    <input type="password" placeholder="Update Password" name="updatepassword" id="updatepassword" class="form-control @error('updatepassword') is-invalid @enderror">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label" id="alamat">Address</label>
