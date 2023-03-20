@@ -142,7 +142,7 @@
 														@foreach ($data as $items)
 															<tr>
 																<td>{{ $loop->iteration }}</td>
-																<td><img class="rounded-circle" width="35" src="{{ asset('assets/dsadmin/images/profile/small/pic1.jpg 	') }}" alt=""></td>
+																<td><img class="rounded-circle" width="35" src="{{$items->photo_menu == null ? asset('assets/image/logo_bpi.png') : asset($items->photo_menu)}}" alt=""></td>
 																<td>{{ $items->nama_menu }}</td>
 																<td>{{ $items->kategori->nama_kategori }}</td>
 																<td>{{ $items->formatRupiah('harga') }}</td>
