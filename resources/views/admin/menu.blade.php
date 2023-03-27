@@ -1,6 +1,5 @@
 @extends('admin.layouts.menu')
 @section('title', 'Menu')
-
 		<!--**********************************
             Header start
         ***********************************-->
@@ -150,6 +149,7 @@
 																<!-- <td><strong>120$</strong></td> -->
 																<td>
 																	<div class="d-flex">
+																		{{-- {{dd($items->id_menu)}} --}}
 																			<!-- Update -->
 																				<button data-bs-toggle="modal" data-bs-target=".edit{{$items->id_menu}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>
 																			<!-- End Update -->
@@ -163,48 +163,49 @@
 																								</button>
 																							</div>
 																							<div class="modal-body">
-																								<form action="{{ url('menu/'.$items->id.'/update') }}" method="POST">
+																								<form action="{{ url('menu/'.$items->id_menu.'/update') }}" method="POST">
 																									@csrf
-																										<!-- Photo Menu -->
-																											<div class="mb-3 row">
-																												<label for="photo_menu" class="col-sm-3 col-form-label">Photo Menu</label>
-																												<div class="col-sm-9">
-																													<input type="file" class="form-control @error('photo_menu') is-invalid @enderror" placeholder="Photo Menu" name="photo_menu" value="{{ $items->photo_menu }}" id="photo_menu">
-																													<span class="text-danger">@error('photo_menu') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Photo Menu -->
-																										<!-- Nama Menu -->
-																											<div class="mb-3 row">
-																												<label for="nama_menu" class="col-sm-3 col-form-label">Nama Menu</label>
-																												<div class="col-sm-9">
-																													<input type="Text" class="form-control @error('nama_menu') is-invalid @enderror" placeholder="Nama Menu" name="nama_menu" value="{{ $items->nama_menu }}" id="nama_menu">
-																													<span class="text-danger">@error('nama_menu') {{$message}} @enderror</span>
-																												</div>
-																											</div>
-																										<!-- End Nama Menu -->
-																										<!-- Nama Category -->
-																												<div class="mb-3 row">
-																													<label for="harga_menu" class="col-sm-3 col-form-label">Nama Category</label>
-																													<div class="col-sm-9">
-																														<select id="single-select" name="id_kategori">
-																															@foreach ($kategori as $items)
-																																<option value="{{ $items->id_kategori }}">{{ $items->nama_kategori }}</option>
-																															@endforeach
-																														</select>
-																															<span class="text-danger">@error('id_kategori') {{$message}} @enderror</span>
+																									<!-- Photo Menu -->
+																									<div class="mb-3 row">
+																										<label for="photo_menu" class="col-sm-3 col-form-label">Photo Menu</label>
+																										<div class="col-sm-9">
+																											<input type="file" class="form-control @error('photo_menu') is-invalid @enderror" placeholder="Photo Menu" name="photo_menu" value="{{ $items->photo_menu }}" id="photo_menu">
+																											<span class="text-danger">@error('photo_menu') {{$message}} @enderror</span>
+																										</div>
+																									</div>
+																									<!-- End Photo Menu -->
+																									<!-- Nama Menu -->
+																									<div class="mb-3 row">
+																										<label for="nama_menu" class="col-sm-3 col-form-label">Nama Menu</label>
+																										<div class="col-sm-9">
+																											<input type="Text" class="form-control @error('nama_menu') is-invalid @enderror" placeholder="Nama Menu" name="nama_menu" value="{{ $items->nama_menu }}" id="nama_menu">
+																											<span class="text-danger">@error('nama_menu') {{$message}} @enderror</span>
+																										</div>
+																									</div>
+																									<!-- End Nama Menu -->
+																									<!-- Nama Category -->
+																									<div class="mb-3 row">
+																										<label for="harga_menu" class="col-sm-3 col-form-label">Nama Category</label>
+																										<div class="col-sm-9">
+																											<select id="single-select" name="id_kategori">
+																												<option default value={{$items->kategori->id_kategori}}>{{$items->kategori->nama_kategori}}</option>
+																												@foreach ($kategori as $data)
+																												<option value="{{ $data->id_kategori }}">{{ $data->nama_kategori }}</option>
+																												@endforeach
+																											</select>
+																														<span class="text-danger">@error('id_kategori') {{$message}} @enderror</span>
 																													</div>
 																												</div>
-																										<!-- End Nama Category -->
-																										<!-- Harga Menu -->
-																											<div class="mb-3 row">
-																												<label for="harga_menu" class="col-sm-3 col-form-label">Harga Menu</label>
-																												<div class="col-sm-9">
-																													<input type="number" class="form-control @error('harga') is-invalid @enderror" placeholder="Harga Menu" name="harga" value="{{ $items->harga }}" id="harga_menu">
-																													<span class="text-danger">@error('harga') {{$message}} @enderror</span>
+																												<!-- End Nama Category -->
+																												<!-- Harga Menu -->
+																												<div class="mb-3 row">
+																													<label for="harga_menu" class="col-sm-3 col-form-label">Harga Menu</label>
+																													<div class="col-sm-9">
+																														<input type="number" class="form-control @error('harga') is-invalid @enderror" placeholder="Harga Menu" name="harga" value="{{strval($items->harga)}}" id="harga_menu">
+																														<span class="text-danger">@error('harga') {{$message}} @enderror</span>
+																													</div>
 																												</div>
-																											</div>
-																										<!-- End Harga Menu -->
+																												<!-- End Harga Menu -->
 																										<!-- Stok Menu -->
 																											<div class="mb-3 row">
 																												<label for="stok_menu" class="col-sm-3 col-form-label">Stok Menu</label>
@@ -225,10 +226,10 @@
 																				</div>
 																			<!-- End Modal Alert Update -->
 																			<!-- Delete -->
-																				<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target=".Delete{{$items->id_menu}}"><i class="fa fa-trash"></i></a>
+																			<a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delete{{$items->id_menu}}"><i class="fa fa-trash"></i></a>
 																			<!-- End Delete -->
 																			<!-- Modal Alert Delete -->
-																				<div class="modal fade Delete{{$items->id_menu}}">
+																				<div class="modal fade" id="Delete{{$items->id_menu}}">
 																					<div class="modal-dialog" role="document">
 																						<div class="modal-content">
 																							<div class="modal-header">
@@ -240,7 +241,7 @@
 																							<div class="modal-footer">
 																								<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
 																								<!-- @method('delete') -->
-																								<form action="" method="POST">
+																								<form action="{{route('hapusmenu', $items->id_menu)}}" method="post">
 																									@method('delete')
 																									@csrf
 																									<button type="submit" class="btn btn-primary">Yes, Delete</button>
@@ -253,7 +254,7 @@
 																	</div>												
 																</td>
 															</tr>
-															@endforeach
+														@endforeach
 														</tbody>
 													</table>
 												</div>

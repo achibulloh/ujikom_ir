@@ -16,7 +16,7 @@
                         </div>
                         <ul class="navbar-nav header-right">
                             <li class="nav-item">
-								<a href="#" class="btn btn-primary d-sm-inline-block d-none">Generate Report<i class="las la-signal ms-3 scale5"></i></a>
+								<a href="/laporan" class="btn btn-primary d-sm-inline-block d-none">Generate Report<i class="las la-signal ms-3 scale5"></i></a>
 							</li>
                         </ul>
                     </div>
@@ -46,7 +46,7 @@
 									</svg>
 								</div>
 								<div>
-									<h2 class="text-white invoice-num">2478</h2>
+									<h2 class="text-white invoice-num">0</h2>
 									<span class="text-white fs-18">Total Invoices</span>
 								</div>
 							</div>
@@ -64,8 +64,8 @@
 									</svg>
 								</div>
 								<div>
-									<h2 class="text-white invoice-num">983</h2>
-									<span class="text-white fs-18">Paid Invoices</span>
+									<h2 class="text-white invoice-num">{{$totalUser}}</h2>
+									<span class="text-white fs-18">Total Users</span>
 								</div>
 							</div>
 						</div>
@@ -82,8 +82,8 @@
 									</svg>
 								</div>
 								<div>
-									<h2 class="text-white invoice-num">1256</h2>
-									<span class="text-white fs-18">Unpaid Invoices</span>
+									<h2 class="text-white invoice-num">{{$totalMenu}}</h2>
+									<span class="text-white fs-18">Total Menu</span>
 								</div>
 							</div>
 						</div>

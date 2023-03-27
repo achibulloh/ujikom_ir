@@ -33,7 +33,8 @@ Route::post('/forgotpassword', [CustomAuthController::class,'forgotpassword'])->
 Route::get('/register', [CustomAuthController::class,'register']);
 // Register Kasir
 Route::post('/register-kasir', [CustomAuthController::class,'registerkasir'])->name('register-kasir');
-Route::post('/kasir/cart/{id_menu}', [KasirController::class,'store']);
+Route::post('/kasir/{id}', [KasirController::class,'store']);
+Route::get('/kasir/menu', 'App\Http\Controllers\KasirController@menu')->name('menu');
 // Route::get('/cart', [KasirController::class,'store'])->where('id','[0-9]+');
 // End Kasir
 // To Dasboard
@@ -56,6 +57,8 @@ Route::get('/menu', 'App\Http\Controllers\AdminController@menu')->name('menu')->
 Route::get('/kategori', 'App\Http\Controllers\AdminController@kategori')->name('kategori')->middleware('checkadmin');
 Route::post('/tambahkategori', 'App\Http\Controllers\AdminController@tambahkategori')->name('tambahkategori');
 Route::delete('/hapuskategori/{id}', [AdminController::class, 'hapuskategori'])->name('hapuskategori');
+Route::delete('/hapusmenu/{id}', [AdminController::class, 'hapusmenu'])->name('hapusmenu');
+Route::post('/menu/{id}/update', 'App\Http\Controllers\AdminController@updatemenu');
 Route::post('/kategori/{id}/updatekategori', 'App\Http\Controllers\AdminController@updatekategori');
 Route::get('/kategori/{id}/editkategori', 'App\Http\Controllers\AdminController@editkategori');
 Route::post('/tambahmenu', 'App\Http\Controllers\AdminController@tambahmenu')->name('tambahmenu');

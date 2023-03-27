@@ -81,8 +81,8 @@
           <div class="h-full overflow-y-auto px-2">
             <div class="grid grid-cols-4 gap-4 pb-3">
               @foreach ($data as $items)
-              <form action="{{url('kasir/cart/'.$items->id_menu)}}" method="POST">
-                <button>
+              {{-- <form action="{{url('kasir/'.$items->id_menu)}}" method="POST"> --}}
+                <button ng-click="addItem(item)">
                   <div type="button" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
                     <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
                     <div class="flex pb-3 px-3 text-sm -mt-3">
@@ -91,7 +91,7 @@
                     </div>
                   </div>
                 </button>
-              </form>
+              {{-- </form> --}}
                 @endforeach
               </div>
             </div>

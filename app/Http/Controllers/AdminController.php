@@ -51,8 +51,20 @@ class AdminController extends Controller
     public function menu() {
         $data = Menu::with('kategori')->get();
         $kategori = Kategori::all();
-        return view("admin.menu", compact('data', 'kategori'));   
+        return view("admin.menu", compact('data', 'kategori'));
     } 
+    public function updatemenu(Request $request, $id_menu) {
+        $menu = Menu::find($id_menu);
+        if ($request->file('photo')) {
+            $menu->photo_menu = $request->file('photo')->store('photo');
+        }
+        $menu->nama_menu = $request->nama_menu;
+        $menu->id_kategori = $request->id_kategori;
+        $menu->harga = $request->harga;
+        $menu->stok = $request->stok;
+        $menu->update();
+        return redirect('/menu')->with('success','You have successfully update menu.');
+    }
     public function tambahmenu (Request $request) {
         $request->validate([
             'nama_menu'=>'required|unique:menu',
@@ -74,13 +86,19 @@ class AdminController extends Controller
 
         return redirect('/menu')->with('success', "You have successfully create menu.");
     }
+    public function hapusmenu($id_menu) {
+        $user = Menu::where('id_menu', '=', $id_menu);
+        $user->delete();
+
+        return redirect('/menu')->with('success','You have successfully deleted users.');
+    }
 
     public function tambahusers (Request $request) {
         $request->validate([
             'photo'=>'image',
             'username'=>'required|unique:users',
             'nama_lengkap'=>'required',
-            'jenis_kelamin'=>'required',
+            'harga'=>'required',
             'alamat'=>'required',
             'nomor_tlp'=>'required|min:12|max:13',
             'email'=>'required|email|unique:users',

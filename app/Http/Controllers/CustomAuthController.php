@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -65,7 +66,12 @@ class CustomAuthController extends Controller
     }
 
     public function adminn() {
-        return view("admin.dasboard");   
+        // $data = User::with('users')->get();
+        $user = User::all();
+        $totalUser = $user->count();
+        $menu = Menu::all();
+        $totalMenu = $menu->count();
+        return view("admin.dasboard", compact('totalUser', 'totalMenu'));   
     }
 
     public function proses_login(Request $request) {
