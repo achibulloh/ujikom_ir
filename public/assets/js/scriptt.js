@@ -38,12 +38,35 @@ function initApp() {
     isShowModalReceipt: false,
     receiptNo: null,
     receiptDate: null,
-    
     async initDatabase() {
       this.db = await loadDatabase();
       this.loadProducts();
     },
+    async loadProducts() {
+      this.products = await this.db.getProducts();
+      console.log("products loaded", this.products);
+    },
+    async startWithSampleData() {
+      const response = await fetch("data/sample.json");
+      const data = await response.json();
+      this.products = data.products;
+      for (let product of data.products) {
+        await this.db.addProduct(product);
+      }
 
+      this.setFirstTime(false);
+    },
+    startBlank() {
+      this.setFirstTime(false);
+    },
+    setFirstTime(firstTime) {
+      this.firstTime = firstTime;
+      if (firstTime) {
+        localStorage.removeItem("first_time");
+      } else {
+        localStorage.setItem("first_time", new Date().getTime());
+      }
+    },
     filteredProducts() {
       const rg = this.keyword ? new RegExp(this.keyword, "gi") : null;
       return this.products.filter((p) => !rg || p.name.match(rg));
@@ -86,6 +109,7 @@ function initApp() {
     addCash(amount) {      
       this.cash = (this.cash || 0) + amount;
       this.updateChange();
+      this.beep();
     },
     getItemsCount() {
       return this.cart.reduce((count, item) => count + item.qty, 0);
@@ -135,6 +159,18 @@ function initApp() {
       this.receiptDate = null;
       this.updateChange();
       this.clearSound();
+    },
+    beep() {
+      this.playSound("sound/beep-29.mp3");
+    },
+    clearSound() {
+      this.playSound("sound/button-21.mp3");
+    },
+    playSound(src) {
+      const sound = new Audio();
+      sound.src = src;
+      sound.play();
+      sound.onended = () => delete(sound);
     },
     printAndProceed() {
       const receiptContent = document.getElementById('receipt-content');

@@ -33,11 +33,13 @@ Route::post('/forgotpassword', [CustomAuthController::class,'forgotpassword'])->
 Route::get('/register', [CustomAuthController::class,'register']);
 // Register Kasir
 Route::post('/register-kasir', [CustomAuthController::class,'registerkasir'])->name('register-kasir');
+Route::post('/kasir/cart/{id_menu}', [KasirController::class,'store']);
+// Route::get('/cart', [KasirController::class,'store'])->where('id','[0-9]+');
 // End Kasir
 // To Dasboard
 Route::post('/proses_login', 'App\Http\Controllers\CustomAuthController@proses_login')->name('proses_login');
 Route::get('/admin', [CustomAuthController::class,'adminn'])->name('admin')->middleware('checkadmin');
-Route::get('/kasir', [KasirController::class,'kasirr'])->name('kasir')->middleware('checkcashier');
+Route::get('/kasir', [KasirController::class,'kasirr'])->name('kasir')->middleware('checkcashier')->name('ds');
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
 // Dasboard Admin

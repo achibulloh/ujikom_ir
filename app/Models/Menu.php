@@ -25,5 +25,9 @@ class Menu extends Model
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
+    static function detail_menu($id_menu) {
+        $data = Menu::where('id_menu',$id_menu)->first();
+        return $data;
+    }
     // https://github.com/mesinkasir/axcoracashierapp
 }

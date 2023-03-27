@@ -81,14 +81,16 @@
           <div class="h-full overflow-y-auto px-2">
             <div class="grid grid-cols-4 gap-4 pb-3">
               @foreach ($data as $items)
-              <form action="" method="POST">
-                <div type="submit"  class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg">
-                  <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
-                  <div class="flex pb-3 px-3 text-sm -mt-3">
-                    <p class="flex-grow truncate mr-1">{{$items->nama_menu}}</p>
-                    <p class="nowrap font-semibold">{{$items->harga}}</p>
+              <form action="{{url('kasir/cart/'.$items->id_menu)}}" method="POST">
+                <button>
+                  <div type="button" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
+                    <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
+                    <div class="flex pb-3 px-3 text-sm -mt-3">
+                      <p class="flex-grow truncate mr-1">{{$items->nama_menu}}</p>
+                      <p class="nowrap font-semibold">Rp. {{$items->harga}}</p>
+                    </div>
                   </div>
-                </div>
+                </button>
               </form>
                 @endforeach
               </div>
@@ -121,14 +123,14 @@
               </div>
             </div>
 
-            @foreach ($data as $items)
             <div class="flex-1 w-full px-4 overflow-auto">
-              <template x-for="item in cart">
+              @foreach ($data as $items)
+              {{-- <template x-for="item in cart"> --}}
                 <div class="select-none mb-3 bg-blue-gray-50 rounded-lg w-full text-blue-gray-700 py-2 px-2 flex justify-center">
-                  <img src="{{ asset('assets/image/png/LogoOnly.png') }}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
+                  <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
                   <div class="flex-grow">
                     <h5 class="text-sm">{{$items->nama_menu}}</h5>
-                    <p class="text-xs block">{{$items->harga}}</p>
+                    <p class="text-xs block">Rp. {{$items->harga}}</p>
                   </div>
                   <div class="py-1">
                     <div class="w-28 grid grid-cols-3 gap-2 ml-2">
@@ -146,9 +148,9 @@
                     </div>
                   </div>
                 </div>
-              </template>
+              {{-- </template> --}}
+              @endforeach
             </div>
-            @endforeach
           </div>
           <!-- end of cart items -->
 
@@ -174,7 +176,6 @@
               </div>
             </div>
             <div
-              x-show="change > 0"
               class="flex mb-3 text-lg font-semibold bg-cyan-50 text-blue-gray-700 rounded-lg py-2 px-3"
             >
               <div class="text-cyan-800">CHANGE</div>
@@ -183,31 +184,8 @@
                 x-text="priceFormat(change)">
               </div>
             </div>
-            <div
-              x-show="change < 0"
-              class="flex mb-3 text-lg font-semibold bg-pink-100 text-blue-gray-700 rounded-lg py-2 px-3"
-            >
-              <div
-                class="text-right flex-grow text-pink-600"
-                x-text="priceFormat(change)">
-              </div>
-            </div>
-            <div
-              x-show="change == 0 && cart.length > 0"
-              class="flex justify-center mb-3 text-lg font-semibold bg-cyan-50 text-cyan-700 rounded-lg py-2 px-3"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-              </svg>
-            </div>
             <button
               class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none"
-              x-bind:class="{
-                'bg-cyan-500 hover:bg-cyan-600': submitable(),
-                'bg-blue-gray-200': !submitable()
-              }"
-              :disabled="!submitable()"
-              x-on:click="submit()"
             >
               SUBMIT
             </button>
@@ -218,7 +196,7 @@
       <!-- end of right sidebar -->
     </div>
 
-  <div id="print-area" class="print-area"></div>
+  {{-- <div id="print-area" class="print-area"></div> --}}
   <!-- Scripts -->
   <script src="{{ asset('assets/js/scriptt.js') }}"></script>
   <script src="https://unpkg.com/idb/build/iife/index-min.js"></script>
