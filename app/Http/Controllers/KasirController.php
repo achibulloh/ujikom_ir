@@ -14,16 +14,17 @@ class KasirController extends Controller
     public function kasirr() {
         $data = Menu::all();
         $cart = Cart::all();
+        // $menu = Menu::join()
         return view("kasir.dasboard", compact('data', 'cart'));   
     }
-    public function store (Request $request, $id_menu){
+    public function store (Request $request){
         // $cart = session('cart');
         // $data = Menu::detail_menu('id_menu');
         // $cart['id_menu'] = [
         //     "nama_menu" => $data->nama_menu,
         //     "harga" => $data->harga,
         //     "photo_menu" => $data->photo_menu,
-        //     "jumlah" => 1
+        //     "qty" => 1
         // ];
         // session(['cart'=>$cart]);
         // $menu = Menu::find($id_menu);
@@ -32,41 +33,44 @@ class KasirController extends Controller
         // $menu->id_menu = $request->id_menu;
         // $menu->qty = 1;
         // $menu->save();
-        $this->validate($request, [
-            'id_menu' => 'required|exists:menu,id_menu',
-            'qty' => 'required|integer' 
+        // $data = Menu::where('id_menu', '=', $id_menu);
+        // $menu = Menu::get($id_menu);
+        // $session[$menu] = [
+        //     "photo_menu" => $data->photo_menu,
+        //     "nama_menu" => $data->nama_menu,
+        //     "harga" => $data->harga,
+        //     "qty" => 1
+        // ];
+        $menu = Menu::findOrFail($request->input('id_menu'));
+        // Cart::add(
+        //     $menu->id_menu,
+        //     $menu->photo_menu,
+        //     $menu->name_menu,
+        //     $request->input('qty'),
+        //     $menu->price / 10,
+        // );
+        Cart::create([
+            'id_kasir' => Auth::user()->id,
+            'id_menu' => $request->id_menu,
+            'qty' => 1
         ]);
+        return redirect('/kasir')->with('success','data sudah masuk');
 
-            //AMBIL DATA CART DARI COOKIE, KARENA BENTUKNYA JSON MAKA KITA GUNAKAN JSON_DECODE UNTUK MENGUBAHNYA MENJADI ARRAY
-            $carts = json_decode($request->cookie('dw-carts'), true); 
-        
-            //CEK JIKA CARTS TIDAK NULL DAN PRODUCT_ID ADA DIDALAM ARRAY CARTS
-            if ($carts && array_key_exists($request->product_id, $carts)) {
-                //MAKA UPDATE QTY-NYA BERDASARKAN PRODUCT_ID YANG DIJADIKAN KEY ARRAY
-                $carts[$request->product_id]['qty'] += $request->qty;
-            } else {
-                //SELAIN ITU, BUAT QUERY UNTUK MENGAMBIL PRODUK BERDASARKAN PRODUCT_ID
-                $product = Menu::find($request->id_menu);
-                //TAMBAHKAN DATA BARU DENGAN MENJADIKAN PRODUCT_ID SEBAGAI KEY DARI ARRAY CARTS
-                $carts[$request->product_id] = [
-                    'qty' => $request->qty,
-                    'nama_menu' => $product->id_menu,
-                    'product_name' => $product->name,
-                    'product_price' => $product->price,
-                    'product_image' => $product->image
-                ];
-            }
-
-            //BUAT COOKIE-NYA DENGAN NAME DW-CARTS
-            //JANGAN LUPA UNTUK DI-ENCODE KEMBALI, DAN LIMITNYA 2800 MENIT ATAU 48 JAM
-            $cookie = cookie('dw-carts', json_encode($carts), 2880);
-            //STORE KE BROWSER UNTUK DISIMPAN
-            return redirect()->back()->cookie($cookie);
-
-        // return redirect('/kasir');
+    }
+    public function tambah_qty() {
+        Cart::updated([
+            'qty' => 1
+        ]);
+        return redirect('/kasir')->with('success','data sudah masuk');
     }
     public function menu() {
         $data = Menu::with('kategori')->get();
         return $data;
     } 
+    public function clearmenu($id_kasir){
+        $cart = Cart::where('id_kasir', '=', $id_kasir);
+        $cart->delete();
+
+        return redirect('/kasir');
+    }
 }

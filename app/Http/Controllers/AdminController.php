@@ -87,8 +87,8 @@ class AdminController extends Controller
         return redirect('/menu')->with('success', "You have successfully create menu.");
     }
     public function hapusmenu($id_menu) {
-        $user = Menu::where('id_menu', '=', $id_menu);
-        $user->delete();
+        $menu = Menu::where('id_menu', '=', $id_menu);
+        $menu->delete();
 
         return redirect('/menu')->with('success','You have successfully deleted users.');
     }

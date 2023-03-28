@@ -81,9 +81,12 @@
           <div class="h-full overflow-y-auto px-2">
             <div class="grid grid-cols-4 gap-4 pb-3">
               @foreach ($data as $items)
-              {{-- <form action="{{url('kasir/'.$items->id_menu)}}" method="POST"> --}}
-                <button ng-click="addItem(item)">
+              <form action="{{ route('cart.store')}}" method="POST">
+                @csrf
+                <button type="submit">
                   <div type="button" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
+                    <input type="hidden" name="id_menu" value="{{$items->id_menu}}" >
+                    <input type="hidden" name="qty" value="1" >
                     <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
                     <div class="flex pb-3 px-3 text-sm -mt-3">
                       <p class="flex-grow truncate mr-1">{{$items->nama_menu}}</p>
@@ -91,7 +94,7 @@
                     </div>
                   </div>
                 </button>
-              {{-- </form> --}}
+              </form>
                 @endforeach
               </div>
             </div>
@@ -111,20 +114,24 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <div class="text-center absolute bg-cyan-500 text-white w-5 h-5 text-xs p-0 leading-5 rounded-full -right-2 top-3" x-text="getItemsCount()"></div>
+                <div class="text-center absolute bg-cyan-500 text-white w-5 h-5 text-xs p-0 leading-5 rounded-full -right-2 top-3">{{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}</div>
               </div>
               <div class="flex-grow px-8 text-right text-lg py-4 relative">
+                @foreach ($cart as $items)
+                <form action="{{ route('clear',$items->id_kasir)}}" method="POST">
+                  @endforeach
                 <!-- trash button -->
-                <button x-on:click="clear()" class="text-blue-gray-300 hover:text-pink-500 focus:outline-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
+                  <button class="text-blue-gray-300 hover:text-pink-500 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+              </form>
               </div>
             </div>
 
             <div class="flex-1 w-full px-4 overflow-auto">
-              @foreach ($data as $items)
+              @foreach ($cart as $items)
               {{-- <template x-for="item in cart"> --}}
                 <div class="select-none mb-3 bg-blue-gray-50 rounded-lg w-full text-blue-gray-700 py-2 px-2 flex justify-center">
                   <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
@@ -139,8 +146,11 @@
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                         </svg>
                       </button>
-                      <input x-model.number="item.qty" type="text" class="bg-white rounded-lg text-center shadow focus:outline-none focus:shadow-lg text-sm">
-                      <button x-on:click="addQty(item, 1)" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
+                      <input value="{{$items->qty}}" type="text" class="bg-white rounded-lg text-center shadow focus:outline-none focus:shadow-lg text-sm">
+                      {{-- <form action="{{ route('tambahqty')}}" method="POST">
+                        @csrf
+                      </form> --}}
+                      <button type="submit" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
@@ -204,6 +214,28 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  @if(Session::has("success"))
+  <script>
+        toastr.success("{{Session::get('success')}}", "Success", {
+          positionClass: "toast-top-right",
+          timeOut: 5e3,
+          closeButton: !0,
+          debug: !1,
+          newestOnTop: !0,
+          progressBar: !0,
+          preventDuplicates: !0,
+          onclick: null,
+          showDuration: "300",
+          hideDuration: "1000",
+          extendedTimeOut: "1000",
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut",
+          tapToDismiss: !1
+        })
+  </script>
+  @endif
 </body>
 </html>
     

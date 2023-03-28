@@ -15,7 +15,7 @@ class Menu extends Model
         'photo_menu',
         'nama_menu',
         'id_kategori',
-        'harga',
+        'price',
         'stok'
     ];
 
@@ -24,6 +24,10 @@ class Menu extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class, 'id_cart');
     }
     static function detail_menu($id_menu) {
         $data = Menu::where('id_menu',$id_menu)->first();

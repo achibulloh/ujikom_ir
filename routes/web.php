@@ -33,14 +33,15 @@ Route::post('/forgotpassword', [CustomAuthController::class,'forgotpassword'])->
 Route::get('/register', [CustomAuthController::class,'register']);
 // Register Kasir
 Route::post('/register-kasir', [CustomAuthController::class,'registerkasir'])->name('register-kasir');
-Route::post('/kasir/{id}', [KasirController::class,'store']);
+Route::post('/kasir', [KasirController::class,'store'])->name('cart.store');
 Route::get('/kasir/menu', 'App\Http\Controllers\KasirController@menu')->name('menu');
-// Route::get('/cart', [KasirController::class,'store'])->where('id','[0-9]+');
+Route::post('/tambahqty', [KasirController::class,'tambah_qty'])->name('tambahqty');
+Route::post('/clear{id}', [KasirController::class,'clearmenu'])->name('clear');
 // End Kasir
 // To Dasboard
 Route::post('/proses_login', 'App\Http\Controllers\CustomAuthController@proses_login')->name('proses_login');
 Route::get('/admin', [CustomAuthController::class,'adminn'])->name('admin')->middleware('checkadmin');
-Route::get('/kasir', [KasirController::class,'kasirr'])->name('kasir')->middleware('checkcashier')->name('ds');
+Route::get('/kasir', [KasirController::class,'kasirr'])->name('kasir')->middleware('checkcashier');
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
 // Dasboard Admin

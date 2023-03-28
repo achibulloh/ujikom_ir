@@ -18,8 +18,12 @@ class Cart extends Model
 
     protected $primaryKey = 'id_cart';
 
-    public function kategori()
+    // public function kategori()
+    // {
+    //     return $this->belongsTo(Kategori::class, 'id_kategori');
+    // }
+    public function menu()
     {
-        return $this->belongsTo(Kategori::class, 'id_kategori');
+        return $this->hasMany(Menu::class, 'id_menu');
     }
 }

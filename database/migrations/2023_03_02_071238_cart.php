@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('id_kasir')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('id_menu')->references('id_menu')->on('menu')->onDelete('cascade');
             $table->integer('qty');
+            $table->timestamps();
         });
     }
 
