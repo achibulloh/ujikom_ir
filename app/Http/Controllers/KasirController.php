@@ -38,14 +38,21 @@ class KasirController extends Controller
     // }
     // }
     public function store (Request $request) {
-        if (Auth()->Cart()->qty == 0) {
+        $doble = Cart::where('id_menu', $request->id_menu)->first();
+        if ($doble) {
+            $qty = Auth::cart()->qty;
+            Cart::updated([
+                'qty' => $qty + 1
+            ]);
+            return redirect('/kasir');
+        }
             Cart::create([
                 'id_kasir' => Auth::user()->id,
                 'id_menu' => $request->id_menu,
                 'qty' => 1    
             ]);
             return redirect('/kasir');
-        }
+        
         // return redirect('/kasir');
     }
 
