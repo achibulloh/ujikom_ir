@@ -36,7 +36,7 @@ Route::post('/register-kasir', [CustomAuthController::class,'registerkasir'])->n
 Route::post('/kasir', [KasirController::class,'store'])->name('cart.store');
 Route::get('/kasir/menu', 'App\Http\Controllers\KasirController@menu')->name('menu');
 Route::post('/tambahqty', [KasirController::class,'tambah_qty'])->name('tambahqty');
-Route::post('/clear{id}', [KasirController::class,'clearmenu'])->name('clear');
+Route::post('/clear/{id}', [KasirController::class,'clearmenu'])->name('clear');
 // End Kasir
 // To Dasboard
 Route::post('/proses_login', 'App\Http\Controllers\CustomAuthController@proses_login')->name('proses_login');
@@ -45,6 +45,7 @@ Route::get('/kasir', [KasirController::class,'kasirr'])->name('kasir')->middlewa
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
 // Dasboard Admin
+Route::get('/transaksi', [AdminController::class,'transaksi'])->name('transaksi');
 Route::post('/profile/{id}/update', 'App\Http\Controllers\AdminController@profileupdate')->name('profileupdate');
 Route::get('/profile', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
 Route::get('/laporan', 'App\Http\Controllers\AdminController@laporan')->name('laporan')->middleware('checkadmin');

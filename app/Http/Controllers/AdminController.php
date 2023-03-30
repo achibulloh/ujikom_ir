@@ -11,11 +11,16 @@ use Illuminate\Contracts\Cache\Store;
 use App\Models\User;
 use App\Models\Menu;
 use App\Models\Kategori;
+use App\Models\Transaksi;
 use Session;
 
 
 class AdminController extends Controller
 {
+    public function transaksi() {
+        $data = Transaksi::all();
+        return view("admin.transaksi",compact('data'));   
+    } 
     public function profile() {
         $data = User::all();
         return view("admin.profile",compact('data'));   

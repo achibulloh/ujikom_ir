@@ -147,11 +147,11 @@
 								<span class="nav-text">Category</span>
 							</a>
 						</li>
-						<!-- <li><a class="ai-icon" href="/transaksi" aria-expanded="false">
+						<li><a class="ai-icon" href="/transaksi" aria-expanded="false">
 								<i class="flaticon-045-heart"></i>
 								<span class="nav-text">Transaction</span>
 							</a>
-						</li> -->
+						</li>
 						<!-- <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
 								<i class="flaticon-013-checkmark"></i>
 								<span class="nav-text">Widget</span>

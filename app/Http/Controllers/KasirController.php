@@ -13,42 +13,14 @@ class KasirController extends Controller
 {
     public function kasirr() {
         $data = Menu::all();
+        $data1 = Menu::paginate(6);
         $cart = Cart::all();
+        $totalCart = $cart->count();
         // $menu = Menu::join()
-        return view("kasir.dasboard", compact('data', 'cart'));   
+        return view("kasir.dasboard", compact('data', 'cart', 'totalCart'));   
     }
     public function store (Request $request){
-        // $cart = session('cart');
-        // $data = Menu::detail_menu('id_menu');
-        // $cart['id_menu'] = [
-        //     "nama_menu" => $data->nama_menu,
-        //     "harga" => $data->harga,
-        //     "photo_menu" => $data->photo_menu,
-        //     "qty" => 1
-        // ];
-        // session(['cart'=>$cart]);
-        // $menu = Menu::find($id_menu);
-        // $menu = new Cart();
-        // $menu->id_kasir = $request->id_kasir;
-        // $menu->id_menu = $request->id_menu;
-        // $menu->qty = 1;
-        // $menu->save();
-        // $data = Menu::where('id_menu', '=', $id_menu);
-        // $menu = Menu::get($id_menu);
-        // $session[$menu] = [
-        //     "photo_menu" => $data->photo_menu,
-        //     "nama_menu" => $data->nama_menu,
-        //     "harga" => $data->harga,
-        //     "qty" => 1
-        // ];
-        $menu = Menu::findOrFail($request->input('id_menu'));
-        // Cart::add(
-        //     $menu->id_menu,
-        //     $menu->photo_menu,
-        //     $menu->name_menu,
-        //     $request->input('qty'),
-        //     $menu->price / 10,
-        // );
+        // $menu = Menu::findOrFail($request->input('id_menu'));
         Cart::create([
             'id_kasir' => Auth::user()->id,
             'id_menu' => $request->id_menu,
@@ -57,8 +29,8 @@ class KasirController extends Controller
         return redirect('/kasir')->with('success','data sudah masuk');
 
     }
-    public function tambah_qty() {
-        Cart::updated([
+    public function tambah_qty(request $request, $id_cart) {
+        Cart::where('id_cart', $id_cart)->update([
             'qty' => 1
         ]);
         return redirect('/kasir')->with('success','data sudah masuk');
@@ -68,8 +40,10 @@ class KasirController extends Controller
         return $data;
     } 
     public function clearmenu($id_kasir){
-        $cart = Cart::where('id_kasir', '=', $id_kasir);
-        $cart->delete();
+        // Cart::find($id_kasir)->delete();
+            $cart = Cart::find($id_kasir);
+            $cart = Cart::where('id_kasir', '=', $id_kasir);
+            $cart->delete();
 
         return redirect('/kasir');
     }

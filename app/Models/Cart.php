@@ -22,8 +22,12 @@ class Cart extends Model
     // {
     //     return $this->belongsTo(Kategori::class, 'id_kategori');
     // }
+    // public function menu()
+    // {
+    //     return $this->hasMany(Menu::class, 'id_menu');
+    // }
     public function menu()
     {
-        return $this->hasMany(Menu::class, 'id_menu');
+        return $this->belongsTo(Menu::class, 'id_menu');
     }
 }

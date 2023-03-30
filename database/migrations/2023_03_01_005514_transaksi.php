@@ -15,15 +15,14 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id('id_transaksi');
+            $table->integer('invoice');
             $table->foreignId('id_kasir')->references('id')->on('users')->onDelete('cascade');
             $table->string('nama_pelangan');
-            $table->string('nama_baramg');
-            $table->integer('jumlah_barang');
-            $table->enum('metodepembayaran',['cash','credit/debit','qris']);
-            $table->rememberToken();
+            $table->integer('jumlah_menu');
+            $table->integer('total_bayar');
+            $table->enum('metode_pembayaran',['cash','credit/debit','qris']);
+            $table->enum('status',['pending','success','cencel']);
             $table->timestamps();
-            $table->foreignId('created_by')->nullable(true)->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('updated_by')->nullable(true)->references('id')->on('users')->onDelete('cascade');
         });
     }
 

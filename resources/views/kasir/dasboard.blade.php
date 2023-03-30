@@ -70,11 +70,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <input
-            type="text"
-            class="bg-white rounded-3xl shadow text-lg full w-full h-16 py-4 pl-16 transition-shadow focus:shadow-2xl focus:outline-none"
-            placeholder="Cari menu ..."
-            x-model="keyword"
+          <input type="text" class="bg-white rounded-3xl shadow text-lg full w-full h-16 py-4 pl-16 transition-shadow focus:shadow-2xl focus:outline-none" placeholder="Cari menu ..." name="search" value="" autofocus
           />
         </div>
         <div class="h-full overflow-hidden mt-4">
@@ -84,7 +80,7 @@
               <form action="{{ route('cart.store')}}" method="POST">
                 @csrf
                 <button type="submit">
-                  <div type="button" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
+                  <div type="hidden" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
                     <input type="hidden" name="id_menu" value="{{$items->id_menu}}" >
                     <input type="hidden" name="qty" value="1" >
                     <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
@@ -95,7 +91,8 @@
                   </div>
                 </button>
               </form>
-                @endforeach
+              @endforeach
+              {{-- {{$items->links()}} --}}
               </div>
             </div>
         </div>
@@ -114,19 +111,21 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <div class="text-center absolute bg-cyan-500 text-white w-5 h-5 text-xs p-0 leading-5 rounded-full -right-2 top-3">{{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}</div>
+                <div class="text-center absolute bg-cyan-500 text-white w-5 h-5 text-xs p-0 leading-5 rounded-full -right-2 top-3">{{$totalCart}}</div>
               </div>
               <div class="flex-grow px-8 text-right text-lg py-4 relative">
                 @foreach ($cart as $items)
                 <form action="{{ route('clear',$items->id_kasir)}}" method="POST">
                   @endforeach
-                <!-- trash button -->
-                  <button class="text-blue-gray-300 hover:text-pink-500 focus:outline-none">
+                  @csrf
+                  {{-- @method('delete') --}}
+                  <!-- trash button -->
+                  <button type="submit" class="text-blue-gray-300 hover:text-pink-500 focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                   </button>
-              </form>
+                </form>
               </div>
             </div>
 
@@ -134,10 +133,10 @@
               @foreach ($cart as $items)
               {{-- <template x-for="item in cart"> --}}
                 <div class="select-none mb-3 bg-blue-gray-50 rounded-lg w-full text-blue-gray-700 py-2 px-2 flex justify-center">
-                  <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
+                  <img src="{{$items->menu->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->menu->photo_menu)}}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
                   <div class="flex-grow">
-                    <h5 class="text-sm">{{$items->nama_menu}}</h5>
-                    <p class="text-xs block">Rp. {{$items->harga}}</p>
+                    <h5 class="text-sm">{{$items->menu->nama_menu}}</h5>
+                    <p class="text-xs block">Rp. {{$items->menu->harga}}</p>
                   </div>
                   <div class="py-1">
                     <div class="w-28 grid grid-cols-3 gap-2 ml-2">
@@ -175,7 +174,8 @@
                 <div class="flex-grow text-left">CASH</div>
                 <div class="flex text-right">
                   <div class="mr-2">Rp</div>
-                  <input x-bind:value="numberFormat(cash)" x-on:keyup="updateCash($event.target.value)" type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none" readonly>
+                  <input x-bind:value="numberFormat(cash)" type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none" readonly>
+                  {{-- value="{{ $cart->menu->harga *  $cart->qty }}" --}}
                 </div>
               </div>
               <hr class="my-2">
@@ -194,11 +194,7 @@
                 x-text="priceFormat(change)">
               </div>
             </div>
-            <button
-              class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none"
-            >
-              SUBMIT
-            </button>
+            <button class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none"> SUBMIT </button>
           </div>
           <!-- end of payment info -->
         </div>

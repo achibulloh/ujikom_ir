@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
         ],
         [
             'photo_menu' => 'photo/choco-glaze-donut-peanut.png',
-            'nama_menu' => 'Choco-glaze-donut-peanut',
+            'nama_menu' => 'Choco-donut-peanut',
             'id_kategori' => '3',
             'harga' => '10000',
             'stok' => '23'
