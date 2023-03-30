@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -68,10 +69,12 @@ class CustomAuthController extends Controller
     public function adminn() {
         // $data = User::with('users')->get();
         $user = User::all();
+        $transaksi = Transaksi::all();
+        $totalTransaksi = $transaksi->count();
         $totalUser = $user->count();
         $menu = Menu::all();
         $totalMenu = $menu->count();
-        return view("admin.dasboard", compact('totalUser', 'totalMenu'));   
+        return view("admin.dasboard", compact('totalUser', 'totalMenu', 'totalTransaksi'));   
     }
 
     public function proses_login(Request $request) {

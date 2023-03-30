@@ -46,8 +46,8 @@
 									</svg>
 								</div>
 								<div>
-									<h2 class="text-white invoice-num">0</h2>
-									<span class="text-white fs-18">Total Invoices</span>
+									<h2 class="text-white invoice-num">{{$totalTransaksi}}</h2>
+									<span class="text-white fs-18">Total Invoice</span>
 								</div>
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 									</svg>
 								</div>
 								<div>
-									<h2 class="text-white invoice-num">652</h2>
+									<h2 class="text-white invoice-num">0</h2>
 									<span class="text-white fs-18">Total Invoices Sent</span>
 								</div>
 							</div>

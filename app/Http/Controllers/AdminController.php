@@ -19,7 +19,8 @@ class AdminController extends Controller
 {
     public function transaksi() {
         $data = Transaksi::all();
-        return view("admin.transaksi",compact('data'));   
+        $users = User::all();
+        return view("admin.transaksi",compact('data', 'users'));   
     } 
     public function profile() {
         $data = User::all();
@@ -168,7 +169,7 @@ class AdminController extends Controller
         $user = Kategori::where('id_kategori', '=', $id_kategori);
         $user->delete();
 
-        return redirect('/kategori')->with('success','You have successfully deleted users.');
+        return redirect('/kategori')->with('success','You have successfully deleted kategori.');
     }
     public function editkategori($id_kategori){
         $data = Kategori::where('id_kategori', $id_kategori)->first();
@@ -177,7 +178,7 @@ class AdminController extends Controller
     public function updatekategori(Request $request, $id_kategori) {
         $data = Kategori::where('id_kategori', '=', $id_kategori);
         $data->update($request->except(['_token', 'submit']));
-        Session::flash('success','Data Anda Berhasil Update');
+        Session::flash('success','You have successfully edited the category.');
         return redirect('kategori');
     }
 }

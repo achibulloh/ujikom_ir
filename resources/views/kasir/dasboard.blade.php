@@ -86,7 +86,7 @@
                     <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
                     <div class="flex pb-3 px-3 text-sm -mt-3">
                       <p class="flex-grow truncate mr-1">{{$items->nama_menu}}</p>
-                      <p class="nowrap font-semibold">Rp. {{$items->harga}}</p>
+                      <p class="nowrap font-semibold">{{$items->formatRupiah('harga') }}</p>
                     </div>
                   </div>
                 </button>
@@ -136,7 +136,7 @@
                   <img src="{{$items->menu->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->menu->photo_menu)}}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
                   <div class="flex-grow">
                     <h5 class="text-sm">{{$items->menu->nama_menu}}</h5>
-                    <p class="text-xs block">Rp. {{$items->menu->harga}}</p>
+                    <p class="text-xs block">{{$items->menu->formatRupiah('harga')}}</p>
                   </div>
                   <div class="py-1">
                     <div class="w-28 grid grid-cols-3 gap-2 ml-2">
@@ -167,7 +167,7 @@
           <div class="select-none h-auto w-full text-center pt-3 pb-4 px-4">
             <div class="flex mb-3 text-lg font-semibold text-blue-gray-700">
               <div>TOTAL</div>
-              <div class="text-right w-full" x-text="priceFormat(getTotalPrice())"></div>
+              <div class="text-right w-full" value="">Rp. </div>
             </div>
             <div class="mb-3 text-blue-gray-700 px-3 pt-2 pb-3 rounded-lg bg-blue-gray-50">
               <div class="flex text-lg font-semibold">

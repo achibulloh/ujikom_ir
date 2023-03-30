@@ -45,7 +45,7 @@ Route::get('/kasir', [KasirController::class,'kasirr'])->name('kasir')->middlewa
 Route::get('/logout', 'App\Http\Controllers\CustomAuthController@logout')->name('logout');
 // End Dasboard
 // Dasboard Admin
-Route::get('/transaksi', [AdminController::class,'transaksi'])->name('transaksi');
+Route::get('/transaksi', [AdminController::class,'transaksi'])->name('transaksi')->middleware('checkadmin');
 Route::post('/profile/{id}/update', 'App\Http\Controllers\AdminController@profileupdate')->name('profileupdate');
 Route::get('/profile', 'App\Http\Controllers\AdminController@profile')->name('profile')->middleware('checkadmin');
 Route::get('/laporan', 'App\Http\Controllers\AdminController@laporan')->name('laporan')->middleware('checkadmin');
