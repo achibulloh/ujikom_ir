@@ -70,11 +70,13 @@ class CustomAuthController extends Controller
         // $data = User::with('users')->get();
         $user = User::all();
         $transaksi = Transaksi::all();
+        $tr = Transaksi::where('status','like','success');
+        $totalinvoicesuccess = $tr->count();
         $totalTransaksi = $transaksi->count();
         $totalUser = $user->count();
         $menu = Menu::all();
         $totalMenu = $menu->count();
-        return view("admin.dasboard", compact('totalUser', 'totalMenu', 'totalTransaksi'));   
+        return view("admin.dasboard", compact('totalUser', 'totalMenu', 'totalTransaksi', 'totalinvoicesuccess'));   
     }
 
     public function proses_login(Request $request) {

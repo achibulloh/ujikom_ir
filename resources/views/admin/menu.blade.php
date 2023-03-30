@@ -114,7 +114,7 @@
 																			<!-- End Stok Menu -->
 																			<div class="modal-footer">
 																				<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-																				<button type="submit" class="btn btn-primary" name="submit">Tambah Kategori</button>
+																				<button type="submit" class="btn btn-primary" name="submit">Tambah Menu</button>
 																			</div>
 																	</form>
 																</div>

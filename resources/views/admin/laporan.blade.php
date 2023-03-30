@@ -60,28 +60,26 @@
 																			<thead>
 																				<tr>
 																					<th> # </th>
-																					<th>Username </th>
-																					<th>Nama Lengkap </th>
-																					<th>Nomor Telepon </th>
-																					<th>Email </th>
-																					<th>Jenis Kelamin </th>
-																					<th>Alamat </th>
-																					<th>Status Akun </th>
-																					<th>Role </th>
+																					<th>Invoice</th>
+																					<th>Nama Kasir</th>
+																					<th>Nama Pelangan </th>
+																					<th>Jumlah Menu </th>
+																					<th>Total Bayar </th>
+																					<th>Metode Pembayaran </th>
+																					<th>Status </th>
 																				</tr>
 																			</thead>
 																			<tbody>
 																			@foreach ($data as $items)
 																				<tr>
 																					<td>{{ $loop->iteration }}</td>
-																					<td>{{ $items->username }}</td>
-																					<td>{{ $items->nama_lengkap }}</td>
-																					<td>{{ $items->nomor_tlp }}</td>
-																					<td>{{ $items->email }}</td>
-																					<td>@if ( $items->jenis_kelamin == 'L') Laki-Laki @else ( $items->jenis_kelamin == 'P') Perempuan @endif</td>
-																					<td>{{ $items->alamat }}</td>
-																					<td>@if ($items->status_akun == 'active')<span class="badge light badge-success"><i class="fa fa-circle text-success me-1"></i>Active</span> @elseif ($items->status_akun == 'pending') <span class="badge light badge-warning"><i class="fa fa-circle text-warning me-1"></i>Pending</span> @else ($items->status_akun == 'blokir') <span class="badge light badge-danger"><i class="fa fa-circle text-denger me-1"></i>Blokir</span> @endif</td>
-																					<td>{{ $items->role }}</td>
+																					<td>{{ $items->invoice }}</td>
+																					<td>{{ $items->id_kasir }}</td>
+																					<td>{{ $items->nama_pelangan }}</td>
+																					<td>{{ $items->jumlah_menu }}</td>
+																					<td>{{ $items->formatRupiah('total_bayar') }}</td>
+																					<td>{{ $items->metode_pembayaran }}</td>
+																					<td>@if ($items->status == 'success')<span class="badge light badge-success"><i class="fa fa-circle text-success me-1"></i>Success</span> @elseif ($items->status_akun == 'pending') <span class="badge light badge-warning"><i class="fa fa-circle text-warning me-1"></i>Pending</span> @else ($items->status_akun == 'cencel') <span class="badge light badge-danger"><i class="fa fa-circle text-denger me-1"></i>Cencel</span> @endif</td>
 																					<!-- <td><strong>120$</strong></td> -->
 																				</tr>
 																				@endforeach

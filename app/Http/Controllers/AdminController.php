@@ -47,7 +47,7 @@ class AdminController extends Controller
         return view("admin.users")->with('data', $data); 
     }
     public function laporan() {
-        $data = User::all();
+        $data = Transaksi::all();
         return view("admin.laporan")->with('data', $data);   
     } 
     public function kategori() {
@@ -96,7 +96,7 @@ class AdminController extends Controller
         $menu = Menu::where('id_menu', '=', $id_menu);
         $menu->delete();
 
-        return redirect('/menu')->with('success','You have successfully deleted users.');
+        return redirect('/menu')->with('success','You have successfully deleted manu.');
     }
 
     public function tambahusers (Request $request) {

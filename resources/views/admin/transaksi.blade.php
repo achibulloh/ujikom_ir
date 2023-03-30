@@ -1,5 +1,5 @@
 @extends('admin.layouts.menu')
-@section('title', 'Management Users')
+@section('title', 'Transaksi')
 
 		<!--**********************************
             Header start
@@ -66,7 +66,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $items->invoice }}</td>
-                                                <td>{{ $items->username }}</td>
+                                                <td>{{ $items->id_kasir }}</td>
                                                 <td>{{ $items->nama_pelangan }}</td>
                                                 <td>{{ $items->jumlah_menu }}</td>
                                                 <td>{{ $items->formatRupiah('total_bayar') }}</td>

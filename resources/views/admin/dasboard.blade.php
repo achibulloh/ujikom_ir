@@ -98,8 +98,8 @@
 									</svg>
 								</div>
 								<div>
-									<h2 class="text-white invoice-num">0</h2>
-									<span class="text-white fs-18">Total Invoices Sent</span>
+									<h2 class="text-white invoice-num">{{$totalinvoicesuccess}}</h2>
+									<span class="text-white fs-18">Total Invoice Success</span>
 								</div>
 							</div>
 						</div>

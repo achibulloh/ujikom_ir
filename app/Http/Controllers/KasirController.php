@@ -38,7 +38,7 @@ class KasirController extends Controller
     // }
     // }
     public function store (Request $request) {
-        if ($request->qty == 0) {
+        if (Auth()->Cart()->qty == 0) {
             Cart::create([
                 'id_kasir' => Auth::user()->id,
                 'id_menu' => $request->id_menu,
@@ -46,7 +46,7 @@ class KasirController extends Controller
             ]);
             return redirect('/kasir');
         }
-        return redirect('/kasir');
+        // return redirect('/kasir');
     }
 
     public function tambah_qty(request $request, $id_cart) {
