@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('total_bayar');
             $table->enum('metode_pembayaran',['Cash','Credit/Debit','Qris']);
             $table->enum('status',['pending','success','cencel']);
+            $table->date('tgl');
             $table->timestamps();
         });
     }

@@ -15,8 +15,7 @@ class Menu extends Model
         'photo_menu',
         'nama_menu',
         'id_kategori',
-        'price',
-        'stok'
+        'harga'
     ];
 
     protected $primaryKey = 'id_menu';

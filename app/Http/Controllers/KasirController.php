@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -14,6 +15,7 @@ class KasirController extends Controller
 {
     public function kasirr(Request $request) {
         $data = Menu::all();
+        $kt = Kategori::all();
         // $data1 = Menu::paginate(6);
         $cart = Cart::all();
         $totalCart = $cart->count();
@@ -27,7 +29,7 @@ class KasirController extends Controller
             $totalHarga += $hargaMenu * $qty;
         }
         $totalHargaFormatted = number_format($totalHarga,0,',','.');
-        return view("kasir.dasboard", compact('data', 'cart', 'totalCart','request','totalHargaFormatted'));  
+        return view("kasir.dasboard", compact('data', 'cart', 'totalCart','request','totalHargaFormatted', 'kt'));  
     }
     public function store(Request $request)
     {
@@ -49,10 +51,17 @@ class KasirController extends Controller
 
     public function tambah_qty(request $request) {
         $doble = Cart::where('id_menu', $request->id_menu)->first();
+        if ($doble) {
             $qty = $doble->qty;
             $doble->update([
                 'qty' => $qty + 1
             ]);
+            return redirect('/kasir');
+        }
+        $qty = $doble->qty;
+        $doble->update([
+            'qty' => $qty + 1
+        ]);
         return redirect('/kasir');
     }
     public function kurang_qty(request $request) {

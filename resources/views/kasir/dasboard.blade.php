@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Chasier - Dasboard</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('assets/css/stylee.css') }}">
   <!-- FAVICONS ICON -->
@@ -32,7 +32,7 @@
             </a>
           </li>
         </ul>
-            <a class="mt-auto flex items-center justify-center text-cyan-200 hover:text-cyan-100 h-10 w-10 focus:outline-none" data-toggle="modal" data-target="#logout">
+            <a class="mt-auto flex items-center justify-center text-cyan-200 hover:text-cyan-100 h-10 w-10 focus:outline-none" href="/logout">
               <span class="flex items-center justify-center h-12 w-12 rounded-2xl bg-cyan-300 shadow-lg text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 512 512" fill="white"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/></svg>
               </span>
@@ -40,7 +40,7 @@
       </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
     <!-- page content -->
     <div class="flex-grow flex">
@@ -176,14 +176,14 @@
           <div class="select-none h-auto w-full text-center pt-3 pb-4 px-4">
             <div class="flex mb-3 text-lg font-semibold text-blue-gray-700">
               <div>TOTAL</div>
-              <div class="text-right w-full">Rp. {{$totalHargaFormatted}}</div>
+              <div class="text-right w-full" id="totalHarga">Rp. {{$totalHargaFormatted}}</div>
             </div>
             <div class="mb-3 text-blue-gray-700 px-3 pt-2 pb-3 rounded-lg bg-blue-gray-50">
               <div class="flex text-lg font-semibold">
                 <div class="flex-grow text-left">CASH</div>
                 <div class="flex text-right">
                   <div class="mr-2">Rp</div>
-                  <input x-bind:value="numberFormat(cash)" type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none" readonly>
+                  <input x-bind:value="numberFormat(cash)" type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none" id="totalBayar">
                   {{-- value="{{ $cart->menu->harga *  $cart->qty }}" --}}
                 </div>
               </div>
@@ -197,13 +197,74 @@
             <div class="flex mb-3 text-lg font-semibold bg-cyan-50 text-blue-gray-700 rounded-lg py-2 px-3">
               <div class="text-cyan-800">CHANGE</div>
               <div
-                class="text-right flex-grow text-cyan-600"
-                x-text="priceFormat(change)">
+                class="text-right flex-grow text-cyan-600" id="change">
               </div>
             </div>
             <div class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none">
-              <a type="button" class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none">SUBMIT</a>
+              <button data-bs-toggle="modal" data-bs-target="#totransaksi" type="submit" class="text-white bg-cyan-600 rounded-2xl text-lg w-full py-3 focus:outline-none">SUBMIT</button>
             </div>
+            {{-- Modal --}}
+              <div class="modal fade" id="totransaksi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Transaksi</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3 row">
+                        <label for="nama_pelangan" class="col-sm-3 col-form-label">Nama Pelangan</label>
+                        <div class="col-sm-9">
+                          <input type="Text" class="form-control @error('nama_pelangan') is-invalid @enderror" placeholder="Nama Pelangan" name="nama_pelangan" value="{{ $items->nama_pelangan }}" id="nama_pelangan">
+                          <span class="text-danger">@error('nama_pelangan') {{$message}} @enderror</span>
+                        </div>
+                      </div>
+                      <h5>Detail Pemesanan</h5>
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Foto Menu</th>
+                            <th>Nama Menu</th>
+                            <th>Qty</th>
+                            <th>Total Pembayaran</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($cart as $items)
+                          <tr>
+                            <th>{{ $loop->iteration }}</th>
+                            <th><img class="rounded-circle" width="35" src="{{$items->menu->photo_menu == null ? asset('assets/image/logo_bpi.png') : asset($items->menu->photo_menu)}}" alt="{{$items->nama_menu}}"></th>
+                            <th>{{$items->menu->nama_menu}}</th>
+                            <th>{{$items->qty}}</th>
+                            {{-- Formater idr --}}
+                            @php
+                              $total = $items->menu->harga * $items->qty;
+                              $total1 =number_format($total,0,',','.');
+                            @endphp
+                            {{-- End Formater idr --}}
+                            <th>Rp. {{$total1}}</th>
+                          </tr>
+                          @endforeach
+                          <tr>
+                            <th colspan="4">Total Bayar</th>
+                            <th>{{$totalHargaFormatted}}</th>
+                          </tr>
+                          <tr>
+                            <th colspan="4">Change</th>
+                            <th id="change"></th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="text-white bg-cyan-600 rounded-2 text-lg w-40 py-2 focus:outline-none">Lanjut</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+					  {{-- End Modal --}}
           </div>
           <!-- end of payment info -->
         </div>
@@ -214,11 +275,31 @@
   {{-- <div id="print-area" class="print-area"></div> --}}
   <!-- Scripts -->
   <script src="{{ asset('assets/js/scriptt.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/idb/build/iife/index-min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    const getTotalHarga = document.getElementById('totalHarga');
+    const getTotalBayar = document.getElementById('totalBayar');
+    const getKembalian = document.getElementById('change');
+
+    getTotalBayar.addEventListener('change', (e) => {
+        const totalHarga = +(getTotalHarga.innerText.replace(/\D/g, ''));
+        getKembalian.innerText = (+(e.target.value) - totalHarga).toLocaleString('id-ID',{style: 'currency',currency: 'IDR',});
+    })
+
+    // getTotalBayar.on('change', (e) => {
+    //   const totalHarga = +(getTotalHarga.innerText.replace(/\D/g, ''))
+    //   console.log(e.target.value)
+    //   // const totalHarga = parseInt(getTotalHarga.innerText.replace('Rp. ', ''))
+    //   // const totalBayar = parseInt(e.target.value.replace(',', ''))
+    //   // const kembalian = `Rp. ${(totalHarga - totalBayar).toLocaleString('id-ID')}`
+    //   // getKembalian.innerText = kembalian;
+    // })
+
+  </script>
   @if(Session::has("success"))
   <script>
         toastr.success("{{Session::get('success')}}", "Success", {
@@ -243,4 +324,3 @@
   @endif
 </body>
 </html>
-    

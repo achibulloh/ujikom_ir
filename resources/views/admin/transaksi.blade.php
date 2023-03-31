@@ -76,26 +76,78 @@
                                                 <td>
 													<div class="d-flex">
                                                             <!-- Update -->
-                                                                <button data-bs-toggle="modal" data-bs-target=".edit{{$items->id_transaksi}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>
+                                                                <button data-bs-toggle="modal" data-bs-target=".edit{{$items->id_transaksi}}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-info"></i></button>
                                                             <!-- End Update -->
                                                             <!-- Modal Alert Update -->
                                                                 <div class="modal fade edit{{$items->id_transaksi}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h3 class="modal-title">Edit Users</h3>
+                                                                                <h3 class="modal-title">Detail Transaksi</h3>
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                                                                                 </button>
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                 {{-- hhh --}}
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="invoice" class="col-sm-3 col-form-label">Invoice Transaksi</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="invoice" value="{{ $items->invoice }}" id="invoice" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="id_kasir" class="col-sm-3 col-form-label">Nama Kasir</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="id_kasir" value="{{ $items->id_kasir }}" id="id_kasir" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="nama_pelangan" class="col-sm-3 col-form-label">Nama Pelangan</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="nama_pelangan" value="{{ $items->nama_pelangan }}" id="nama_pelangan" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="jumlah_menu" class="col-sm-3 col-form-label">Jumlah Pesanan</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="jumlah_menu" value="{{ $items->jumlah_menu }}" id="jumlah_menu" readonly>
+                                                                                    </div>
+                                                                                </div>  
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="total_bayar" class="col-sm-3 col-form-label">Total Bayar</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="total_bayar" value="{{ $items->total_bayar }}" id="total_bayar" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="metode_pembayaran" class="col-sm-3 col-form-label">Metode Pembayaran</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="metode_pembayaran" value="{{ $items->metode_pembayaran }}" id="metode_pembayaran" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="status" class="col-sm-3 col-form-label">Status Transaksi</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="status" value="{{ $items->status }}" id="status" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3 row">
+                                                                                    <label for="created_at" class="col-sm-3 col-form-label">Tanggal Transaksi</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="created_at" value="{{ $items->created_at }}" id="created_at" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                                                    {{-- <button type="submit" class="btn btn-primary" name="submit">Edit Menu</button> --}}
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             <!-- End Modal Alert Update -->
                                                             <!-- Delete -->
-                                                                <a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delet{{$items->id_transaksi}}"><i class="fa fa-trash"></i></a>
+                                                                {{-- <a type="button" class="btn btn-danger shadow btn-xs sharp" data-bs-toggle="modal" data-bs-target="#Delet{{$items->id_transaksi}}"><i class="fa fa-trash"></i></a> --}}
                                                             <!-- End Delete -->
                                                             <!-- Modal Alert Delete -->
                                                                 <div class="modal fade" id="Delet{{$items->id_transaksi}}">

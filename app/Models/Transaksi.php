@@ -18,7 +18,8 @@ class Transaksi extends Model
         'jumlah_menu',
         'total_bayar',
         'metode_pembayaran',
-        'status'
+        'status',
+        'tgl'
     ];
     protected $primaryKey = "id_transaksi";
     public function users()
