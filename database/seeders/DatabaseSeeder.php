@@ -65,14 +65,14 @@ class DatabaseSeeder extends Seeder
         ],
         [
             'photo_menu' => 'photo/choco-glaze-donut.png',
-            'nama_menu' => 'Choco-glaze-donut',
+            'nama_menu' => 'Glaze Donut',
             'id_kategori' => '3',
             'harga' => '10000',
             'stok' => '23'
         ],
         [
             'photo_menu' => 'photo/choco-glaze-donut-peanut.png',
-            'nama_menu' => 'Choco-donut-peanut',
+            'nama_menu' => 'Donut Peanut',
             'id_kategori' => '3',
             'harga' => '10000',
             'stok' => '23'
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
         ],
         [
             'photo_menu' => 'photo/red-glaze-donut.png',
-            'nama_menu' => 'Red-glaze-donut',
+            'nama_menu' => 'Red Glaze Donut',
             'id_kategori' => '3',
             'harga' => '10000',
             'stok' => '23'
@@ -114,28 +114,28 @@ class DatabaseSeeder extends Seeder
         ],
         [
             'photo_menu' => 'photo/coffee-latte.png',
-            'nama_menu' => 'Coffee-latte',
+            'nama_menu' => 'Coffee Latte',
             'id_kategori' => '4',
             'harga' => '10000',
             'stok' => '23'
         ],
         [
             'photo_menu' => 'photo/ice-chocolate.png',
-            'nama_menu' => 'Ice-chocolate',
+            'nama_menu' => 'Ice Chocolate',
             'id_kategori' => '2',
             'harga' => '10000',
             'stok' => '23'
         ],
         [
             'photo_menu' => 'photo/ice-tea.png',
-            'nama_menu' => 'Ice-tea',
+            'nama_menu' => 'Ice Tea',
             'id_kategori' => '2',
             'harga' => '10000',
             'stok' => '23'
         ],
         [
             'photo_menu' => 'photo/matcha-latte.png',
-            'nama_menu' => 'Matcha-latte',
+            'nama_menu' => 'Matcha Latte',
             'id_kategori' => '2',
             'harga' => '10000',
             'stok' => '23'

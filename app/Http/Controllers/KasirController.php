@@ -51,13 +51,6 @@ class KasirController extends Controller
 
     public function tambah_qty(request $request) {
         $doble = Cart::where('id_menu', $request->id_menu)->first();
-        if ($doble) {
-            $qty = $doble->qty;
-            $doble->update([
-                'qty' => $qty + 1
-            ]);
-            return redirect('/kasir');
-        }
         $qty = $doble->qty;
         $doble->update([
             'qty' => $qty + 1
@@ -66,11 +59,20 @@ class KasirController extends Controller
     }
     public function kurang_qty(request $request) {
         $doble = Cart::where('id_menu', $request->id_menu)->first();
+        $qty = $doble->qty;
+        if ($qty < 1) {
+            $dl = Cart::where('id_cart', $request->id_cart)->first();
+            $dl->delete();
+            return redirect('/kasir')->with('delet');
+        } else {
             $qty = $doble->qty;
             $doble->update([
                 'qty' => $qty - 1
             ]);
         return redirect('/kasir');
+        }
+        
+
     }
     public function menu() {
         $data = Menu::with('kategori')->get();

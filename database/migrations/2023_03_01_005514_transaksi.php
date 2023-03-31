@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('nama_pelangan');
             $table->integer('jumlah_menu');
             $table->integer('total_bayar');
+            $table->integer('uangtunai');
+            $table->integer('change');
             $table->enum('metode_pembayaran',['Cash','Credit/Debit','Qris']);
             $table->enum('status',['pending','success','cencel']);
             $table->date('tgl');

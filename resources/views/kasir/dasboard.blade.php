@@ -146,23 +146,29 @@
                   <div class="py-1">
                     <div class="w-28 grid grid-cols-3 gap-2 ml-2">
                       <form action="{{ route('kurangqty')}}" method="POST">
-                        @csrf
-                          <button class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
+                        @csrf 
+                        @if(Session::has("delet"))
+                           @method('delete')
+                        @endif
+                          <input type="hidden" name="id_menu" value="{{$items->id_menu}}" >
+                          <input type="hidden" name="qty" value="1" >
+                          <button type="submit" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none w-8 h-8">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                             </svg>
                           </button>
                       </form>
-                      <input value="{{$items->qty}}" type="text" class="bg-white rounded-lg text-center shadow focus:outline-none focus:shadow-lg text-sm" readonly>
+                      <input value="{{$items->qty}}" type="text" class="bg-white rounded-lg w-8 h-8 text-center shadow focus:outline-none focus:shadow-lg text-sm" readonly>
                       <form action="{{ route('tambahqty')}}" method="POST">
                         @csrf
-                        <button type="submit" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
+                        <input type="hidden" name="id_menu" value="{{$items->id_menu}}" >
+                        <input type="hidden" name="qty" value="1" >
+                        <button type="submit" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none w-8 h-8">
                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                           </svg>
                         </button>
                       </form>
-                      {{-- <input type="text" value="{{$items->menu->harga * $items->qty}}"> --}}
                       </div>
                   </div>
                 </div>
@@ -171,7 +177,6 @@
           </div>
           <!-- end of cart items -->
 
-
           <!-- payment info -->
           <div class="select-none h-auto w-full text-center pt-3 pb-4 px-4">
             <div class="flex mb-3 text-lg font-semibold text-blue-gray-700">
@@ -179,20 +184,15 @@
               <div class="text-right w-full" id="totalHarga">Rp. {{$totalHargaFormatted}}</div>
             </div>
             <div class="mb-3 text-blue-gray-700 px-3 pt-2 pb-3 rounded-lg bg-blue-gray-50">
-              <div class="flex text-lg font-semibold">
-                <div class="flex-grow text-left">CASH</div>
-                <div class="flex text-right">
-                  <div class="mr-2">Rp</div>
-                  <input x-bind:value="numberFormat(cash)" type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none" id="totalBayar">
-                  {{-- value="{{ $cart->menu->harga *  $cart->qty }}" --}}
-                </div>
-              </div>
               <hr class="my-2">
-              <div class="grid grid-cols-3 gap-2 mt-2">
-                <template x-for="money in moneys">
-                  <button x-on:click="addCash(money)" class="bg-white rounded-lg shadow hover:shadow-lg focus:outline-none inline-block px-2 py-1 text-sm">+<span x-text="numberFormat(money)"></span></button>
-                </template>
-              </div>
+                <div class="flex text-lg font-semibold">
+                  <div class="flex-grow text-left">CASH</div>
+                  <div class="flex text-right">
+                    <div class="mr-2">Rp</div>
+                    <input type="number" class="w-28 text-right bg-white shadow rounded-lg focus:bg-white focus:shadow-lg px-2 focus:outline-none" id="totalBayar">
+                  </div>
+                </div>
+              <hr class="my-2">
             </div>
             <div class="flex mb-3 text-lg font-semibold bg-cyan-50 text-blue-gray-700 rounded-lg py-2 px-3">
               <div class="text-cyan-800">CHANGE</div>
@@ -201,7 +201,7 @@
               </div>
             </div>
             <div class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none">
-              <button data-bs-toggle="modal" data-bs-target="#totransaksi" type="submit" class="text-white bg-cyan-600 rounded-2xl text-lg w-full py-3 focus:outline-none">SUBMIT</button>
+              <button data-bs-toggle="modal" data-bs-target="#totransaksi" type="submit" class="text-white bg-cyan-600 rounded-2xl text-lg w-full py-3 focus:outline-none">BAYAR</button>
             </div>
             {{-- Modal --}}
               <div class="modal fade" id="totransaksi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -212,55 +212,61 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <div class="mb-3 row">
-                        <label for="nama_pelangan" class="col-sm-3 col-form-label">Nama Pelangan</label>
-                        <div class="col-sm-9">
-                          <input type="Text" class="form-control @error('nama_pelangan') is-invalid @enderror" placeholder="Nama Pelangan" name="nama_pelangan" value="{{ $items->nama_pelangan }}" id="nama_pelangan">
-                          <span class="text-danger">@error('nama_pelangan') {{$message}} @enderror</span>
+                        <form action="{{ url('/kasir') }}" method="POST">
+                            <div class="mb-3 row">
+                              <label for="nama_pelangan" class="col-sm-3 col-form-label">Nama Pelangan</label>
+                              <div class="col-sm-9">
+                                <input type="Text" class="form-control @error('nama_pelangan') is-invalid @enderror" placeholder="Nama Pelangan" name="nama_pelangan" value="{{ $items->nama_pelangan }}" id="nama_pelangan">
+                                <span class="text-danger">@error('nama_pelangan') {{$message}} @enderror</span>
+                              </div>
+                            </div>
+                            <h5>Detail Pemesanan</h5>
+                            <table class="table table-striped table-hover">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Foto Menu</th>
+                                  <th>Nama Menu</th>
+                                  <th>Qty</th>
+                                  <th>Total Pembayaran</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @foreach ($cart as $items)
+                                <tr>
+                                  <th>{{ $loop->iteration }}</th>
+                                  <th><img class="rounded-circle" width="35" src="{{$items->menu->photo_menu == null ? asset('assets/image/logo_bpi.png') : asset($items->menu->photo_menu)}}" alt="{{$items->nama_menu}}"></th>
+                                  <th>{{$items->menu->nama_menu}}</th>
+                                  <th>{{$items->qty}}</th>
+                                  {{-- Formater idr --}}
+                                  @php
+                                    $total = $items->menu->harga * $items->qty;
+                                    $total1 =number_format($total,2,',','.');
+                                  @endphp
+                                  {{-- End Formater idr --}}
+                                  <th>Rp. {{$total1}}</th>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                  <th colspan="4">Total Bayar</th>
+                                  <th>Rp. {{$totalHargaFormatted}}</th>
+                                </tr>
+                                <tr>
+                                  <th colspan="4">Uang Tunai</th>
+                                  <th id="totalBayar">Rp. 0</th>
+                                </tr>
+                                <tr>
+                                  <th colspan="4">Change</th>
+                                  <th id="change">Rp. 0</th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="text-white bg-cyan-600 rounded-2 text-lg w-40 py-2 focus:outline-none">Lanjut</button>
+                          </form>
                         </div>
-                      </div>
-                      <h5>Detail Pemesanan</h5>
-                      <table class="table table-striped table-hover">
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Foto Menu</th>
-                            <th>Nama Menu</th>
-                            <th>Qty</th>
-                            <th>Total Pembayaran</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($cart as $items)
-                          <tr>
-                            <th>{{ $loop->iteration }}</th>
-                            <th><img class="rounded-circle" width="35" src="{{$items->menu->photo_menu == null ? asset('assets/image/logo_bpi.png') : asset($items->menu->photo_menu)}}" alt="{{$items->nama_menu}}"></th>
-                            <th>{{$items->menu->nama_menu}}</th>
-                            <th>{{$items->qty}}</th>
-                            {{-- Formater idr --}}
-                            @php
-                              $total = $items->menu->harga * $items->qty;
-                              $total1 =number_format($total,0,',','.');
-                            @endphp
-                            {{-- End Formater idr --}}
-                            <th>Rp. {{$total1}}</th>
-                          </tr>
-                          @endforeach
-                          <tr>
-                            <th colspan="4">Total Bayar</th>
-                            <th>{{$totalHargaFormatted}}</th>
-                          </tr>
-                          <tr>
-                            <th colspan="4">Change</th>
-                            <th id="change"></th>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="text-white bg-cyan-600 rounded-2 text-lg w-40 py-2 focus:outline-none">Lanjut</button>
-                    </div>
                   </div>
                 </div>
               </div>
