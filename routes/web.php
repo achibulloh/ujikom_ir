@@ -38,6 +38,7 @@ Route::get('/kasir/menu', 'App\Http\Controllers\KasirController@menu')->name('me
 Route::post('/tambahqty', [KasirController::class,'tambah_qty'])->name('tambahqty');
 Route::post('/kurangqty', [KasirController::class,'kurang_qty'])->name('kurangqty');
 Route::post('/clear/{id}', [KasirController::class,'clearmenu'])->name('clear');
+Route::get('/kasir/cari', [KasirController::class,'carii'])->name('kasir.cari');
 // End Kasir
 // To Dasboard
 Route::post('/proses_login', 'App\Http\Controllers\CustomAuthController@proses_login')->name('proses_login');

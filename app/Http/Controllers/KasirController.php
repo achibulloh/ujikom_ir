@@ -12,47 +12,23 @@ use App\Models\Cart;
 
 class KasirController extends Controller
 {
-    public function kasirr() {
+    public function kasirr(Request $request) {
         $data = Menu::all();
         // $data1 = Menu::paginate(6);
         $cart = Cart::all();
         $totalCart = $cart->count();
         // $menu = Menu::join()
-        return view("kasir.dasboard", compact('data', 'cart', 'totalCart'));   
+        $totalHarga = 0;
+
+        foreach ($cart as $c) {
+            $menu = Menu::where('id_menu', $c->id_menu)->first();
+            $hargaMenu = $menu->harga;
+            $qty = $c->qty;
+            $totalHarga += $hargaMenu * $qty;
+        }
+        $totalHargaFormatted = number_format($totalHarga,0,',','.');
+        return view("kasir.dasboard", compact('data', 'cart', 'totalCart','request','totalHargaFormatted'));  
     }
-    
-    //     // $menu = Menu::findOrFail($request->input('id_menu'));
-    //     if ($request->qty == 0) {
-    //         Cart::create([
-    //             'id_kasir' => Auth::user()->id,
-    //             'id_menu' => $request->id_menu,
-    //             'qty' => 1
-    //         ]);
-    //         return redirect('/kasir');
-    //     } else {
-    //         $qty = $request->qty;
-    //         Cart::updated([
-    //             'qty' => $qty + 1
-    //         ]);
-    //         return redirect('/kasir');
-    // }
-    // }
-    // public function store (Request $request) {
-    //     $doble = Cart::where('id_menu', $request->id_menu)->first();
-    //     if ($doble) {
-    //         $qty = Auth::cart()->qty;
-    //         Cart::updated([
-    //             'qty' => $qty + 1
-    //         ]);
-    //         return redirect('/kasir');
-    //     }
-    //         Cart::create([
-    //             'id_kasir' => Auth::user()->id,
-    //             'id_menu' => $request->id_menu,
-    //             'qty' => 1    
-    //         ]);
-    //         return redirect('/kasir');
-    // }
     public function store(Request $request)
     {
         $doble = Cart::where('id_menu', $request->id_menu)->first();
@@ -73,24 +49,18 @@ class KasirController extends Controller
 
     public function tambah_qty(request $request) {
         $doble = Cart::where('id_menu', $request->id_menu)->first();
-        if ($doble) {
             $qty = $doble->qty;
             $doble->update([
                 'qty' => $qty + 1
             ]);
-            return redirect('/kasir');
-        }
         return redirect('/kasir');
     }
     public function kurang_qty(request $request) {
         $doble = Cart::where('id_menu', $request->id_menu)->first();
-        if ($doble) {
             $qty = $doble->qty;
             $doble->update([
                 'qty' => $qty - 1
             ]);
-            // return redirect('/kasir');
-        }
         return redirect('/kasir');
     }
     public function menu() {
@@ -104,5 +74,13 @@ class KasirController extends Controller
             $cart->delete();
 
         return redirect('/kasir');
+    }
+    public function carii(Request $request){
+        if ($request) {
+            $menu = Menu::where('nama_menu', 'like', '%'.$request->cari.'%');
+        } else {
+            $menu = Menu::all();
+        }
+        return view("kasir.dasboard", compact('menu'));
     }
 }

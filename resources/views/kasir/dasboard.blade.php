@@ -63,16 +63,19 @@
     <!-- page content -->
     <div class="flex-grow flex">
       <!-- store menu -->
-      <div class="flex flex-col bg-blue-gray-50 h-full w-full py-4">
-        <div class="flex px-2 flex-row relative">
-          <div class="absolute left-5 top-3 px-2 py-2 rounded-full bg-cyan-500 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+      <form action="{{ route('kasir.cari') }}" method="GET" >
+        <div class="flex flex-col bg-blue-gray-50 h-full w-full py-4">
+          <div class="flex px-2 flex-row relative">
+            <button type="submit">
+              <div class="absolute left-5 top-3 px-2 py-2 rounded-full bg-cyan-500 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </button>
+                <input name="cari" type="text" class="bg-white rounded-3xl shadow text-lg full w-full h-16 py-4 pl-16 transition-shadow focus:shadow-2xl focus:outline-none" placeholder="Cari menu ..." value="{{$request->cari}}" autofocus />
+              </form>
           </div>
-          <input type="text" class="bg-white rounded-3xl shadow text-lg full w-full h-16 py-4 pl-16 transition-shadow focus:shadow-2xl focus:outline-none" placeholder="Cari menu ..." name="search" value="" autofocus
-          />
-        </div>
         <div class="h-full overflow-hidden mt-4">
           <div class="h-full overflow-y-auto px-2">
             <div class="grid grid-cols-4 gap-4 pb-3">
@@ -173,7 +176,7 @@
           <div class="select-none h-auto w-full text-center pt-3 pb-4 px-4">
             <div class="flex mb-3 text-lg font-semibold text-blue-gray-700">
               <div>TOTAL</div>
-              <div class="text-right w-full">Rp. 0</div>
+              <div class="text-right w-full">Rp. {{$totalHargaFormatted}}</div>
             </div>
             <div class="mb-3 text-blue-gray-700 px-3 pt-2 pb-3 rounded-lg bg-blue-gray-50">
               <div class="flex text-lg font-semibold">
@@ -191,16 +194,16 @@
                 </template>
               </div>
             </div>
-            <div
-              class="flex mb-3 text-lg font-semibold bg-cyan-50 text-blue-gray-700 rounded-lg py-2 px-3"
-            >
+            <div class="flex mb-3 text-lg font-semibold bg-cyan-50 text-blue-gray-700 rounded-lg py-2 px-3">
               <div class="text-cyan-800">CHANGE</div>
               <div
                 class="text-right flex-grow text-cyan-600"
                 x-text="priceFormat(change)">
               </div>
             </div>
-            <button type="submit" value="SUBMIT" class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none">value="SUBMIT"</button>
+            <div class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none">
+              <a type="button" class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none">SUBMIT</a>
+            </div>
           </div>
           <!-- end of payment info -->
         </div>
