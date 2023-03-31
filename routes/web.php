@@ -39,7 +39,7 @@ Route::post('/tambahqty', [KasirController::class,'tambah_qty'])->name('tambahqt
 Route::post('/kurangqty', [KasirController::class,'kurang_qty'])->name('kurangqty');
 Route::post('/clear/{id}', [KasirController::class,'clearmenu'])->name('clear');
 Route::get('/kasir/cari', [KasirController::class,'carii'])->name('kasir.cari');
-Route::patch('/kasir/{id}', [KasirController::class,'update']);
+Route::post('/transaksi', [KasirController::class,'transkasi'])->name('transaksi');
 // End Kasir
 // To Dasboard
 Route::post('/proses_login', 'App\Http\Controllers\CustomAuthController@proses_login')->name('proses_login');

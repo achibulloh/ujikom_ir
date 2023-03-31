@@ -212,16 +212,16 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ url('/kasir') }}" method="POST">
+                        <form action="{{ route('transaksi') }}" method="POST">
+                           @csrf
                             <div class="mb-3 row">
                               <label for="nama_pelangan" class="col-sm-3 col-form-label">Nama Pelangan</label>
                               <div class="col-sm-9">
-                                <input type="Text" class="form-control @error('nama_pelangan') is-invalid @enderror" placeholder="Nama Pelangan" name="nama_pelangan" value="{{ $items->nama_pelangan }}" id="nama_pelangan">
+                                <input type="Text" class="form-control @error('nama_pelangan') is-invalid @enderror" placeholder="Nama Pelangan" name="nama_pelangan" value="{{old('nama_pelangan')}}" id="nama_pelangan">
                                 <span class="text-danger">@error('nama_pelangan') {{$message}} @enderror</span>
-                              </div>
+                              </div>  
                             </div>
-                            <h5>Detail Pemesanan</h5>
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped">
                               <thead>
                                 <tr>
                                   <th>#</th>

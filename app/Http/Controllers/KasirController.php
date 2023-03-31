@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -93,5 +94,29 @@ class KasirController extends Controller
             $menu = Menu::all();
         }
         return view("kasir.dasboard", compact('menu'));
+    }
+    public function transaksi(Request $request){
+        $menu = Menu::where('id_menu', $c->id_menu)->first();
+        $hargaMenu = $menu->harga;
+        $qty = $c->qty;
+        $totalHarga += $hargaMenu * $qty;
+        $metodebayar = Cash;
+        $status = success;
+        $cart = Cart::all();
+        $totalCart = $cart->count();
+        $transaksi = Transaksi::all();
+        $request->validate([
+            'nama_pelangan'=>'required'
+        ]);
+        $transaksi->Auth::user()->id = $request->id_kasir;;
+        $transaksi->nama_pelangan = $request->nama_pelangan;
+        $transaksi->totalCart = $request->jumlah_menu;
+        $transaksi->totalHarga = $request->total_bayar;
+        $transaksi->totalHarga = $request->change;
+        $transaksi->metodebayar = $request->metode_pembayaran;
+        $transaksi->status = $request->status;
+        $transaksi->save();
+        return redirect('/kasir');
+
     }
 }
