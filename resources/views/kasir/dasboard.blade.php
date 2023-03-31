@@ -200,7 +200,7 @@
                 x-text="priceFormat(change)">
               </div>
             </div>
-            <input type="button" value="SUBMIT" class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none"> 
+            <button type="submit" value="SUBMIT" class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none">value="SUBMIT"</button>
           </div>
           <!-- end of payment info -->
         </div>
