@@ -36,6 +36,7 @@ Route::post('/register-kasir', [CustomAuthController::class,'registerkasir'])->n
 Route::post('/kasir', [KasirController::class,'store'])->name('cart.store');
 Route::get('/kasir/menu', 'App\Http\Controllers\KasirController@menu')->name('menu');
 Route::post('/tambahqty', [KasirController::class,'tambah_qty'])->name('tambahqty');
+Route::post('/kurangqty', [KasirController::class,'kurang_qty'])->name('kurangqty');
 Route::post('/clear/{id}', [KasirController::class,'clearmenu'])->name('clear');
 // End Kasir
 // To Dasboard

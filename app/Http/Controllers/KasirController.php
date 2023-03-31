@@ -20,7 +20,7 @@ class KasirController extends Controller
         // $menu = Menu::join()
         return view("kasir.dasboard", compact('data', 'cart', 'totalCart'));   
     }
-    // public function store (Request $request){
+    
     //     // $menu = Menu::findOrFail($request->input('id_menu'));
     //     if ($request->qty == 0) {
     //         Cart::create([
@@ -37,31 +37,61 @@ class KasirController extends Controller
     //         return redirect('/kasir');
     // }
     // }
-    public function store (Request $request) {
+    // public function store (Request $request) {
+    //     $doble = Cart::where('id_menu', $request->id_menu)->first();
+    //     if ($doble) {
+    //         $qty = Auth::cart()->qty;
+    //         Cart::updated([
+    //             'qty' => $qty + 1
+    //         ]);
+    //         return redirect('/kasir');
+    //     }
+    //         Cart::create([
+    //             'id_kasir' => Auth::user()->id,
+    //             'id_menu' => $request->id_menu,
+    //             'qty' => 1    
+    //         ]);
+    //         return redirect('/kasir');
+    // }
+    public function store(Request $request)
+    {
         $doble = Cart::where('id_menu', $request->id_menu)->first();
         if ($doble) {
-            $qty = Auth::cart()->qty;
-            Cart::updated([
+            $qty = $doble->qty;
+            $doble->update([
                 'qty' => $qty + 1
             ]);
             return redirect('/kasir');
         }
-            Cart::create([
-                'id_kasir' => Auth::user()->id,
-                'id_menu' => $request->id_menu,
-                'qty' => 1    
-            ]);
-            return redirect('/kasir');
-        
-        // return redirect('/kasir');
+        Cart::create([
+            'id_kasir' => Auth::user()->id,
+            'id_menu' => $request->id_menu,
+            'qty' => 1    
+        ]);
+        return redirect('/kasir');
     }
 
-    public function tambah_qty(request $request, $id_cart) {
-        $qty = $request->qty;
-        Cart::where('id_cart', $id_cart)->update([
-            'qty' => $qty + 1
-        ]);
-        return redirect('/kasir')->with('success','data sudah masuk');
+    public function tambah_qty(request $request) {
+        $doble = Cart::where('id_menu', $request->id_menu)->first();
+        if ($doble) {
+            $qty = $doble->qty;
+            $doble->update([
+                'qty' => $qty + 1
+            ]);
+            return redirect('/kasir');
+        }
+        return redirect('/kasir');
+    }
+    public function kurang_qty(request $request) {
+        $doble = Cart::where('id_menu', $request->id_menu)->first();
+        if ($doble) {
+            $qty = $doble->qty;
+            $doble->update([
+                'qty' => $qty - 1
+            ]);
+            // return redirect('/kasir');
+        }
+        return redirect('/kasir');
     }
     public function menu() {
         $data = Menu::with('kategori')->get();

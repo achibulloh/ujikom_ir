@@ -83,7 +83,7 @@
                   <div type="hidden" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
                     <input type="hidden" name="id_menu" value="{{$items->id_menu}}" >
                     <input type="hidden" name="qty" value="1" >
-                    <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="SMART CHASIER">
+                    <img src="{{$items->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->photo_menu)}}" alt="{{$items->nama_menu}}">
                     <div class="flex pb-3 px-3 text-sm -mt-3">
                       <p class="flex-grow truncate mr-1">{{$items->nama_menu}}</p>
                       <p class="nowrap font-semibold">{{$items->formatRupiah('harga') }}</p>
@@ -131,43 +131,49 @@
 
             <div class="flex-1 w-full px-4 overflow-auto">
               @foreach ($cart as $items)
-              {{-- <template x-for="item in cart"> --}}
+              @php 
+              $total = 0;
+              @endphp
                 <div class="select-none mb-3 bg-blue-gray-50 rounded-lg w-full text-blue-gray-700 py-2 px-2 flex justify-center">
-                  <img src="{{$items->menu->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->menu->photo_menu)}}" alt="MENU" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
+                  <img src="{{$items->menu->photo_menu == null ? asset('photo/LogoOnly.png') : asset($items->menu->photo_menu)}}" alt="{{$items->menu->nama_menu}}" class="rounded-lg h-10 w-10 bg-white shadow mr-2">
                   <div class="flex-grow">
                     <h5 class="text-sm">{{$items->menu->nama_menu}}</h5>
                     <p class="text-xs block">{{$items->menu->formatRupiah('harga')}}</p>
                   </div>
                   <div class="py-1">
                     <div class="w-28 grid grid-cols-3 gap-2 ml-2">
-                      <button x-on:click="addQty(item, -1)" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                        </svg>
-                      </button>
-                      <input value="{{$items->qty}}" type="text" class="bg-white rounded-lg text-center shadow focus:outline-none focus:shadow-lg text-sm">
-                      {{-- <form action="{{ route('tambahqty')}}" method="POST">
+                      <form action="{{ route('kurangqty')}}" method="POST">
                         @csrf
-                      </form> --}}
-                      <button type="submit" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                      </button>
-                    </div>
+                          <button class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                            </svg>
+                          </button>
+                      </form>
+                      <input value="{{$items->qty}}" type="text" class="bg-white rounded-lg text-center shadow focus:outline-none focus:shadow-lg text-sm" readonly>
+                      <form action="{{ route('tambahqty')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                        </button>
+                      </form>
+                      {{-- <input type="text" value="{{$items->menu->harga * $items->qty}}"> --}}
+                      </div>
                   </div>
                 </div>
-              {{-- </template> --}}
               @endforeach
             </div>
           </div>
           <!-- end of cart items -->
 
+
           <!-- payment info -->
           <div class="select-none h-auto w-full text-center pt-3 pb-4 px-4">
             <div class="flex mb-3 text-lg font-semibold text-blue-gray-700">
               <div>TOTAL</div>
-              <div class="text-right w-full" value="">Rp. </div>
+              <div class="text-right w-full">Rp. 0</div>
             </div>
             <div class="mb-3 text-blue-gray-700 px-3 pt-2 pb-3 rounded-lg bg-blue-gray-50">
               <div class="flex text-lg font-semibold">
