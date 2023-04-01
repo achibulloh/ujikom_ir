@@ -96,27 +96,27 @@ class KasirController extends Controller
         return view("kasir.dasboard", compact('menu'));
     }
     public function transaksi(Request $request){
-        $menu = Menu::where('id_menu', $c->id_menu)->first();
-        $hargaMenu = $menu->harga;
-        $qty = $c->qty;
-        $totalHarga += $hargaMenu * $qty;
         $metodebayar = Cash;
         $status = success;
+        $total_bayar = 100000;
+        $uangtunai = 100000;
+        $change = 0;
         $cart = Cart::all();
         $totalCart = $cart->count();
-        $transaksi = Transaksi::all();
+        $transaksi = new Transaksi();
         $request->validate([
             'nama_pelangan'=>'required'
         ]);
-        $transaksi->Auth::user()->id = $request->id_kasir;;
+        $transaksi->id_kasir = Auth::user()->id;
         $transaksi->nama_pelangan = $request->nama_pelangan;
-        $transaksi->totalCart = $request->jumlah_menu;
-        $transaksi->totalHarga = $request->total_bayar;
-        $transaksi->totalHarga = $request->change;
-        $transaksi->metodebayar = $request->metode_pembayaran;
+        $transaksi->jumlah_menu = $request->$totalCart;
+        $transaksi->total_bayar = $request->$total_bayar;
+        $transaksi->uangtunai = $request->$uangtunai;
+        $transaksi->change = $request->$change;
+        $transaksi->metode_pembayaran = $request->$metodebayar;
         $transaksi->status = $request->status;
         $transaksi->save();
-        return redirect('/kasir');
+        return redirect('/kasir')->with('success','Transaksi Succeess');
 
     }
 }

@@ -157,7 +157,7 @@
                             </svg>
                           </button>
                       </form>
-                      <input value="{{$items->qty}}" type="text" class="bg-white rounded-lg w-8 h-8 text-center shadow focus:outline-none focus:shadow-lg text-sm" readonly>
+                      <input value="{{$items->qty}}" type="text" class="bg-white rounded-lg w-8 h-8 text-center shadow focus:outline-none focus:shadow-lg text-sm" min="1" readonly>
                       <form action="{{ route('tambahqty')}}" method="POST">
                         @csrf
                         <input type="hidden" name="id_menu" value="{{$items->id_menu}}" >
@@ -252,11 +252,11 @@
                                 </tr>
                                 <tr>
                                   <th colspan="4">Uang Tunai</th>
-                                  <th id="totalBayar">Rp. 0</th>
+                                  <th id="totalBayarModal">Rp. 0</th>
                                 </tr>
                                 <tr>
                                   <th colspan="4">Change</th>
-                                  <th id="change">Rp. 0</th>
+                                  <th id="changeModal">Rp. 0</th>
                                 </tr>
                               </tbody>
                             </table>
@@ -288,11 +288,15 @@
   <script>
     const getTotalHarga = document.getElementById('totalHarga');
     const getTotalBayar = document.getElementById('totalBayar');
+    const getTotalBayarModal = document.getElementById('totalBayarModal');
     const getKembalian = document.getElementById('change');
+    const getKembalianModal = document.getElementById('changeModal')
 
     getTotalBayar.addEventListener('change', (e) => {
         const totalHarga = +(getTotalHarga.innerText.replace(/\D/g, ''));
         getKembalian.innerText = (+(e.target.value) - totalHarga).toLocaleString('id-ID',{style: 'currency',currency: 'IDR',});
+        getKembalianModal.innerText = (+(e.target.value) - totalHarga).toLocaleString('id-ID',{style: 'currency',currency: 'IDR',});
+        getTotalBayarModal.innerText = `Rp. ${e.target.value}`;
     })
 
     // getTotalBayar.on('change', (e) => {

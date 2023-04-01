@@ -72,6 +72,7 @@
 																		{{-- <p class="mb-1">Pilih Waktu Laporan</p> --}}
 																		{{-- <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2023 - 01/31/20123"> --}}
 																		<a data-bs-toggle="modal" data-bs-target="#fillterDate" class="btn btn-outline-primary mb-3"><i class="fa fa-calendar me-3 scale3"></i>Filter Laporan</a>
+																		<a class="btn btn-outline-primary mb-3"><i class="las la-download scale5 me-3"></i>Download Laporan</a>
 																	</div>
 																</div>
 																<div class="card-body">
