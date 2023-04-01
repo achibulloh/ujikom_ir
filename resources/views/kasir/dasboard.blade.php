@@ -53,7 +53,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <a href="/logout" class="btn btn-primary">Logout</a>
+              <button class="text-white bg-cyan-600 rounded-2 text-lg w-40 py-2 focus:outline-none"><a href="/logout">Logout</a></button>
             </div>
           </div>
         </div>
@@ -210,7 +210,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('transaksi') }}" method="POST">
+                        <form action="{{ route('deleteCart') }}" method="POST">
                            @csrf
                             <div class="mb-3 row">
                               <label for="nama_pelangan" class="col-sm-3 col-form-label">Nama Pelangan</label>
@@ -285,6 +285,7 @@
   {{-- <div id="print-area" class="print-area"></div> --}}
   <!-- Scripts -->
   <script src="{{ asset('assets/js/scriptt.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/idb/build/iife/index-min.js"></script>
@@ -308,36 +309,16 @@
         getTotalBayarModal.innerText = `Rp. ${e.target.value}`;
     })
 
-    // getTotalBayar.on('change', (e) => {
-    //   const totalHarga = +(getTotalHarga.innerText.replace(/\D/g, ''))
-    //   console.log(e.target.value)
-    //   // const totalHarga = parseInt(getTotalHarga.innerText.replace('Rp. ', ''))
-    //   // const totalBayar = parseInt(e.target.value.replace(',', ''))
-    //   // const kembalian = `Rp. ${(totalHarga - totalBayar).toLocaleString('id-ID')}`
-    //   // getKembalian.innerText = kembalian;
-    // })
-
   </script>
   @if(Session::has("success"))
   <script>
-        toastr.success("{{Session::get('success')}}", "Success", {
-          positionClass: "toast-top-right",
-          timeOut: 5e3,
-          closeButton: !0,
-          debug: !1,
-          newestOnTop: !0,
-          progressBar: !0,
-          preventDuplicates: !0,
-          onclick: null,
-          showDuration: "300",
-          hideDuration: "1000",
-          extendedTimeOut: "1000",
-          showEasing: "swing",
-          hideEasing: "linear",
-          showMethod: "fadeIn",
-          hideMethod: "fadeOut",
-          tapToDismiss: !1
-        })
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: '{{Session::get('success')}}',
+      showConfirmButton: false,
+      timer: 1500
+    })
   </script>
   @endif
 </body>

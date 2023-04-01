@@ -34,12 +34,14 @@ Route::get('/register', [CustomAuthController::class,'register']);
 // Register Kasir
 Route::post('/register-kasir', [CustomAuthController::class,'registerkasir'])->name('register-kasir');
 Route::post('/kasir', [KasirController::class,'store'])->name('cart.store');
-Route::get('/kasir/menu', 'App\Http\Controllers\KasirController@menu')->name('menu');
+Route::get('/kasir/menu', 'App\Http\Controllers\KasirController@menu')->name('crot');
 Route::post('/tambahqty', [KasirController::class,'tambah_qty'])->name('tambahqty');
 Route::post('/kurangqty', [KasirController::class,'kurang_qty'])->name('kurangqty');
 Route::post('/clear/{id}', [KasirController::class,'clearmenu'])->name('clear');
 Route::get('/kasir/cari', [KasirController::class,'carii'])->name('kasir.cari');
-Route::post('/transaksi', [KasirController::class,'transaksi'])->name('transaksi');
+// Route::post('/transaksi', [KasirController::class,'transaksi'])->name('transaksi');
+Route::post('/transaksi', [KasirController::class,'deleteCart'])->name('deleteCart');
+
 // End Kasir
 // To Dasboard
 Route::post('/proses_login', 'App\Http\Controllers\CustomAuthController@proses_login')->name('proses_login');

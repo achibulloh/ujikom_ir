@@ -66,7 +66,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>TR-0{{ $items->id_kasir }}</td>
-                                                <td>{{ $items->id_kasir }}</td>
+                                                <td>{{ $items->id_kasir }}</td> 
                                                 <td>{{ $items->nama_pelangan }}</td>
                                                 <td>{{ $items->jumlah_menu }}</td>
                                                 <td>{{ $items->formatRupiah('total_bayar') }}</td>
