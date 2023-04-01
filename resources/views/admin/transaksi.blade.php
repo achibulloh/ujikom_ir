@@ -65,7 +65,7 @@
 										@foreach ($data as $items)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $items->invoice }}</td>
+                                                <td>TR-0{{ $items->id_kasir }}</td>
                                                 <td>{{ $items->id_kasir }}</td>
                                                 <td>{{ $items->nama_pelangan }}</td>
                                                 <td>{{ $items->jumlah_menu }}</td>
@@ -92,7 +92,7 @@
                                                                                 <div class="mb-3 row">
                                                                                     <label for="invoice" class="col-sm-3 col-form-label">Invoice Transaksi</label>
                                                                                     <div class="col-sm-9">
-                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="invoice" value="{{ $items->invoice }}" id="invoice" readonly>
+                                                                                        <input type="Text" class="form-control" placeholder="Nama Menu" name="invoice" value="TR-0{{ $items->id_kasir }}" id="invoice" readonly>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="mb-3 row">

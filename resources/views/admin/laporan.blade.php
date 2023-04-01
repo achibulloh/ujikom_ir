@@ -95,13 +95,13 @@
 																				@foreach ($data as $items)
 																					<tr>
 																						<td>{{ $loop->iteration }}</td>
-																						<td>{{ $items->invoice }}</td>
+																						<td>TR-0{{ $items->id_kasir }}</td>
 																						<td>{{ $items->id_kasir }}</td>
 																						<td>{{ $items->nama_pelangan }}</td>
 																						<td>{{ $items->jumlah_menu }}</td>
 																						<td>{{ $items->formatRupiah('total_bayar') }}</td>
 																						<td>{{ $items->metode_pembayaran }}</td>
-																						<td>{{ $items->tgl }}</td>
+																						<td>{{ $items->created_at }}</td>
 																						<td>@if ($items->status == 'success')<span class="badge light badge-success"><i class="fa fa-circle text-success me-1"></i>Success</span> @elseif ($items->status_akun == 'pending') <span class="badge light badge-warning"><i class="fa fa-circle text-warning me-1"></i>Pending</span> @else ($items->status_akun == 'cencel') <span class="badge light badge-danger"><i class="fa fa-circle text-denger me-1"></i>Cencel</span> @endif</td>
 																						<!-- <td><strong>120$</strong></td> -->
 																					</tr>

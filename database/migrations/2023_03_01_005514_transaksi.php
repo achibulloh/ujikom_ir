@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id('id_transaksi');
-            $table->integer('invoice');
             $table->foreignId('id_kasir')->references('id')->on('users')->onDelete('cascade');
             $table->string('nama_pelangan');
             $table->integer('jumlah_menu');
@@ -24,7 +23,6 @@ return new class extends Migration
             $table->integer('change');
             $table->enum('metode_pembayaran',['Cash','Credit/Debit','Qris']);
             $table->enum('status',['pending','success','cencel']);
-            $table->date('tgl');
             $table->timestamps();
         });
     }

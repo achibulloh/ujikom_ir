@@ -30,7 +30,7 @@ class KasirController extends Controller
             $totalHarga += $hargaMenu * $qty;
         }
         $totalHargaFormatted = number_format($totalHarga,0,',','.');
-        return view("kasir.dasboard", compact('data', 'cart', 'totalCart','request','totalHargaFormatted', 'kt'));  
+        return view("kasir.dasboard", compact('data', 'cart', 'totalCart','request','totalHargaFormatted', 'kt','totalHarga'));  
     }
     public function store(Request $request)
     {
@@ -96,11 +96,6 @@ class KasirController extends Controller
         return view("kasir.dasboard", compact('menu'));
     }
     public function transaksi(Request $request){
-        $metodebayar = Cash;
-        $status = success;
-        $total_bayar = 100000;
-        $uangtunai = 100000;
-        $change = 0;
         $cart = Cart::all();
         $totalCart = $cart->count();
         $transaksi = new Transaksi();
@@ -109,11 +104,11 @@ class KasirController extends Controller
         ]);
         $transaksi->id_kasir = Auth::user()->id;
         $transaksi->nama_pelangan = $request->nama_pelangan;
-        $transaksi->jumlah_menu = $request->$totalCart;
-        $transaksi->total_bayar = $request->$total_bayar;
-        $transaksi->uangtunai = $request->$uangtunai;
-        $transaksi->change = $request->$change;
-        $transaksi->metode_pembayaran = $request->$metodebayar;
+        $transaksi->jumlah_menu = $request->totalcart;
+        $transaksi->total_bayar = $request->total_bayar;
+        $transaksi->uangtunai = $request->uangtunai;
+        $transaksi->change = $request->change;
+        $transaksi->metode_pembayaran = $request->metode_pembayaran;
         $transaksi->status = $request->status;
         $transaksi->save();
         return redirect('/kasir')->with('success','Transaksi Succeess');

@@ -94,7 +94,6 @@
                 </button>
               </form>
               @endforeach
-              {{-- {{$items->links()}} --}}
               </div>
             </div>
         </div>
@@ -247,15 +246,21 @@
                                 </tr>
                                 @endforeach
                                 <tr>
+                                  <input type="hidden" name="metode_pembayaran" value="Cash" >
+                                  <input type="hidden" name="status" value="success" >
+                                  <input type="hidden" name="totalcart" value="{{$totalCart}}" >
                                   <th colspan="4">Total Bayar</th>
+                                  <input type="hidden" name="total_bayar" value="{{$totalHarga}}" >
                                   <th>Rp. {{$totalHargaFormatted}}</th>
                                 </tr>
                                 <tr>
                                   <th colspan="4">Uang Tunai</th>
-                                  <th id="totalBayarModal">Rp. 0</th>
+                                  <input type="hidden" name="uangtunai" value="0" id="totalBayarModalInput" >
+                                  <th id="totalBayarModal" name="uangtunai" >Rp. 0</th>
                                 </tr>
                                 <tr>
                                   <th colspan="4">Change</th>
+                                  <input type="hidden" name="change" value="0" id="changeModalInput" >
                                   <th id="changeModal">Rp. 0</th>
                                 </tr>
                               </tbody>
@@ -289,13 +294,17 @@
     const getTotalHarga = document.getElementById('totalHarga');
     const getTotalBayar = document.getElementById('totalBayar');
     const getTotalBayarModal = document.getElementById('totalBayarModal');
+    const getTotalBayarModalInput = document.getElementById('totalBayarModalInput');
     const getKembalian = document.getElementById('change');
     const getKembalianModal = document.getElementById('changeModal')
+    const getKembalianModalInput = document.getElementById('changeModalInput')
 
     getTotalBayar.addEventListener('change', (e) => {
         const totalHarga = +(getTotalHarga.innerText.replace(/\D/g, ''));
         getKembalian.innerText = (+(e.target.value) - totalHarga).toLocaleString('id-ID',{style: 'currency',currency: 'IDR',});
         getKembalianModal.innerText = (+(e.target.value) - totalHarga).toLocaleString('id-ID',{style: 'currency',currency: 'IDR',});
+        getKembalianModalInput.value = e.target.value - totalHarga;
+        getTotalBayarModalInput.value = e.target.value;
         getTotalBayarModal.innerText = `Rp. ${e.target.value}`;
     })
 
