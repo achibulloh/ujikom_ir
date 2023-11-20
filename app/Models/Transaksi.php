@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Traits\HasFormatRupiah;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Transaksi extends Model
 {
@@ -21,6 +22,10 @@ class Transaksi extends Model
         'status'
     ];
     protected $primaryKey = "id_transaksi";
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s'); 
+    }
     public function users()
     {
         return $this->belongsTo(User::class, 'id');

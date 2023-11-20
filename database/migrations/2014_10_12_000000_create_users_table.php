@@ -26,6 +26,7 @@ return new class extends Migration
             $table->enum('status_akun', ['pending','active','blokir'])->default('pending');
             $table->enum('role',['admin','kasir'])->default('kasir');
             $table->string('photo')->nullable();
+            $table->timestamp('last_seen')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Menu;
 use App\Models\User;
 use App\Models\Cart;
+use Carbon\Carbon;
 
 class KasirController extends Controller
 {
     public function kasirr(Request $request) {
+        $users = User::all();
         $data = Menu::all();
-        $kt = Kategori::all();
+        $kategori = Kategori::all();
         // $data1 = Menu::paginate(6);
         $cart = Cart::all()->where('id_kasir', Auth::id());
         $totalCart = $cart->count();
@@ -30,7 +32,7 @@ class KasirController extends Controller
             $totalHarga += $hargaMenu * $qty;
         }
         $totalHargaFormatted = number_format($totalHarga,0,',','.');
-        return view("kasir.dasboard", compact('data', 'cart', 'totalCart','request','totalHargaFormatted', 'kt','totalHarga'));  
+        return view("kasir.dasboard", compact('data', 'cart', 'totalCart','request','totalHargaFormatted', 'kategori','totalHarga'));  
     }
     public function store(Request $request)
     {
@@ -96,86 +98,32 @@ class KasirController extends Controller
         return view("kasir.dasboard", compact('menu'));
     }
 
-    // public function deleteCart(){
-    //     Cart::truncate();
-    //     return redirect('/kasir')->with('success','Data Cart Berhasil Dihapus');
-    // }
-    // TES
-    public function deleteCart($id_kasir){
-        Cart::where('id_kasir', $id_kasir)->delete();
-        return redirect('/kasir')->with('success','Data Cart Berhasil Dihapus');
-    }
-    
-    // TES 
     public function transaksi(Request $request){
-        $cart = Cart::all();
-        $totalCart = $cart->count();
-        $transaksi = new Transaksi();
+        $cart = Cart::where('qty');
+        // $jumlah_menu = $cart->count();
+        // $transaksi = new Transaksi();
         $request->validate([
             'nama_pelangan'=>'required'
         ]);
+
+        $transaksi = new Transaksi();
         $transaksi->id_kasir = Auth::user()->id;
         $transaksi->nama_pelangan = $request->nama_pelangan;
-        $transaksi->jumlah_menu = $request->totalcart;
+        $transaksi->jumlah_menu = $request->jumlah_menu;
         $transaksi->total_bayar = $request->total_bayar;
         $transaksi->uangtunai = $request->uangtunai;
         $transaksi->change = $request->change;
         $transaksi->metode_pembayaran = $request->metode_pembayaran;
         $transaksi->status = $request->status;
-        $transaksi->save();
-        $this->deleteCart(Auth::user()->id); // panggil method deleteCart dengan mengirimkan id_kasir
-        return redirect('/kasir')->with('success','Transaksi Success');
+        $cek = $transaksi->save();
+        if ($cek) {
+            $id_kasir = Auth::user()->id;
+            $cart = Cart::find($id_kasir);
+            $cart = Cart::where('id_kasir', '=', $id_kasir);
+            $cart->delete();
+            return redirect('/kasir')->with('success','Transaksi Success');
+        } else {
+            return redirect('/kasir')->with('fail','Transaksi Gagal');
+        }
     }
-    
-    
-
-    // public function transaksi(Request $request){
-    //     $cart = Cart::all();
-    //     $totalCart = $cart->count();
-    //     $transaksi = new Transaksi();
-    //     $request->validate([
-    //         'nama_pelangan'=>'required'
-    //     ]);
-    //     $transaksi->id_kasir = Auth::user()->id;
-    //     $transaksi->nama_pelangan = $request->nama_pelangan;
-    //     $transaksi->jumlah_menu = $request->totalcart;
-    //     $transaksi->total_bayar = $request->total_bayar;
-    //     $transaksi->uangtunai = $request->uangtunai;
-    //     $transaksi->change = $request->change;
-    //     $transaksi->metode_pembayaran = $request->metode_pembayaran;
-    //     $transaksi->status = $request->status;
-    //     $transaksi->save();
-    //     $this->deleteCart();
-    //     return redirect('/kasir')->with('success','Transaksi Success');
-    // }
-
-    // irfan
-    // public function transaksi(Request $request, $id_cart){
-    //     $cart = Cart::all();
-    //     $totalCart = $cart->count();
-    //     $transaksi = new Transaksi();
-    //     $request->validate([
-    //         'nama_pelangan'=>'required'
-    //     ]);
-    //     $transaksi->id_kasir = Auth::user()->id;
-    //     $transaksi->nama_pelangan = $request->nama_pelangan;
-    //     $transaksi->jumlah_menu = $request->totalcart;
-    //     $transaksi->total_bayar = $request->total_bayar;
-    //     $transaksi->uangtunai = $request->uangtunai;
-    //     $transaksi->change = $request->change;
-    //     $transaksi->metode_pembayaran = $request->metode_pembayaran;
-    //     $transaksi->status = $request->status;
-    //     $transaksi->save();
-    //     $cart = Cart::find($id_cart);
-    //     $cart->delete();
-    //     return redirect('/kasir')->with('success','Transaksi Succeess');
-    // }
-
-    // public function destroyCart($id)
-    // {
-    //     $cart = Cart::find('id_kasir');
-    //     $cart->delete();
-
-    //     return redirect('/kasir')->with('success', 'Transaksi Success');
-    // }
 }

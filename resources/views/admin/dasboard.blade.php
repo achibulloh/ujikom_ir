@@ -46,8 +46,9 @@
 									</svg>
 								</div>
 								<div>
-									<h2 class="text-white invoice-num">{{$totalTransaksi}}</h2>
-									<span class="text-white fs-18">Total Invoice</span>
+									{{-- <input type="hidden" value="{{$totalBayar}}" class="totalBayar" > --}}
+									<h2 class="text-white invoice-num">{{$totalBayar}}</h2>
+									<span class="text-white fs-18">Total Penghasilan</span>
 								</div>
 							</div>
 						</div>

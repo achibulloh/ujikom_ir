@@ -45,9 +45,15 @@
 									<button type="button" class="btn-close" data-bs-dismiss="modal">
 									</button>
 								</div>
-								<form action="" method="GET">
+								<form action="{{ url("/laporan") }}" method="GET">
 									<div class="modal-body">
-										<input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2023 - 01/31/20123">
+										<div class="col-xl-3 col-xxl-6 col-md-6 mb-3">
+											<label class="form-label">Start Date</label>
+											<input type="date" class="form-control" placeholder="2023-11-01" value="{{old('start_date')}}" name="start_date" id="mdate">
+											<label class="form-label">End Date</label>
+											<input type="date" class="form-control" placeholder="2023-11-07" value="{{old('end_date')}}" name="end_date" id="mdate">
+										</div>
+										{{-- <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2023 - 01/31/20123"> --}}
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
@@ -72,7 +78,13 @@
 																		{{-- <p class="mb-1">Pilih Waktu Laporan</p> --}}
 																		{{-- <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2023 - 01/31/20123"> --}}
 																		<a data-bs-toggle="modal" data-bs-target="#fillterDate" class="btn btn-outline-primary mb-3"><i class="fa fa-calendar me-3 scale3"></i>Filter Laporan</a>
-																		<a class="btn btn-outline-primary mb-3"><i class="las la-download scale5 me-3"></i>Download Laporan</a>
+																	</div>
+																	<div class="example">
+																		<form action="{{ url("/laporan/pdf") }}" method="GET">
+																			<input type="hidden" value="{{$start_date}}" name="start_date" readonly>
+																			<input type="hidden" value="{{$end_date}}" name="end_date" readonly>
+																			<button type="submit" class="btn btn-outline-primary mb-3"><i class="las la-download scale5 me-3"></i>Export Laporan</button>
+																		</form>
 																	</div>
 																</div>
 																<div class="card-body">

@@ -24,9 +24,19 @@
                   </div>
                   <!-- password.email -->
               <div class="login-form">
-                <form action="{{ route('forgotpassword')}}" method="POST">
+                @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+                @endif
+                <form action="{{ route('password.email')}}" method="POST">
                 @csrf
                   <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter Your Email Address" name="email" value="{{old('email')}}" required>
+                  @error('email')
+                  <div class="alert alert-danger mt-2">
+                      <strong>{{ $message }}</strong>
+                  </div>
+                  @enderror
                   <br>
                   <button id="singin" class="signin" name="submit">Reset Password</button>
 

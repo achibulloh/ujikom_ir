@@ -7,6 +7,27 @@
   <title>Smart Chasier - Dasboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .kategori {
+      background-color: #26c6da;
+      width: 250px;
+      height: 40px;
+    }
+
+    .kategori .h1 {
+      font-size: 27px;
+      color: whitesmoke;
+      text-align: center;
+      align-items: center;
+      justify-items: center;
+      justify-content: center;
+    }
+
+    .h1-nihh {
+      font-size: 30px;
+      
+    }
+  </style>
   <link rel="stylesheet" href="{{ asset('assets/css/stylee.css') }}">
   <!-- FAVICONS ICON -->
   <link rel="shortcut icon" type="image/png" href="{{ asset('assets/image/png/LogoOnly.png') }}" />
@@ -53,7 +74,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button class="text-white bg-cyan-600 rounded-2 text-lg w-40 py-2 focus:outline-none"><a href="/logout">Logout</a></button>
+              <button class="text-white bg-cyan-600 rounded-2 text-lg w-40 py-2 focus:outline-none"><a href="/logout/id-{{ auth()->user()->id }}">Logout</a></button>
             </div>
           </div>
         </div>
@@ -75,9 +96,39 @@
                 <input name="cari" type="text" class="bg-white rounded-3xl shadow text-lg full w-full h-16 py-4 pl-16 transition-shadow focus:shadow-2xl focus:outline-none" placeholder="Cari menu ..." value="{{$request->cari}}" autofocus />
               </form>
           </div>
+          
+          <br>
+          <h1 class="h1-nihh"> Kategori </h1>
+          <br>
+              <div class="grid grid-cols-2 gap-4">
+                <button type="submit">
+                  <div type="hidden" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
+                    <div class="kategori">
+                      <input type="hidden" name="id_menu" value="sdasd" >
+                        <h1 class="h1">Semua</h1>
+                    </div>
+                  </div>
+                </button>
+                @foreach ($kategori as $items)
+                <form action="" method="POST">
+                  @csrf
+                  <button type="submit">
+                    <div type="hidden" class="select-none cursor-pointer transition-shadow overflow-hidden rounded-2xl bg-white shadow hover:shadow-lg" >
+                      <div class="kategori">
+                        <input type="hidden" name="id_menu" value="{{$items->id_kategori}}" >
+                          <h1 class="h1">{{$items->nama_kategori}}</h1>
+                      </div>
+                    </div>
+                  </button>
+                </form>
+                @endforeach
+              </div>
+              <br>
+              <h1 class="h1-nihh"> Menu </h1>
         <div class="h-full overflow-hidden mt-4">
           <div class="h-full overflow-y-auto px-2">
             <div class="grid grid-cols-4 gap-4 pb-3">
+
               @foreach ($data as $items)
               <form action="{{ route('cart.store')}}" method="POST">
                 @csrf
@@ -145,7 +196,7 @@
                     <div class="w-28 grid grid-cols-3 gap-2 ml-2">
                       <form action="{{ route('kurangqty')}}" method="POST">
                         @csrf 
-                        @if(Session::has("delet"))
+                        @if(Session::has("delete"))
                            @method('delete')
                         @endif
                           <input type="hidden" name="id_menu" value="{{$items->id_menu}}" >
@@ -210,8 +261,9 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('deleteCart') }}" method="POST">
+                        <form action="{{ route('transaksi') }}" method="POST">
                            @csrf
+                           <input id="id_kasir" name="id_kasir" type="hidden" value="{{ auth()->user()->id }}" readonly disabled>
                             <div class="mb-3 row">
                               <label for="nama_pelangan" class="col-sm-3 col-form-label">Nama Pelangan</label>
                               <div class="col-sm-9">
@@ -248,7 +300,7 @@
                                 <tr>
                                   <input type="hidden" name="metode_pembayaran" value="Cash" >
                                   <input type="hidden" name="status" value="success" >
-                                  <input type="hidden" name="totalcart" value="{{$totalCart}}" >
+                                  <input type="hidden" name="jumlah_menu" value="10" >
                                   <th colspan="4">Total Bayar</th>
                                   <input type="hidden" name="total_bayar" value="{{$totalHarga}}" >
                                   <th>Rp. {{$totalHargaFormatted}}</th>
@@ -316,6 +368,17 @@
       position: 'top-end',
       icon: 'success',
       title: '{{Session::get('success')}}',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  </script>
+  @endif
+  @if(Session::has("fail"))
+  <script>
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: '{{Session::get('fail')}}',
       showConfirmButton: false,
       timer: 1500
     })

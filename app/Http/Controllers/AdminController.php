@@ -12,8 +12,10 @@ use App\Models\User;
 use App\Models\Menu;
 use App\Models\Kategori;
 use App\Models\Transaksi;
-use Session;
-
+use Cache;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -46,10 +48,54 @@ class AdminController extends Controller
         $data = User::all();
         return view("admin.users")->with('data', $data); 
     }
-    public function laporan() {
-        $data = Transaksi::all();
-        return view("admin.laporan")->with('data', $data);   
+    public function activity() {
+        $data = User::all();
+        return view("admin.activity-log-user")->with('data', $data); 
+    }
+    public function laporan(Request $request) {
+        // $data = Transaksi::all();
+        if (request()->start_date || request()->end_date) {
+            $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+            $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+            $data = Transaksi::whereBetween('created_at',[$start_date,$end_date])->get();
+            $start = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+            $end = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+        } else {
+            $start_date = 0;
+            $end_date = 0;
+            $data = Transaksi::latest()->get();
+            
+            $start = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+            $end = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+        }
+        // 
+        return view("admin.laporan", compact("start_date","end_date","start","end"))->with('data', $data);   
     } 
+    public function exportPDF(Request $request) {
+        if (request()->start_date || request()->end_date) {
+            $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+            $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+            $data = Transaksi::whereBetween('created_at',[$start_date,$end_date])->get();
+
+            $start = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+            $end = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+        } else {
+            $data = Transaksi::latest()->get();
+            $start_date = 'Semua Data';
+            $end_date = 'Semua Data';
+            // $start = $start_date;
+            // $end = $end_date;
+            $start = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+            $end = Carbon::parse(request()->start_date)->translatedFormat('d F Y');
+        }
+        // $totalpenghasilan = $data
+        // $tr = Transaksi::where('totalbayar');
+        $pdf = PDF::loadView('admin.laporantopdf', compact('data','start','end','start_date','end_date'));
+        $pdf->setPaper('A4', 'potrait');
+        
+        return $pdf->stream('LaporanSmartCashier.pdf');
+        
+      }
     public function kategori() {
         $data = Kategori::all();
         return view("admin.kategori")->with('data', $data);   

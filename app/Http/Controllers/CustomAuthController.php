@@ -75,8 +75,9 @@ class CustomAuthController extends Controller
         $totalTransaksi = $transaksi->count();
         $totalUser = $user->count();
         $menu = Menu::all();
-        $totalMenu = $menu->count();
-        return view("admin.dasboard", compact('totalUser', 'totalMenu', 'totalTransaksi', 'totalinvoicesuccess'));   
+        $totalMenu = $menu->count();    
+        $totalBayar = Transaksi::sum('total_bayar');
+        return view("admin.dasboard", compact('totalUser', 'totalMenu', 'transaksi', 'totalTransaksi', 'totalinvoicesuccess','totalBayar'));   
     }
 
     public function proses_login(Request $request) {

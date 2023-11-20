@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
             foreach($user as $key => $value){
             User::create($value);
         }
-        DB::table('kategori')->insert([[
+        DB::table('kategori')->insert([
+        [
             'nama_kategori' => 'Makanan'
         ],
         [
